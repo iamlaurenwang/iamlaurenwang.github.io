@@ -205,11 +205,7 @@
         let size = fontClass ? Number(fontClass.split("-")[1]) : 6
 
         function updateClass(){
-            el.classList.forEach(cls => {
-                if(/^fs-\d+$/.test(cls)){
-                    el.classList.remove(cls)
-                }
-            });
+            el.className = el.className.replace(/fs-\d+/g, '')
             el.classList.add(`fs-${size}`)
         }
 
