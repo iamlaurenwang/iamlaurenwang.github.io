@@ -97,57 +97,10 @@
 
 
     const deposit = document.getElementById('deposit')
-    deposit.addEventListener('click', () => {
-        const amount = Number(document.getElementById('amount').value)
-
-        const selectedAccount = document.getElementById('selectedAccount').value
-        let result
-        switch (selectedAccount) {
-            case 'A':
-                result = accountA.deposit(amount)
-                updateUI(balanceA, result)
-                break
-            case 'B':
-                result = accountB.deposit(amount)
-                updateUI(balanceB, result)
-
-                break
-            case 'C':
-                result = accountC.deposit(amount)
-                updateUI(balanceC, result)
-
-                break
-            default:
-                break;
-        }
-
-    })
+    deposit.addEventListener('click', () => handleTransaction('deposit'))
 
     const withdraw = document.getElementById('withdraw')
-    withdraw.addEventListener('click', () => {
-        const amount = Number(document.getElementById('amount').value)
-
-        const selectedAccount = document.getElementById('selectedAccount').value
-        let result
-        switch (selectedAccount) {
-            case 'A':
-                result = accountA.withdraw(amount)
-                updateUI(balanceA, result)
-                break
-            case 'B':
-                result = accountB.withdraw(amount)
-                updateUI(balanceB, result)
-
-                break
-            case 'C':
-                result = accountC.withdraw(amount)
-                updateUI(balanceC, result)
-
-                break
-            default:
-                break;
-        }
-    })
+    withdraw.addEventListener('click', () => handleTransaction('withdraw'))
 
     function createBankAccount(initBalance) {
         let balance = initBalance
@@ -162,10 +115,28 @@
             }
         }
     }
+
     function updateUI(el, amount) {
         el.innerText = amount
     }
 
+    function handleTransaction(type) {
+    const amount = Number(document.getElementById('amount').value);
+    const selectedAccount = document.getElementById('selectedAccount').value;
+
+    const accounts = {
+        'A': { account: accountA, balanceEl: balanceA },
+        'B': { account: accountB, balanceEl: balanceB },
+        'C': { account: accountC, balanceEl: balanceC }
+    };
+
+    if (accounts[selectedAccount]) {
+        const result = type === 'deposit' 
+            ? accounts[selectedAccount].account.deposit(amount) 
+            : accounts[selectedAccount].account.withdraw(amount);
+        updateUI(accounts[selectedAccount].balanceEl, result);
+    }
+}
 
 
     const sendCodeBtn = document.getElementById('sendCode')
