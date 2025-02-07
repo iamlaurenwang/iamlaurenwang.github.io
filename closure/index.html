@@ -13,11 +13,10 @@
 </head>
 
 <body>
-    <div class="container">
+<div class="container d-flex flex-column">
+    <div class="card p-3 my-3">
         <div class="row justify-content-center">
             <div class="col fs-1 fw-bolder">Bank Account</div>
-            <div class="col d-flex justify-content-around align-items-center">
-            </div>
         </div>
         <div class="row mt-2">
             <div class="col">
@@ -57,6 +56,17 @@
             </div>
         </div>
     </div>
+
+    <div class="card p-3 my-3">
+        <div class="row justify-content-center">
+            <div class="col fs-1 fw-bolder">Send Verification Code</div>
+            <button type="button" class="btn btn-outline-secondary" id="sendCode">寄送驗證碼</button>
+
+        </div>
+    </div>
+</div>
+
+    
 
 </body>
 <script>
@@ -123,10 +133,6 @@ switch (selectedAccount) {
 }
     })
 
-
-
-
-
     function createBankAccount(initBalance) {
         let balance = initBalance
         return {
@@ -142,6 +148,38 @@ switch (selectedAccount) {
     }
     function updateUI(el, amount) {
         el.innerText = amount
+    }
+
+
+
+
+    const sendCodeBtn = document.getElementById('sendCode')
+    sendCodeBtn.addEventListener('click', ()=>{
+        let action = sendCode()
+        action()
+
+
+    })
+
+    function sendCode(){
+        let count = 5
+        let displayTxt = `請稍候${count}秒`
+        sendCodeBtn.textContent = displayTxt
+        sendCodeBtn.disabled = true
+        
+        return function counter(){
+            let timer = setInterval(()=>{
+                count--
+                let displayTxt = `請稍候${count}秒`
+                sendCodeBtn.textContent = displayTxt
+                
+                if(count === 0){
+                    clearInterval(timer)
+                    sendCodeBtn.disabled = false
+                    sendCodeBtn.textContent = "重新寄送驗證碼"
+                }
+            }, 1000)
+        }
     }
 
 
