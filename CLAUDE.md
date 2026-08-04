@@ -42,3 +42,7 @@ src/
 ## Security & Other Guidelines
 - Never commit real personal contact info, API keys, or other sensitive data into code or commits; use environment variables or placeholder data instead
 - Confirm necessity before adding new third-party dependencies to avoid unnecessary bloat
+
+## Documentation
+1. place documentations in docs/
+2. keep track of unfinished task in documentation

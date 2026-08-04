@@ -1,7 +1,8 @@
 export enum RouteName  {
-    Home = 'home',
+    Landing = 'landing',
     Contact = 'contact',
     Resume = 'resume',
     Visuals = 'visuals',
-    Notes = 'notes'
+    Notes = 'notes',
+    Demo = 'demo' 
 }
