@@ -2,6 +2,7 @@
 import { RouterLink } from 'vue-router'
 import { LayoutGrid, Sparkles, ArrowRight } from '@lucide/vue'
 import { RouteName } from '@/types/routes'
+import PillTag from '@/components/PillTag.vue'
 
 interface VisualCard {
   title: string
@@ -45,12 +46,7 @@ const cards: VisualCard[] = [
       >
         <div class="flex items-center justify-between">
           <component :is="card.icon" :size="24" class="text-accent-500" />
-          <span
-            v-if="!card.ready"
-            class="rounded-full bg-neutral-100 px-2.5 py-0.5 font-sans text-[0.65rem] tracking-wide text-neutral-400 uppercase"
-          >
-            Soon
-          </span>
+          <PillTag v-if="!card.ready" variant="muted" size="xs">Soon</PillTag>
         </div>
         <h2 class="mt-4 font-serif text-xl text-neutral-800">{{ card.title }}</h2>
         <p class="mt-2 flex-1 font-sans text-sm leading-relaxed text-neutral-500">
