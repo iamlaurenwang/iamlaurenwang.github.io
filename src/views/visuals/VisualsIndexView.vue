@@ -1,6 +1,6 @@
 <script lang="ts" setup>
 import { RouterLink } from 'vue-router'
-import { LayoutGrid, Sparkles, ArrowRight } from '@lucide/vue'
+import { LayoutGrid, Sparkles, ArrowRight, Braces } from '@lucide/vue'
 import { RouteName } from '@/types/routes'
 import PillTag from '@/components/PillTag.vue'
 
@@ -18,6 +18,13 @@ const cards: VisualCard[] = [
     description: 'Interactive playgrounds to build intuition for CSS layout.',
     to: { name: RouteName.VisualsFlexGrid },
     icon: LayoutGrid,
+    ready: true,
+  },
+  {
+    title: 'JavaScript Concepts',
+    description: 'Interactive demos for language features, starting with closures.',
+    to: { name: RouteName.VisualsJs },
+    icon: Braces,
     ready: true,
   },
   {

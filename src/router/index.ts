@@ -23,6 +23,11 @@ const routes: RouteRecordRaw[] = [
         component: () => import('@/views/visuals/FlexAndGrid.vue'),
       },
       {
+        path: 'js-concepts',
+        name: RouteName.VisualsJs,
+        component: () => import('@/views/visuals/JsConcepts.vue'),
+      },
+      {
         path: 'animation',
         name: RouteName.VisualsAnimation,
         component: () => import('@/views/visuals/AnimationDisplay.vue'),
