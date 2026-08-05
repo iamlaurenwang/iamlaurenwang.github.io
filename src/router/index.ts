@@ -50,6 +50,11 @@ const routes: RouteRecordRaw[] = [
     component: () => import('@/views/DemoView.vue'),
     meta: { hideLayout: true },
   },
+  {
+    path: '/:pathMatch(.*)*',
+    name: RouteName.NotFound,
+    component: () => import('@/views/NotFoundView.vue'),
+  },
 ]
 
 const router = createRouter({

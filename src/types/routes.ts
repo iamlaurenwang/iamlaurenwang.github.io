@@ -9,4 +9,5 @@ export enum RouteName {
   Notes = 'notes',
   Tutoring = 'tutoring',
   Demo = 'demo',
+  NotFound = 'not-found',
 }
