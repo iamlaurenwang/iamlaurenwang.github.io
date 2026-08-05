@@ -1,13 +1,13 @@
 <script lang="ts" setup>
-import { RouterLink } from 'vue-router'
-import { RouteName } from '@/types/routes'
+import { RouterLink } from "vue-router";
+import { RouteName } from "@/types/routes";
 
 const navLinks = [
-  { label: 'Visuals',  to: { name: RouteName.Visuals } },
-  { label: 'Notes',    to: { name: RouteName.Notes } },
-  { label: 'Tutoring', to: { name: RouteName.Tutoring } },
-  { label: 'Contact',  to: { name: RouteName.Contact } },
-]
+  { label: "Visuals", to: { name: RouteName.VisualsIndex } },
+  { label: "Notes", to: { name: RouteName.Notes } },
+  { label: "Tutoring", to: { name: RouteName.Tutoring } },
+  { label: "Contact", to: { name: RouteName.Contact } },
+];
 </script>
 
 <template>
