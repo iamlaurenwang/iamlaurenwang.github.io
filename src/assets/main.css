@@ -23,7 +23,8 @@
   --color-accent-50:  #FDF9EE;
   --color-accent-100: #FAF0CC;
   --color-accent-200: #F2DE96;
-  --color-accent-300: #E5C85A;
+  /* TODO: 文件中的accent-300為#ddcd71, 之後可以考慮替換 */
+  --color-accent-300: #E5C85A; 
   --color-accent-400: #D4B035;
   --color-accent-500: #C8A22A;
   --color-accent-600: #A8830D;
