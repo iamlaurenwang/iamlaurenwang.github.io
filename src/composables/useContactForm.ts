@@ -9,15 +9,14 @@ export interface ContactFormFields {
 type ContactFormErrors = Partial<Record<keyof ContactFormFields, string>>
 
 const EMAIL_PATTERN = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+const FORMSPREE_ENDPOINT = 'https://formspree.io/f/xnpaqwbo'
 
-/**
- * Front-end only contact form state. Validates locally and surfaces a
- * "submitted" state, but intentionally does NOT send anything to a backend.
- */
 export function useContactForm() {
   const fields = reactive<ContactFormFields>({ name: '', email: '', message: '' })
   const errors = reactive<ContactFormErrors>({})
-  const isSubmitted = ref<boolean>(false)
+  const isSubmitted = ref(false)
+  const isLoading = ref(false)
+  const submitError = ref<string | null>(null)
 
   function validate(): boolean {
     errors.name = fields.name.trim() ? undefined : 'Please tell me your name.'
@@ -28,10 +27,26 @@ export function useContactForm() {
     return !errors.name && !errors.email && !errors.message
   }
 
-  function submit(): void {
+  async function submit(): Promise<void> {
     if (!validate()) return
-    // No network request by design — this is a visual/interactive placeholder.
-    isSubmitted.value = true
+    isLoading.value = true
+    submitError.value = null
+    try {
+      const res = await fetch(FORMSPREE_ENDPOINT, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+        body: JSON.stringify({ name: fields.name, email: fields.email, message: fields.message }),
+      })
+      if (res.ok) {
+        isSubmitted.value = true
+      } else {
+        submitError.value = 'Something went wrong. Please try again or reach out directly.'
+      }
+    } catch {
+      submitError.value = 'Network error. Please check your connection and try again.'
+    } finally {
+      isLoading.value = false
+    }
   }
 
   function reset(): void {
@@ -42,7 +57,9 @@ export function useContactForm() {
     errors.email = undefined
     errors.message = undefined
     isSubmitted.value = false
+    isLoading.value = false
+    submitError.value = null
   }
 
-  return { fields, errors, isSubmitted, submit, reset }
+  return { fields, errors, isSubmitted, isLoading, submitError, submit, reset }
 }

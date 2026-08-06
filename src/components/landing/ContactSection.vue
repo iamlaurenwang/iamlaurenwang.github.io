@@ -1,8 +1,9 @@
 <script lang="ts" setup>
-import { Flower2 } from '@lucide/vue'
+import { Flower2, ExternalLink } from '@lucide/vue'
 import { useContactForm } from '@/composables/useContactForm'
+import { socialLinks } from '@/data/contact'
 
-const { fields, errors, isSubmitted, submit } = useContactForm()
+const { fields, errors, isSubmitted, isLoading, submitError, submit } = useContactForm()
 </script>
 
 <template>
@@ -17,7 +18,24 @@ const { fields, errors, isSubmitted, submit } = useContactForm()
           Have a project in mind, or need help preparing for GEPT or TOEIC? Fill out the form
           and tell me all about it — I'd love to hear from you!
         </p>
-        <Flower2 :size="28" class="mt-10 text-accent-400" />
+        <!-- Social links -->
+        <div class="mt-10 flex flex-col gap-2.5">
+          <a
+            v-for="s in socialLinks"
+            :key="s.label"
+            :href="s.href"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="group flex items-center gap-3 rounded-lg border border-neutral-300/60 bg-neutral-50/60 px-3 py-2.5 transition-colors duration-150 hover:bg-neutral-50"
+          >
+            <div :class="s.iconClass" class="shrink-0 rounded-md p-1.5">
+              <component :is="s.icon" :size="14" />
+            </div>
+            <span class="font-sans text-xs text-neutral-500">{{ s.label }}</span>
+            <span class="ml-auto font-sans text-xs text-neutral-400 truncate">{{ s.value }}</span>
+            <ExternalLink :size="12" class="shrink-0 text-neutral-300 group-hover:text-neutral-500 transition-colors" />
+          </a>
+        </div>
       </div>
 
       <!-- Form card -->
@@ -66,11 +84,15 @@ const { fields, errors, isSubmitted, submit } = useContactForm()
 
           <button
             type="submit"
-            class="w-full bg-accent-300 py-3 font-sans text-xs tracking-[0.2em] text-neutral-800 uppercase transition-colors duration-200 hover:bg-accent-400"
+            :disabled="isLoading"
+            class="w-full bg-accent-300 py-3 font-sans text-xs tracking-[0.2em] text-neutral-800 uppercase transition-colors duration-200 hover:bg-accent-400 disabled:cursor-not-allowed disabled:opacity-60"
           >
-            Send
+            {{ isLoading ? 'Sending…' : 'Send' }}
           </button>
-          <p class="text-center font-sans text-[0.65rem] text-neutral-400">
+          <p v-if="submitError" class="text-center font-sans text-xs text-error">
+            {{ submitError }}
+          </p>
+          <p v-else class="text-center font-sans text-[0.65rem] text-neutral-400">
             Your information will never be shared. Never submit passwords.
           </p>
         </form>
