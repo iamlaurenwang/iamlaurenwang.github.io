@@ -34,7 +34,7 @@ const { formatPeriod } = usePeriod()
         :key="h"
         class="flex gap-2.5 font-sans text-sm leading-relaxed text-neutral-600"
       >
-        <span class="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-accent-300" />
+        <span class="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-neutral-300" />
         {{ h }}
       </li>
     </ul>
