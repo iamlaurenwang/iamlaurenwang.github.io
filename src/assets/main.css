@@ -23,13 +23,14 @@
   --color-accent-50: #fdf9ee;
   --color-accent-100: #faf0cc;
   --color-accent-200: #f2de96;
-  /* TODO: 文件中的accent-300為#ddcd71, 之後可以考慮替換 */
   --color-accent-300: #ddcd71;
   --color-accent-400: #d4b035;
   --color-accent-500: #c8a22a;
   --color-accent-600: #a8830d;
   --color-accent-700: #8a6c09;
   --color-accent-800: #6e5507;
+
+  --color-dark: #403f3e;
 
   /* === Semantic === */
   --color-success: #10b981;
