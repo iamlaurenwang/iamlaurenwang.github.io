@@ -4,8 +4,13 @@ import {
   ArrowRight, ExternalLink, FileText, Wrench,
   Mail, Code2, Briefcase, Tag, Calendar, X, Menu,
 } from '@lucide/vue'
+import PillTag from '@/components/PillTag.vue'
+import FilterPill from '@/components/FilterPill.vue'
 
 const hoveredCard = ref(false)
+
+const filters = ['All', 'Vue', 'CSS', 'Canvas'] as const
+const activeFilter = ref<(typeof filters)[number]>('All')
 
 const neutralPalette = [
   { hex: '#FDFCF8', label: '50',  cls: 'bg-neutral-50  border border-neutral-300' },
@@ -398,33 +403,32 @@ const iconSizes = [14, 16, 20, 24, 40] as const
 
             <div class="flex flex-wrap gap-3 items-center">
               <p class="text-xs text-neutral-400 w-20 shrink-0">Accent</p>
-              <span class="px-2.5 py-0.5 text-xs font-medium bg-accent-50 text-accent-600 rounded-full">Vue 3</span>
-              <span class="px-2.5 py-0.5 text-xs font-medium bg-accent-50 text-accent-600 rounded-full">TypeScript</span>
-              <span class="px-2.5 py-0.5 text-xs font-medium bg-accent-50 text-accent-600 rounded-full">Design Systems</span>
+              <PillTag variant="accent">Vue 3</PillTag>
+              <PillTag variant="accent">TypeScript</PillTag>
+              <PillTag variant="accent">Design Systems</PillTag>
             </div>
 
             <div class="flex flex-wrap gap-3 items-center">
               <p class="text-xs text-neutral-400 w-20 shrink-0">Neutral</p>
-              <span class="px-2.5 py-0.5 text-xs font-medium bg-neutral-100 text-neutral-500 rounded-full">CSS</span>
-              <span class="px-2.5 py-0.5 text-xs font-medium bg-neutral-100 text-neutral-500 rounded-full">Canvas</span>
+              <PillTag variant="neutral">CSS</PillTag>
+              <PillTag variant="neutral">Canvas</PillTag>
             </div>
 
             <div class="flex flex-wrap gap-3 items-center">
               <p class="text-xs text-neutral-400 w-20 shrink-0">Semantic</p>
-              <span class="px-2.5 py-0.5 text-xs font-medium bg-green-50 text-success rounded-full">HackMD</span>
-              <span class="px-2.5 py-0.5 text-xs font-medium bg-yellow-50 text-warning rounded-full">Draft</span>
+              <PillTag variant="success">HackMD</PillTag>
+              <PillTag variant="warning">Draft</PillTag>
             </div>
 
             <div class="flex flex-wrap gap-3 items-center pt-3 border-t border-neutral-100">
               <p class="text-xs text-neutral-400 w-20 shrink-0">Filter pills</p>
-              <button class="px-4 py-1.5 text-xs font-medium bg-accent-600 text-white rounded-full
-                             transition-colors duration-150">All</button>
-              <button class="px-4 py-1.5 text-xs font-medium bg-neutral-100 text-neutral-600 rounded-full
-                             transition-colors duration-150 hover:bg-neutral-200">Vue</button>
-              <button class="px-4 py-1.5 text-xs font-medium bg-neutral-100 text-neutral-600 rounded-full
-                             transition-colors duration-150 hover:bg-neutral-200">CSS</button>
-              <button class="px-4 py-1.5 text-xs font-medium bg-neutral-100 text-neutral-600 rounded-full
-                             transition-colors duration-150 hover:bg-neutral-200">Canvas</button>
+              <FilterPill
+                v-for="f in filters"
+                :key="f"
+                :label="f"
+                :active="activeFilter === f"
+                @click="activeFilter = f"
+              />
             </div>
           </div>
         </div>
