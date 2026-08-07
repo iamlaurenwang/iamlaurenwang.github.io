@@ -17,11 +17,10 @@ const tabs: { key: Tab; label: string }[] = [
 </script>
 
 <template>
-  <!-- Dark header band -->
-  <!-- <div class="bg-neutral-400"> -->
-  <div class="bg-accent-300 ">
+  <!-- header band -->
+  <div class="bg-neutral-100">
     <div class="mx-auto max-w-5xl px-6 py-16">
-      <h1 class="font-serif text-4xl  text-dark/60">Resume</h1>
+      <h1 class="font-serif text-4xl text-dark/60">Resume</h1>
       <p class="mt-3 max-w-2xl font-sans text-sm leading-relaxed text-dark/60">
         Frontend engineer with a background in Vue.js, TypeScript, and cross-functional team
         delivery — and a TOEIC 935 score to boot.

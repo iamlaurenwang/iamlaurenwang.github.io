@@ -1,36 +1,40 @@
-<script lang="ts" setup>
-import ImagePlaceholder from './ImagePlaceholder.vue'
-</script>
-
 <template>
   <section class="bg-neutral-100">
-    <div class="mx-auto grid max-w-6xl items-stretch gap-10 px-6 py-20 md:grid-cols-2 md:gap-16">
-      <!-- Text -->
-      <div class="flex flex-col justify-center">
-        <h2 class="font-serif text-3xl leading-snug font-normal text-accent-500 md:text-4xl">
-          I didn't take the straight path to get here and I think that's what makes my work
-          better.
-        </h2>
-        <div class="mt-8 space-y-4 font-sans text-sm leading-relaxed text-neutral-600">
-          <p>
-            I started out drawn to language and teaching, then found my way into software — and
-            that mix is exactly what makes my work better. Today I focus on the frontend,
-            building interfaces with Vue.js, TypeScript, and Tailwind CSS, with hands-on
-            experience across component libraries like Quasar, Element Plus, Nuxt UI, and
-            Bootstrap.
-          </p>
-          <p>
-            I'm comfortable across the full stack too — working with C#, Java, SQL, Entity
-            Framework, Docker, and CI/CD pipelines. As a native Mandarin speaker fluent in
-            English (TOEIC 935/990), I also teach writing, composition, and exam preparation for
-            GEPT and TOEIC — a craft that keeps me curious, patient, and clear.
-          </p>
-        </div>
+    <div class="mx-auto max-w-5xl px-6 py-20">
+      <blockquote
+        class="font-serif text-2xl font-light leading-snug text-neutral-700 md:text-3xl md:max-w-3xl"
+      >
+        "I didn't take the straight path to get here —
+        <br class="hidden md:block" />
+        and that's exactly what makes my work better."
+      </blockquote>
+
+      <div class="mt-12 grid gap-6 md:grid-cols-2 md:gap-16">
+        <p class="font-sans text-sm leading-relaxed text-neutral-600">
+          I started out drawn to language and teaching, then found my way into software. Today I
+          focus on the frontend, building interfaces with Vue.js, TypeScript, and Tailwind CSS —
+          with hands-on experience across Quasar, Element Plus, Nuxt UI, and Bootstrap.
+        </p>
+        <p class="font-sans text-sm leading-relaxed text-neutral-600">
+          As a native Mandarin speaker fluent in English (TOEIC 935/990), I also teach writing,
+          composition, and exam preparation for GEPT and TOEIC. A craft that keeps me curious,
+          patient, and precise.
+        </p>
       </div>
 
-      <!-- Image -->
-      <div class="min-h-72 md:min-h-[28rem]">
-        <ImagePlaceholder tone="neutral-300" label="Portrait — Lauren" />
+      <div class="mt-10 flex flex-wrap gap-2.5">
+        <span
+          v-for="fact in [
+            'TOEIC 935/990',
+            '7+ yrs teaching',
+            'Full-stack capable',
+            'Native Mandarin · Fluent English',
+            'NKNU English Dept.',
+          ]"
+          :key="fact"
+          class="border border-neutral-300 px-3 py-1.5 font-sans text-xs text-neutral-500"
+          >{{ fact }}</span
+        >
       </div>
     </div>
   </section>
