@@ -40,7 +40,13 @@ __screenshots__/
 
 # types
 *.d.ts
+!env.d.ts
 
 # personalization
 .editorconfig
 .vscode/
+
+# env (keep .env.example tracked)
+.env
+.env.*
+!.env.example
