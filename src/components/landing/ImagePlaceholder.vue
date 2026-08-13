@@ -14,12 +14,12 @@ const props = withDefaults(
 
 const toneClass = computed<string>(() => {
   const map: Record<PlaceholderTone, string> = {
-    'neutral-100': 'bg-neutral-100',
-    'neutral-200': 'bg-neutral-200',
-    'neutral-300': 'bg-neutral-300',
-    'neutral-400': 'bg-neutral-400',
-    'accent-100': 'bg-accent-100',
-    'accent-200': 'bg-accent-200',
+    'neutral-100': 'bg-neutral-100 dark:bg-neutral-800',
+    'neutral-200': 'bg-neutral-200 dark:bg-neutral-800',
+    'neutral-300': 'bg-neutral-300 dark:bg-neutral-700',
+    'neutral-400': 'bg-neutral-400 dark:bg-neutral-700',
+    'accent-100': 'bg-accent-100 dark:bg-accent-500/20',
+    'accent-200': 'bg-accent-200 dark:bg-accent-500/25',
   }
   return map[props.tone]
 })

@@ -3,12 +3,12 @@ import SectionHeading from "@/components/SectionHeading.vue";
 </script>
 
 <template>
-  <section id="about" class="bg-neutral-100">
+  <section id="about" class="bg-neutral-100 dark:bg-neutral-900">
     <div class="mx-auto max-w-5xl px-6 py-16 md:py-24">
       <SectionHeading number="01" title="About" />
 
       <blockquote
-        class="mt-10 font-serif text-2xl font-light leading-snug text-neutral-700 md:text-3xl md:max-w-3xl"
+        class="mt-10 font-serif text-2xl font-light leading-snug text-neutral-700 md:text-3xl md:max-w-3xl dark:text-neutral-200"
       >
         "I didn't take the straight path to get here —
         <br class="hidden md:block" />
@@ -16,12 +16,12 @@ import SectionHeading from "@/components/SectionHeading.vue";
       </blockquote>
 
       <div class="mt-12 grid gap-6 md:grid-cols-2 md:gap-16">
-        <p class="font-sans text-sm leading-relaxed text-neutral-600">
+        <p class="font-sans text-sm leading-relaxed text-neutral-600 dark:text-neutral-400">
           I focus on the frontend, building interfaces with Vue.js, TypeScript, and Tailwind CSS —
           with hands-on experience across Quasar, Element Plus, Nuxt UI, and Bootstrap, and a
           full-stack foundation in C#, SQL, and Docker.
         </p>
-        <p class="font-sans text-sm leading-relaxed text-neutral-600">
+        <p class="font-sans text-sm leading-relaxed text-neutral-600 dark:text-neutral-400">
           A native Mandarin speaker fluent in English (TOEIC 935/990), I care about clarity in both
           language and code — writing interfaces and documentation that are precise, accessible, and
           easy to reason about.
@@ -38,7 +38,7 @@ import SectionHeading from "@/components/SectionHeading.vue";
             'NKNU English Dept.',
           ]"
           :key="fact"
-          class="border border-neutral-300 px-3 py-1.5 font-sans text-xs text-neutral-500"
+          class="border border-neutral-300 px-3 py-1.5 font-sans text-xs text-neutral-500 dark:border-neutral-700 dark:text-neutral-400"
           >{{ fact }}</span
         >
       </div>

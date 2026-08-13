@@ -18,10 +18,10 @@ const tabs: { key: Tab; label: string }[] = [
 
 <template>
   <!-- header band -->
-  <div class="bg-neutral-100">
+  <div class="bg-neutral-100 dark:bg-neutral-900">
     <div class="mx-auto max-w-5xl px-6 py-16">
-      <h1 class="font-serif text-4xl text-dark/60">Resume</h1>
-      <p class="mt-3 min-h-[2.85rem] max-w-2xl font-sans text-sm leading-relaxed text-dark/60">
+      <h1 class="font-serif text-4xl text-dark/60 dark:text-neutral-100">Resume</h1>
+      <p class="mt-3 min-h-[2.85rem] max-w-2xl font-sans text-sm leading-relaxed text-dark/60 dark:text-neutral-400">
         Frontend engineer with a background in Vue.js, TypeScript, and cross-functional team
         delivery — and a TOEIC 935 score to boot.
       </p>
@@ -30,7 +30,7 @@ const tabs: { key: Tab; label: string }[] = [
   <!-- Content area -->
   <div class="mx-auto max-w-5xl px-6 py-10">
     <!-- Tab bar -->
-    <div class="flex gap-8 border-b border-neutral-200">
+    <div class="flex gap-8 border-b border-neutral-200 dark:border-neutral-800">
       <button
         v-for="tab in tabs"
         :key="tab.key"
@@ -38,8 +38,8 @@ const tabs: { key: Tab; label: string }[] = [
         class="-mb-px pb-3 font-sans text-sm transition-colors duration-150"
         :class="
           activeTab === tab.key
-            ? 'border-b-2 border-accent-500 font-medium text-accent-700'
-            : 'text-neutral-400 hover:text-neutral-700'
+            ? 'border-b-2 border-accent-500 font-medium text-accent-700 dark:border-accent-400 dark:text-accent-400'
+            : 'text-neutral-400 hover:text-neutral-700 dark:text-neutral-500 dark:hover:text-neutral-300'
         "
         @click="activeTab = tab.key"
       >
@@ -57,19 +57,19 @@ const tabs: { key: Tab; label: string }[] = [
       />
 
       <!-- Education -->
-      <div class="mt-4 border-t border-neutral-200 pt-10">
-        <p class="mb-5 font-sans text-xs font-medium uppercase tracking-widest text-neutral-400">
+      <div class="mt-4 border-t border-neutral-200 pt-10 dark:border-neutral-800">
+        <p class="mb-5 font-sans text-xs font-medium uppercase tracking-widest text-neutral-400 dark:text-neutral-500">
           Education
         </p>
-        <div class="rounded-xl bg-neutral-100 p-5">
+        <div class="rounded-xl bg-neutral-100 p-5 dark:bg-neutral-900">
           <div class="flex items-start gap-4">
-            <GraduationCap :size="20" class="mt-0.5 shrink-0 text-neutral-400" />
+            <GraduationCap :size="20" class="mt-0.5 shrink-0 text-neutral-400 dark:text-neutral-500" />
             <div>
-              <h3 class="font-serif text-xl text-neutral-800">{{ education.degree }}</h3>
-              <p class="mt-0.5 font-sans text-sm text-neutral-500">
+              <h3 class="font-serif text-xl text-neutral-800 dark:text-neutral-100">{{ education.degree }}</h3>
+              <p class="mt-0.5 font-sans text-sm text-neutral-500 dark:text-neutral-400">
                 {{ education.school }} {{ education.schoolEn }} · {{ education.location }}
               </p>
-              <p class="mt-0.5 font-sans text-xs text-neutral-400">
+              <p class="mt-0.5 font-sans text-xs text-neutral-400 dark:text-neutral-500">
                 {{ education.period.start }} – {{ education.period.end }}
               </p>
             </div>

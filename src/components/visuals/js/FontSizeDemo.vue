@@ -67,10 +67,10 @@ ctrl.increase()   // mutates the shared private state`
     <!-- Live -->
     <div class="space-y-4">
       <div class="flex items-center gap-3">
-        <div class="inline-flex overflow-hidden rounded-md border border-neutral-200">
+        <div class="inline-flex overflow-hidden rounded-md border border-neutral-200 dark:border-neutral-700">
           <button
             type="button"
-            class="flex h-9 w-9 items-center justify-center text-neutral-600 transition-colors hover:bg-neutral-100 disabled:opacity-40"
+            class="flex h-9 w-9 items-center justify-center text-neutral-600 transition-colors hover:bg-neutral-100 disabled:opacity-40 dark:text-neutral-300 dark:hover:bg-neutral-800"
             :disabled="size <= MIN"
             @click="decrease"
           >
@@ -78,18 +78,18 @@ ctrl.increase()   // mutates the shared private state`
           </button>
           <button
             type="button"
-            class="flex h-9 w-9 items-center justify-center border-l border-neutral-200 text-neutral-600 transition-colors hover:bg-neutral-100 disabled:opacity-40"
+            class="flex h-9 w-9 items-center justify-center border-l border-neutral-200 text-neutral-600 transition-colors hover:bg-neutral-100 disabled:opacity-40 dark:border-neutral-700 dark:text-neutral-300 dark:hover:bg-neutral-800"
             :disabled="size >= MAX"
             @click="increase"
           >
             <Plus :size="14" />
           </button>
         </div>
-        <span class="font-mono text-xs text-neutral-500">size = {{ size }}</span>
+        <span class="font-mono text-xs text-neutral-500 dark:text-neutral-400">size = {{ size }}</span>
       </div>
 
       <p
-        class="rounded-lg border border-neutral-200 bg-neutral-50 p-4 font-serif leading-relaxed text-neutral-800 transition-all"
+        class="rounded-lg border border-neutral-200 bg-neutral-50 p-4 font-serif leading-relaxed text-neutral-800 transition-all dark:border-neutral-800 dark:bg-neutral-900 dark:text-neutral-100"
         :style="textStyle"
       >
         The quick brown fox jumps over the lazy dog.

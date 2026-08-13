@@ -9,7 +9,9 @@ const showLayout = computed(() => !route.meta.hideLayout)
 </script>
 
 <template>
-  <div class="min-h-screen flex flex-col bg-neutral-50 font-sans text-neutral-700">
+  <div
+    class="flex min-h-screen flex-col bg-neutral-50 font-sans text-neutral-700 dark:bg-black dark:text-neutral-300"
+  >
     <AppHeader v-if="showLayout" />
     <main class="flex-1">
       <RouterView />

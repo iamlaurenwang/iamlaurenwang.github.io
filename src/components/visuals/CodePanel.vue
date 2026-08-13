@@ -31,8 +31,8 @@ const tab = ref<Tab>('css')
         class="rounded-md border px-3 py-1 font-mono text-xs transition-colors"
         :class="
           tab === t
-            ? 'border-accent-400 bg-accent-300 text-neutral-800'
-            : 'border-neutral-200 bg-neutral-50 text-neutral-500 hover:bg-neutral-100'
+            ? 'border-accent-500 bg-accent-500 text-white'
+            : 'border-neutral-200 bg-neutral-50 text-neutral-500 hover:bg-neutral-100 dark:border-neutral-700 dark:bg-neutral-900 dark:text-neutral-400 dark:hover:bg-neutral-800'
         "
         @click="tab = t"
       >

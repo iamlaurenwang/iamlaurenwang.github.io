@@ -186,8 +186,8 @@ const childTw = computed<string>(() => {
 
         <div>
           <div class="mb-2 flex items-center justify-between">
-            <p class="font-mono text-xs tracking-wide text-neutral-500">columns</p>
-            <span class="font-mono text-xs text-neutral-700">{{ state.columns }}</span>
+            <p class="font-mono text-xs tracking-wide text-neutral-500 dark:text-neutral-400">columns</p>
+            <span class="font-mono text-xs text-neutral-700 dark:text-neutral-300">{{ state.columns }}</span>
           </div>
           <input
             v-model.number="state.columns"
@@ -195,14 +195,14 @@ const childTw = computed<string>(() => {
             min="1"
             max="6"
             step="1"
-            class="w-full accent-accent-400"
+            class="w-full accent-accent-500"
           />
         </div>
 
         <div>
           <div class="mb-2 flex items-center justify-between">
-            <p class="font-mono text-xs tracking-wide text-neutral-500">rows</p>
-            <span class="font-mono text-xs text-neutral-700">{{ state.rows }}</span>
+            <p class="font-mono text-xs tracking-wide text-neutral-500 dark:text-neutral-400">rows</p>
+            <span class="font-mono text-xs text-neutral-700 dark:text-neutral-300">{{ state.rows }}</span>
           </div>
           <input
             v-model.number="state.rows"
@@ -210,14 +210,14 @@ const childTw = computed<string>(() => {
             min="1"
             max="4"
             step="1"
-            class="w-full accent-accent-400"
+            class="w-full accent-accent-500"
           />
         </div>
 
         <div>
           <div class="mb-2 flex items-center justify-between">
-            <p class="font-mono text-xs tracking-wide text-neutral-500">gap</p>
-            <span class="font-mono text-xs text-neutral-700">{{ state.gap }}px</span>
+            <p class="font-mono text-xs tracking-wide text-neutral-500 dark:text-neutral-400">gap</p>
+            <span class="font-mono text-xs text-neutral-700 dark:text-neutral-300">{{ state.gap }}px</span>
           </div>
           <input
             v-model.number="state.gap"
@@ -225,19 +225,19 @@ const childTw = computed<string>(() => {
             min="0"
             max="48"
             step="2"
-            class="w-full accent-accent-400"
+            class="w-full accent-accent-500"
           />
         </div>
 
         <div>
           <div class="mb-2 flex items-center justify-between">
-            <p class="font-mono text-xs tracking-wide text-neutral-500">items</p>
-            <span class="font-mono text-xs text-neutral-700">{{ children.length }}</span>
+            <p class="font-mono text-xs tracking-wide text-neutral-500 dark:text-neutral-400">items</p>
+            <span class="font-mono text-xs text-neutral-700 dark:text-neutral-300">{{ children.length }}</span>
           </div>
           <div class="flex gap-2">
             <button
               type="button"
-              class="flex h-8 w-8 items-center justify-center rounded-md border border-neutral-200 text-neutral-600 transition-colors hover:bg-neutral-100 disabled:opacity-40"
+              class="flex h-8 w-8 items-center justify-center rounded-md border border-neutral-200 text-neutral-600 transition-colors hover:bg-neutral-100 disabled:opacity-40 dark:border-neutral-700 dark:text-neutral-300 dark:hover:bg-neutral-800"
               :disabled="children.length <= 1"
               @click="removeItem"
             >
@@ -245,7 +245,7 @@ const childTw = computed<string>(() => {
             </button>
             <button
               type="button"
-              class="flex h-8 w-8 items-center justify-center rounded-md border border-neutral-200 text-neutral-600 transition-colors hover:bg-neutral-100 disabled:opacity-40"
+              class="flex h-8 w-8 items-center justify-center rounded-md border border-neutral-200 text-neutral-600 transition-colors hover:bg-neutral-100 disabled:opacity-40 dark:border-neutral-700 dark:text-neutral-300 dark:hover:bg-neutral-800"
               :disabled="children.length >= 12"
               @click="addItem"
             >
@@ -257,15 +257,15 @@ const childTw = computed<string>(() => {
         <!-- Child properties (selected item) -->
         <div
           v-if="selected"
-          class="space-y-4 rounded-lg border border-accent-200 bg-accent-50/50 p-4"
+          class="space-y-4 rounded-lg border border-accent-200 bg-accent-50/50 p-4 dark:border-accent-500/30 dark:bg-accent-500/5"
         >
           <div class="flex items-center justify-between">
-            <p class="font-sans text-xs font-medium text-neutral-700">
+            <p class="font-sans text-xs font-medium text-neutral-700 dark:text-neutral-200">
               Item {{ (selectedIndex ?? 0) + 1 }} · child
             </p>
             <button
               type="button"
-              class="text-neutral-400 transition-colors hover:text-neutral-700"
+              class="text-neutral-400 transition-colors hover:text-neutral-700 dark:text-neutral-500 dark:hover:text-neutral-200"
               @click="selectedIndex = null"
             >
               <X :size="14" />
@@ -274,8 +274,8 @@ const childTw = computed<string>(() => {
 
           <div>
             <div class="mb-2 flex items-center justify-between">
-              <p class="font-mono text-xs tracking-wide text-neutral-500">grid-column (span)</p>
-              <span class="font-mono text-xs text-neutral-700">{{ selected.colSpan }}</span>
+              <p class="font-mono text-xs tracking-wide text-neutral-500 dark:text-neutral-400">grid-column (span)</p>
+              <span class="font-mono text-xs text-neutral-700 dark:text-neutral-300">{{ selected.colSpan }}</span>
             </div>
             <input
               v-model.number="selected.colSpan"
@@ -283,14 +283,14 @@ const childTw = computed<string>(() => {
               min="1"
               :max="state.columns"
               step="1"
-              class="w-full accent-accent-400"
+              class="w-full accent-accent-500"
             />
           </div>
 
           <div>
             <div class="mb-2 flex items-center justify-between">
-              <p class="font-mono text-xs tracking-wide text-neutral-500">grid-row (span)</p>
-              <span class="font-mono text-xs text-neutral-700">{{ selected.rowSpan }}</span>
+              <p class="font-mono text-xs tracking-wide text-neutral-500 dark:text-neutral-400">grid-row (span)</p>
+              <span class="font-mono text-xs text-neutral-700 dark:text-neutral-300">{{ selected.rowSpan }}</span>
             </div>
             <input
               v-model.number="selected.rowSpan"
@@ -298,7 +298,7 @@ const childTw = computed<string>(() => {
               min="1"
               :max="state.rows"
               step="1"
-              class="w-full accent-accent-400"
+              class="w-full accent-accent-500"
             />
           </div>
 
@@ -307,7 +307,7 @@ const childTw = computed<string>(() => {
         </div>
         <p
           v-else
-          class="rounded-lg border border-dashed border-neutral-300 px-3 py-3 text-center font-sans text-xs text-neutral-400"
+          class="rounded-lg border border-dashed border-neutral-300 px-3 py-3 text-center font-sans text-xs text-neutral-400 dark:border-neutral-700 dark:text-neutral-500"
         >
           Click an item to edit its child properties.
         </p>
@@ -315,15 +315,15 @@ const childTw = computed<string>(() => {
 
       <!-- Preview + code -->
       <div class="space-y-4">
-        <div class="rounded-lg border border-neutral-200 bg-neutral-100 p-4" :style="stageStyle">
+        <div class="rounded-lg border border-neutral-200 bg-neutral-100 p-4 dark:border-neutral-800 dark:bg-neutral-900" :style="stageStyle">
           <button
             v-for="(c, i) in children"
             :key="i"
             type="button"
-            class="flex items-center justify-center rounded-md bg-accent-300 px-5 py-3 font-mono text-sm font-medium text-neutral-800 shadow-card transition-all duration-300"
+            class="flex items-center justify-center rounded-md bg-accent-500 px-5 py-3 font-mono text-sm font-medium text-white shadow-card transition-all duration-300"
             :class="
               selectedIndex === i
-                ? 'ring-2 ring-accent-600 ring-offset-2 ring-offset-neutral-100'
+                ? 'ring-2 ring-accent-600 ring-offset-2 ring-offset-neutral-100 dark:ring-offset-neutral-900'
                 : 'hover:brightness-95'
             "
             :style="childStyle(c)"

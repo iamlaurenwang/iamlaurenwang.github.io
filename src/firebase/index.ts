@@ -3,6 +3,7 @@ import { getAnalytics } from "firebase/analytics";
 
 import { getAuth, GoogleAuthProvider } from "firebase/auth";
 import { getFirestore } from "firebase/firestore";
+import { getAI, getGenerativeModel, GoogleAIBackend } from "firebase/ai";
 
 const firebaseConfig = {
   apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
@@ -21,3 +22,15 @@ const app = initializeApp(firebaseConfig);
 export const auth = getAuth(app);
 export const googleProvider = new GoogleAuthProvider();
 export const db = getFirestore(app);
+
+const ai = getAI(app, { backend: new GoogleAIBackend() });
+const model = getGenerativeModel(ai, { model: "gemini-2.5-flash" });
+
+async function askAI(prompt: string) {
+  try {
+    const result = await model.generateContent(prompt);
+    console.log("ai response:", result.response.text);
+  } catch (error) {
+    console.log("ai response failed:", error);
+  }
+}

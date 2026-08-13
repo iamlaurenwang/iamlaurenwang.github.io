@@ -13,7 +13,7 @@ import PageHeader from '@/components/PageHeader.vue'
 
     <FlexPlayground />
 
-    <hr class="border-neutral-200" />
+    <hr class="border-neutral-200 dark:border-neutral-800" />
 
     <GridPlayground />
   </div>

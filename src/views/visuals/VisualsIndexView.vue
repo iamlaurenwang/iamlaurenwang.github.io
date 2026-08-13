@@ -39,8 +39,8 @@ const cards: VisualCard[] = [
 
 <template>
   <div class="mx-auto max-w-5xl px-6 py-12">
-    <h1 class="font-serif text-4xl text-neutral-800">Visuals</h1>
-    <p class="mt-3 max-w-2xl font-sans text-sm leading-relaxed text-neutral-500">
+    <h1 class="font-serif text-4xl text-neutral-800 dark:text-neutral-100">Visuals</h1>
+    <p class="mt-3 max-w-2xl font-sans text-sm leading-relaxed text-neutral-500 dark:text-neutral-400">
       A small collection of interactive demos I build to explore and explain front-end concepts.
     </p>
 
@@ -49,14 +49,14 @@ const cards: VisualCard[] = [
         v-for="card in cards"
         :key="card.title"
         :to="card.to"
-        class="group flex flex-col rounded-lg border border-neutral-200 bg-neutral-50 p-6 shadow-card transition-shadow hover:shadow-card-hover"
+        class="group flex flex-col rounded-lg border border-neutral-200 bg-neutral-50 p-6 shadow-card transition-shadow hover:shadow-card-hover dark:border-neutral-800 dark:bg-neutral-900"
       >
         <div class="flex items-center justify-between">
-          <component :is="card.icon" :size="24" class="text-accent-500" />
+          <component :is="card.icon" :size="24" class="text-accent-500 dark:text-accent-400" />
           <PillTag v-if="!card.ready" variant="muted" size="xs">Soon</PillTag>
         </div>
-        <h2 class="mt-4 font-serif text-xl text-neutral-800">{{ card.title }}</h2>
-        <p class="mt-2 flex-1 font-sans text-sm leading-relaxed text-neutral-500">
+        <h2 class="mt-4 font-serif text-xl text-neutral-800 dark:text-neutral-100">{{ card.title }}</h2>
+        <p class="mt-2 flex-1 font-sans text-sm leading-relaxed text-neutral-500 dark:text-neutral-400">
           {{ card.description }}
         </p>
         <span

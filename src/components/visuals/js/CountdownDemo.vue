@@ -71,8 +71,8 @@ start()                   // step 2: run it`
         class="rounded-md border px-6 py-3 font-sans text-sm font-medium transition-colors"
         :class="
           disabled
-            ? 'cursor-not-allowed border-neutral-200 bg-neutral-100 text-neutral-400'
-            : 'border-accent-400 bg-accent-300 text-neutral-800 hover:brightness-95'
+            ? 'cursor-not-allowed border-neutral-200 bg-neutral-100 text-neutral-400 dark:border-neutral-800 dark:bg-neutral-800 dark:text-neutral-500'
+            : 'border-accent-500 bg-accent-500 text-white hover:brightness-95'
         "
         :disabled="disabled"
         @click="handleSend"

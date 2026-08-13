@@ -5,7 +5,7 @@ import EmptyState from "@/components/EmptyState.vue";
 </script>
 
 <template>
-  <section id="side-projects" class="bg-white">
+  <section id="side-projects" class="bg-white dark:bg-black">
     <div class="mx-auto max-w-5xl px-6 py-16 md:py-24">
       <SectionHeading number="04" title="Side Projects" />
 

@@ -1,47 +1,51 @@
 @import url("https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&display=swap");
 @import "tailwindcss";
 
+/* Class-based dark mode: toggled via `.dark` on <html> (see useTheme.ts) */
+@custom-variant dark (&:where(.dark, .dark *));
+
 @theme {
   /* === Fonts === */
   --font-serif: "Cormorant Garamond", Georgia, "Times New Roman", serif;
   --font-sans: "DM Sans", ui-sans-serif, system-ui, -apple-system, sans-serif;
   --font-mono: ui-monospace, "Cascadia Code", "Fira Code", monospace;
 
-  /* === Neutral — warm cream/brown === */
-  --color-neutral-50: #fdfcf8;
-  --color-neutral-100: #faf8f2;
-  --color-neutral-200: #ede5d8;
-  --color-neutral-300: #d9cec4;
-  --color-neutral-400: #bca99a;
-  --color-neutral-500: #7a6050;
-  --color-neutral-600: #5c4b3a;
-  --color-neutral-700: #3d2b1f;
-  --color-neutral-800: #2a1b10;
-  --color-neutral-900: #1a0e0a;
+  /* === Neutral — Tailwind zinc (cool gray, matches Spotlight) === */
+  --color-neutral-50: #fafafa;
+  --color-neutral-100: #f4f4f5;
+  --color-neutral-200: #e4e4e7;
+  --color-neutral-300: #d4d4d8;
+  --color-neutral-400: #a1a1aa;
+  --color-neutral-500: #71717a;
+  --color-neutral-600: #52525b;
+  --color-neutral-700: #3f3f46;
+  --color-neutral-800: #27272a;
+  --color-neutral-900: #18181b;
+  --color-neutral-950: #09090b;
 
-  /* === Accent — mustard/gold === */
-  --color-accent-50: #fdf9ee;
-  --color-accent-100: #faf0cc;
-  --color-accent-200: #f2de96;
-  --color-accent-300: #ddcd71;
-  --color-accent-400: #d4b035;
-  --color-accent-500: #c8a22a;
-  --color-accent-600: #a8830d;
-  --color-accent-700: #8a6c09;
-  --color-accent-800: #6e5507;
+  /* === Accent — Tailwind teal (matches Spotlight) === */
+  --color-accent-50: #f0fdfa;
+  --color-accent-100: #ccfbf1;
+  --color-accent-200: #99f6e4;
+  --color-accent-300: #5eead4;
+  --color-accent-400: #2dd4bf;
+  --color-accent-500: #14b8a6;
+  --color-accent-600: #0d9488;
+  --color-accent-700: #0f766e;
+  --color-accent-800: #115e59;
 
-  --color-dark: #403f3e;
+  --color-dark: #27272a;
 
   /* === Semantic === */
   --color-success: #10b981;
   --color-warning: #f59e0b;
   --color-error: #ef4444;
 
-  /* === Elevation (warm-tinted shadows) === */
-  --shadow-card: 0 1px 4px rgba(58, 38, 20, 0.06), 0 1px 2px rgba(58, 38, 20, 0.04);
-  --shadow-card-hover: 0 4px 16px rgba(58, 38, 20, 0.1), 0 2px 6px rgba(58, 38, 20, 0.05);
-  --shadow-dropdown: 0 4px 20px rgba(58, 38, 20, 0.12), 0 1px 4px rgba(58, 38, 20, 0.06);
-  --shadow-modal: 0 20px 60px rgba(58, 38, 20, 0.15);
+  /* === Elevation (cool-tinted shadows) === */
+  --shadow-card: 0 1px 4px rgba(9, 9, 11, 0.06), 0 1px 2px rgba(9, 9, 11, 0.04);
+  --shadow-card-hover: 0 4px 16px rgba(9, 9, 11, 0.1), 0 2px 6px rgba(9, 9, 11, 0.05);
+  --shadow-dropdown: 0 4px 20px rgba(9, 9, 11, 0.12), 0 1px 4px rgba(9, 9, 11, 0.06);
+  --shadow-modal: 0 20px 60px rgba(9, 9, 11, 0.15);
 
   /* === Easing === */
   --ease-default: cubic-bezier(0.4, 0, 0.2, 1);
@@ -52,6 +56,23 @@
 
   /* === Animation === */
   --animate-marquee: marquee 30s linear infinite;
+}
+
+@layer base {
+  html {
+    color-scheme: light;
+  }
+  html.dark {
+    color-scheme: dark;
+  }
+  body {
+    background-color: var(--color-neutral-50);
+    color: var(--color-neutral-700);
+  }
+  html.dark body {
+    background-color: #000;
+    color: var(--color-neutral-300);
+  }
 }
 
 @keyframes marquee {

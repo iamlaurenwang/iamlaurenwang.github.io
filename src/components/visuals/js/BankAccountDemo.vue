@@ -69,20 +69,20 @@ const accountB = createBankAccount(350)   // separate balance
     <!-- Live -->
     <div class="space-y-4">
       <div class="flex flex-wrap gap-2">
-        <div class="flex flex-1 items-stretch overflow-hidden rounded-md border border-neutral-200">
-          <span class="flex items-center bg-neutral-100 px-3 font-mono text-sm text-neutral-500"
+        <div class="flex flex-1 items-stretch overflow-hidden rounded-md border border-neutral-200 dark:border-neutral-700">
+          <span class="flex items-center bg-neutral-100 px-3 font-mono text-sm text-neutral-500 dark:bg-neutral-800 dark:text-neutral-400"
             >$</span
           >
           <input
             v-model.number="amount"
             type="number"
             min="0"
-            class="w-full bg-neutral-50 px-3 py-2 font-mono text-sm text-neutral-800 outline-none"
+            class="w-full bg-neutral-50 px-3 py-2 font-mono text-sm text-neutral-800 outline-none dark:bg-neutral-900 dark:text-neutral-100"
           />
         </div>
         <select
           v-model="selected"
-          class="rounded-md border border-neutral-200 bg-neutral-50 px-3 py-2 font-mono text-sm text-neutral-800 outline-none"
+          class="rounded-md border border-neutral-200 bg-neutral-50 px-3 py-2 font-mono text-sm text-neutral-800 outline-none dark:border-neutral-700 dark:bg-neutral-900 dark:text-neutral-100"
         >
           <option v-for="id in ids" :key="id" :value="id">Account {{ id }}</option>
         </select>
@@ -91,14 +91,14 @@ const accountB = createBankAccount(350)   // separate balance
       <div class="flex gap-2">
         <button
           type="button"
-          class="flex-1 rounded-md border border-accent-400 bg-accent-300 py-2 font-sans text-sm font-medium text-neutral-800 transition-colors hover:brightness-95"
+          class="flex-1 rounded-md border border-accent-500 bg-accent-500 py-2 font-sans text-sm font-medium text-white transition-colors hover:brightness-95"
           @click="transact('deposit')"
         >
           Deposit
         </button>
         <button
           type="button"
-          class="flex-1 rounded-md border border-neutral-200 bg-neutral-50 py-2 font-sans text-sm font-medium text-neutral-600 transition-colors hover:bg-neutral-100"
+          class="flex-1 rounded-md border border-neutral-200 bg-neutral-50 py-2 font-sans text-sm font-medium text-neutral-600 transition-colors hover:bg-neutral-100 dark:border-neutral-700 dark:bg-neutral-900 dark:text-neutral-300 dark:hover:bg-neutral-800"
           @click="transact('withdraw')"
         >
           Withdraw
@@ -111,11 +111,13 @@ const accountB = createBankAccount(350)   // separate balance
           :key="id"
           class="flex items-center justify-between rounded-md border px-4 py-2.5 transition-colors"
           :class="
-            flash === id ? 'border-accent-400 bg-accent-50' : 'border-neutral-200 bg-neutral-50'
+            flash === id
+              ? 'border-accent-400 bg-accent-50 dark:bg-accent-500/10'
+              : 'border-neutral-200 bg-neutral-50 dark:border-neutral-800 dark:bg-neutral-900'
           "
         >
-          <span class="font-sans text-sm text-neutral-500">Account {{ id }}</span>
-          <span class="font-mono text-sm font-medium text-neutral-800">${{ balances[id] }}</span>
+          <span class="font-sans text-sm text-neutral-500 dark:text-neutral-400">Account {{ id }}</span>
+          <span class="font-mono text-sm font-medium text-neutral-800 dark:text-neutral-100">${{ balances[id] }}</span>
         </li>
       </ul>
     </div>

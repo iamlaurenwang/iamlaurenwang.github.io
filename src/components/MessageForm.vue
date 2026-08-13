@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 import { LogIn, Send } from '@lucide/vue'
+import BaseButton from '@/components/BaseButton.vue'
 
 // 預覽用：之後串 Firebase 時此 ref 改由 useAuth 提供
 const isLoggedIn = ref(false)
@@ -17,10 +18,10 @@ function togglePreview() {
 <template>
   <!-- 未登入 -->
   <div v-if="!isLoggedIn" class="flex flex-col items-center gap-4 py-8">
-    <p class="font-sans text-sm text-neutral-400">登入後即可留言</p>
+    <p class="font-sans text-sm text-neutral-400 dark:text-neutral-500">登入後即可留言</p>
     <button
       type="button"
-      class="flex items-center gap-2.5 rounded-full border border-neutral-200 bg-white px-6 py-2.5 font-sans text-sm text-neutral-700 shadow-card transition-shadow hover:shadow-card-hover"
+      class="flex items-center gap-2.5 rounded-full border border-neutral-200 bg-white px-6 py-2.5 font-sans text-sm text-neutral-700 shadow-card transition-shadow hover:shadow-card-hover dark:border-neutral-700 dark:bg-neutral-800 dark:text-neutral-200"
     >
       <!-- Google G logo -->
       <svg width="16" height="16" viewBox="0 0 24 24" aria-hidden="true">
@@ -46,7 +47,7 @@ function togglePreview() {
     <!-- 預覽切換，串 Firebase 後移除 -->
     <button
       type="button"
-      class="font-sans text-xs text-neutral-300 underline underline-offset-2 hover:text-neutral-400"
+      class="font-sans text-xs text-neutral-300 underline underline-offset-2 hover:text-neutral-400 dark:text-neutral-600 dark:hover:text-neutral-500"
       @click="togglePreview"
     >
       [預覽] 切換登入狀態
@@ -64,16 +65,16 @@ function togglePreview() {
       />
       <div
         v-else
-        class="flex size-8 shrink-0 items-center justify-center rounded-full bg-accent-200"
+        class="flex size-8 shrink-0 items-center justify-center rounded-full bg-accent-200 dark:bg-accent-500/25"
       >
-        <span class="font-sans text-xs font-medium text-accent-700">
+        <span class="font-sans text-xs font-medium text-accent-700 dark:text-accent-300">
           {{ mockUser.displayName[0] }}
         </span>
       </div>
-      <span class="font-sans text-sm font-medium text-neutral-700">{{ mockUser.displayName }}</span>
+      <span class="font-sans text-sm font-medium text-neutral-700 dark:text-neutral-200">{{ mockUser.displayName }}</span>
       <button
         type="button"
-        class="ml-auto flex items-center gap-1.5 font-sans text-xs text-neutral-400 transition-colors hover:text-neutral-600"
+        class="ml-auto flex items-center gap-1.5 font-sans text-xs text-neutral-400 transition-colors hover:text-neutral-600 dark:text-neutral-500 dark:hover:text-neutral-300"
         @click="togglePreview"
       >
         <LogIn :size="12" />
@@ -86,19 +87,15 @@ function togglePreview() {
       :maxlength="MAX"
       rows="3"
       placeholder="留下你的心得或回饋…"
-      class="w-full resize-none rounded-xl border border-neutral-200 bg-white px-4 py-3 font-sans text-sm leading-relaxed text-neutral-700 placeholder:text-neutral-300 focus:border-accent-400 focus:outline-none focus:ring-2 focus:ring-accent-200"
+      class="w-full resize-none rounded-xl border border-neutral-200 bg-white px-4 py-3 font-sans text-sm leading-relaxed text-neutral-700 placeholder:text-neutral-300 focus:border-accent-400 focus:outline-none focus:ring-2 focus:ring-accent-200 dark:border-neutral-700 dark:bg-neutral-800 dark:text-neutral-200 dark:placeholder:text-neutral-600"
     />
 
     <div class="flex items-center justify-between">
-      <span class="font-sans text-xs text-neutral-300">{{ text.length }} / {{ MAX }}</span>
-      <button
-        type="button"
-        :disabled="!text.trim()"
-        class="flex items-center gap-2 rounded-full bg-accent-500 px-6 py-2 font-sans text-sm font-medium text-white transition-colors hover:bg-accent-600 disabled:cursor-not-allowed disabled:opacity-40"
-      >
+      <span class="font-sans text-xs text-neutral-300 dark:text-neutral-600">{{ text.length }} / {{ MAX }}</span>
+      <BaseButton type="button" :disabled="!text.trim()">
         <Send :size="13" />
         送出留言
-      </button>
+      </BaseButton>
     </div>
   </div>
 </template>

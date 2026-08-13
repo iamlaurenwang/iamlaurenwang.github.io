@@ -19,8 +19,8 @@ import FontSizeDemo from '@/components/visuals/js/FontSizeDemo.vue'
         <PageHeader level="h2" size="section" title="Private state" />
         <PillTag variant="accent" size="sm">closure</PillTag>
       </div>
-      <p class="mb-6 max-w-3xl font-sans text-sm leading-relaxed text-neutral-500">
-        <code class="font-mono text-neutral-700">balance</code> lives inside the factory and is
+      <p class="mb-6 max-w-3xl font-sans text-sm leading-relaxed text-neutral-500 dark:text-neutral-400">
+        <code class="font-mono text-neutral-700 dark:text-neutral-300">balance</code> lives inside the factory and is
         unreachable from outside — only the returned <code class="font-mono">deposit</code> /
         <code class="font-mono">withdraw</code> can touch it. Every call builds an independent
         scope, so accounts A, B and C never leak into each other.
@@ -28,7 +28,7 @@ import FontSizeDemo from '@/components/visuals/js/FontSizeDemo.vue'
       <BankAccountDemo />
     </section>
 
-    <hr class="border-neutral-200" />
+    <hr class="border-neutral-200 dark:border-neutral-800" />
 
     <!-- 2. State in async callbacks -->
     <section>
@@ -36,8 +36,8 @@ import FontSizeDemo from '@/components/visuals/js/FontSizeDemo.vue'
         <PageHeader level="h2" size="section" title="State across async" />
         <PillTag variant="accent" size="sm">closure + setInterval</PillTag>
       </div>
-      <p class="mb-6 max-w-3xl font-sans text-sm leading-relaxed text-neutral-500">
-        <code class="font-mono text-neutral-700">sendCode()</code> returns a
+      <p class="mb-6 max-w-3xl font-sans text-sm leading-relaxed text-neutral-500 dark:text-neutral-400">
+        <code class="font-mono text-neutral-700 dark:text-neutral-300">sendCode()</code> returns a
         <code class="font-mono">counter</code> that still remembers
         <code class="font-mono">count</code>, and the interval callback remembers
         <code class="font-mono">timer</code> so it can stop itself. The state stays alive long after
@@ -46,7 +46,7 @@ import FontSizeDemo from '@/components/visuals/js/FontSizeDemo.vue'
       <CountdownDemo />
     </section>
 
-    <hr class="border-neutral-200" />
+    <hr class="border-neutral-200 dark:border-neutral-800" />
 
     <!-- 3. Shared state / module pattern -->
     <section>
@@ -54,8 +54,8 @@ import FontSizeDemo from '@/components/visuals/js/FontSizeDemo.vue'
         <PageHeader level="h2" size="section" title="Shared state" />
         <PillTag variant="accent" size="sm">module pattern</PillTag>
       </div>
-      <p class="mb-6 max-w-3xl font-sans text-sm leading-relaxed text-neutral-500">
-        One private <code class="font-mono text-neutral-700">size</code>, two methods closing over
+      <p class="mb-6 max-w-3xl font-sans text-sm leading-relaxed text-neutral-500 dark:text-neutral-400">
+        One private <code class="font-mono text-neutral-700 dark:text-neutral-300">size</code>, two methods closing over
         the <em>same</em> variable. The returned object is the only interface to a protected piece
         of state — the revealing module pattern in miniature.
       </p>

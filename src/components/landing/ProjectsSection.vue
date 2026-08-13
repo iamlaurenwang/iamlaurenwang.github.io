@@ -5,7 +5,7 @@ import SectionHeading from "@/components/SectionHeading.vue";
 </script>
 
 <template>
-  <section id="projects" class="bg-neutral-100">
+  <section id="projects" class="bg-neutral-100 dark:bg-neutral-900">
     <div class="mx-auto max-w-5xl px-6 py-16 md:py-24">
       <SectionHeading number="03" title="Projects" />
 
