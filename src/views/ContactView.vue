@@ -11,7 +11,7 @@ const { fields, errors, isSubmitted, isLoading, submitError, submit } = useConta
   <div class="bg-neutral-100">
     <div class="mx-auto max-w-5xl px-6 py-16">
       <h1 class="font-serif text-4xl text-dark/60">Contact</h1>
-      <p class="mt-3 max-w-xl font-sans text-sm leading-relaxed text-dark/60">
+      <p class="mt-3 min-h-[2.85rem] max-w-xl font-sans text-sm leading-relaxed text-dark/60">
         歡迎來聊聊任何事 — 合作提案、家教諮詢、或只是想打聲招呼，都很歡迎。
       </p>
     </div>
