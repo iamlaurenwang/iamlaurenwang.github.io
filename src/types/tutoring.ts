@@ -9,9 +9,23 @@ export interface TutoringService {
 }
 
 export interface Testimonial {
-  quote: string
+  quote?: string
+  points?: string[]
   author: string
   context: string
+}
+
+export interface FeaturedStory {
+  pullQuote: string
+  leadParagraphs: string[]
+  restParagraphs: string[]
+  result: string
+  author: string
+}
+
+export interface Achievement {
+  value: string
+  label: string
 }
 
 export interface Faq {

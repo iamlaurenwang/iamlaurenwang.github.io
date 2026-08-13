@@ -1,13 +1,22 @@
 <script setup lang="ts">
 import { ref } from "vue";
-import { Quote, CheckCircle2, Mail, Sparkles, ArrowUpRight } from "@lucide/vue";
+import { Quote, CheckCircle2, ChevronDown, Mail, Sparkles, ArrowUpRight } from "@lucide/vue";
 import PillTag from "@/components/PillTag.vue";
 import MessageMarquee from "@/components/MessageMarquee.vue";
 import MessageForm from "@/components/MessageForm.vue";
-import { services, stats, successCases, testimonials, faqs } from "@/data/tutoring";
+import {
+  services,
+  stats,
+  successCases,
+  achievements,
+  testimonials,
+  featuredStory,
+  faqs,
+} from "@/data/tutoring";
 import type { Message } from "@/types/message";
 
 const openFaq = ref<number | null>(null);
+const showFullStory = ref(false);
 
 function toggleFaq(i: number) {
   openFaq.value = openFaq.value === i ? null : i;
@@ -134,7 +143,8 @@ const mockMessages: Message[] = [
         </div>
         <p class="font-sans text-sm leading-relaxed text-neutral-600 sm:max-w-2xl dark:text-neutral-400">
           國立高雄師範大學英語學系畢業，擁有 7 年以上教學經驗，
-          教過的學生從小學六年級到大學生、上班族都有。
+          教過的學生從小學六年級到大學生、上班族都有。除一對一家教外，
+          也具備 3～15 人小團班／講台授課經驗，
           擅長根據每個學生的目標和個性，調整課程節奏與教材，讓學習不再是苦差事。
         </p>
       </div>
@@ -145,10 +155,21 @@ const mockMessages: Message[] = [
   <div class="bg-neutral-50 dark:bg-black">
     <div class="mx-auto max-w-5xl px-6 py-16">
       <div class="flex flex-col gap-10 sm:flex-row sm:items-start sm:gap-16">
-        <!-- Big stat -->
+        <!-- Big stat + achievement highlights -->
         <div class="shrink-0 text-center sm:text-left">
           <div class="font-serif text-6xl font-light text-accent-700 dark:text-accent-400">80%</div>
           <div class="mt-1 font-sans text-sm text-neutral-500 dark:text-neutral-400">全民英檢通過率</div>
+
+          <div class="mt-6 flex justify-center gap-8 sm:justify-start">
+            <div v-for="a in achievements" :key="a.label">
+              <div class="font-serif text-2xl font-light text-neutral-800 dark:text-neutral-200">
+                {{ a.value }}
+              </div>
+              <div class="mt-0.5 font-sans text-xs text-neutral-400 dark:text-neutral-500">
+                {{ a.label }}
+              </div>
+            </div>
+          </div>
         </div>
 
         <!-- Notable alumni -->
@@ -177,41 +198,122 @@ const mockMessages: Message[] = [
       <p class="mb-8 font-sans text-xs font-medium uppercase tracking-widest text-neutral-400 dark:text-neutral-500">
         學生 & 家長回饋
       </p>
-      <div class="grid gap-6 sm:grid-cols-3">
+
+      <!-- 5A. Short quotes -->
+      <div class="grid gap-6 sm:grid-cols-2">
         <div
-          v-for="t in testimonials"
-          :key="t.author"
+          v-for="(t, i) in testimonials"
+          :key="i"
           class="flex flex-col rounded-xl border border-neutral-200 bg-white p-6 shadow-card dark:border-neutral-800 dark:bg-neutral-900"
         >
           <Quote :size="20" class="mb-4 shrink-0 text-accent-300 dark:text-accent-500" />
-          <p class="flex-1 font-sans text-sm leading-relaxed text-neutral-600 dark:text-neutral-400">{{ t.quote }}</p>
+
+          <!-- Paragraph quote -->
+          <p
+            v-if="t.quote"
+            class="flex-1 font-sans text-sm leading-relaxed text-neutral-600 dark:text-neutral-400"
+          >
+            {{ t.quote }}
+          </p>
+
+          <!-- Bullet-point quote -->
+          <ul v-else-if="t.points" class="flex-1 space-y-2.5">
+            <li
+              v-for="point in t.points"
+              :key="point"
+              class="flex gap-2.5 font-sans text-sm leading-relaxed text-neutral-600 dark:text-neutral-400"
+            >
+              <span class="mt-1.5 size-1.5 shrink-0 rounded-full bg-accent-400 dark:bg-accent-500" />
+              <span>{{ point }}</span>
+            </li>
+          </ul>
+
           <div class="mt-5 border-t border-neutral-100 pt-4 dark:border-neutral-800">
             <div class="font-sans text-sm font-medium text-neutral-700 dark:text-neutral-200">{{ t.author }}</div>
             <div class="mt-0.5 font-sans text-xs text-neutral-400 dark:text-neutral-500">{{ t.context }}</div>
           </div>
         </div>
       </div>
+
+      <!-- 5B. Featured story (Ryan's mother) -->
+      <div
+        class="mt-6 rounded-xl border border-neutral-200 bg-neutral-50 p-8 shadow-card sm:p-12 dark:border-neutral-800 dark:bg-neutral-900"
+      >
+        <!-- Pull-quote hook -->
+        <div class="flex flex-col gap-4 sm:flex-row sm:gap-6">
+          <Quote :size="32" class="shrink-0 text-accent-300 dark:text-accent-500" />
+          <p class="font-serif text-2xl leading-snug text-neutral-800 sm:text-3xl dark:text-neutral-100">
+            {{ featuredStory.pullQuote }}
+          </p>
+        </div>
+
+        <!-- Body -->
+        <div class="mt-8 space-y-4 sm:max-w-3xl">
+          <p
+            v-for="(para, i) in featuredStory.leadParagraphs"
+            :key="`lead-${i}`"
+            class="font-sans text-sm leading-relaxed text-neutral-600 dark:text-neutral-400"
+          >
+            {{ para }}
+          </p>
+          <p
+            v-for="(para, i) in featuredStory.restParagraphs"
+            v-show="showFullStory"
+            :key="`rest-${i}`"
+            class="font-sans text-sm leading-relaxed text-neutral-600 dark:text-neutral-400"
+          >
+            {{ para }}
+          </p>
+        </div>
+
+        <!-- Read more toggle -->
+        <button
+          type="button"
+          class="mt-6 inline-flex items-center gap-1.5 font-sans text-sm font-medium text-accent-700 transition-colors hover:text-accent-800 dark:text-accent-400 dark:hover:text-accent-300"
+          @click="showFullStory = !showFullStory"
+        >
+          {{ showFullStory ? "收合" : "閱讀完整見證" }}
+          <ChevronDown
+            :size="16"
+            class="transition-transform duration-200"
+            :class="showFullStory ? 'rotate-180' : ''"
+          />
+        </button>
+
+        <!-- Result + author -->
+        <div class="mt-8 border-t border-neutral-200 pt-6 dark:border-neutral-800">
+          <div class="flex flex-wrap items-center gap-2">
+            <CheckCircle2 :size="16" class="shrink-0 text-accent-500 dark:text-accent-400" />
+            <span class="font-sans text-sm font-medium text-neutral-700 dark:text-neutral-200">
+              {{ featuredStory.result }}
+            </span>
+          </div>
+          <div class="mt-3 font-sans text-xs text-neutral-400 dark:text-neutral-500">
+            {{ featuredStory.author }}
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 
-  <!-- 6. Messages -->
-  <div class="bg-white py-16 dark:bg-black">
+  <!-- 6. Messages — 暫時隱藏，待串 Firebase 後再開啟 -->
+  <!-- <div class="bg-white py-16 dark:bg-black">
     <div class="mx-auto max-w-5xl px-6">
       <p class="mb-8 font-sans text-xs font-medium uppercase tracking-widest text-neutral-400 dark:text-neutral-500">
         學生&家長留言
       </p>
     </div>
 
-    <!-- Marquee: max-w-[904px] = 3 cards (w-72) + 2 gaps (gap-5) -->
+    Marquee: max-w-[904px] = 3 cards (w-72) + 2 gaps (gap-5)
     <div class="mx-auto max-w-[904px]">
       <MessageMarquee :messages="mockMessages" />
     </div>
 
-    <!-- Submit form -->
+    Submit form
     <div class="mx-auto mt-10 max-w-2xl px-6">
       <MessageForm />
     </div>
-  </div>
+  </div> -->
 
   <!-- 7. FAQ -->
   <div class="bg-neutral-50 dark:bg-black">
