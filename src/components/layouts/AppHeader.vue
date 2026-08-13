@@ -3,11 +3,8 @@ import { RouterLink } from "vue-router";
 import { RouteName } from "@/types/routes";
 
 const navLinks = [
-  { label: "Visuals",  to: { name: RouteName.VisualsIndex } },
-  // { label: "Notes",    to: { name: RouteName.Notes } },
   { label: "Tutoring", to: { name: RouteName.Tutoring } },
-  { label: "Resume",   to: { name: RouteName.Resume } },
-  { label: "Contact",  to: { name: RouteName.Contact } },
+  { label: "Visuals",  to: { name: RouteName.VisualsIndex } },
 ];
 </script>
 

@@ -26,36 +26,22 @@ import ImagePlaceholder from './ImagePlaceholder.vue'
             Lauren<br />Wang
           </h1>
 
+          <p class="mt-6 max-w-xl font-sans text-sm leading-relaxed text-neutral-500">
+            Frontend engineer building thoughtful, accessible interfaces for the web.
+          </p>
+
           <div class="mt-6 border-t border-neutral-200" />
 
-          <div class="mt-6 grid gap-0 md:grid-cols-2">
-            <!-- Engineering -->
-            <div class="pb-8 md:pb-0 md:pr-10">
-              <p class="font-sans text-xs font-medium uppercase tracking-widest text-neutral-400">
-                Frontend Engineer
-              </p>
-              <ul class="mt-4 space-y-2 font-sans text-sm text-neutral-600">
-                <li>Vue.js · TypeScript · Tailwind CSS</li>
-                <li>Quasar · Element Plus · Nuxt UI</li>
-                <li>C# · Java · SQL · Docker · CI/CD</li>
-                <li>Cross-functional team delivery</li>
-              </ul>
-            </div>
-
-            <!-- Teaching -->
-            <div
-              class="border-t border-neutral-200 pt-8 md:border-t-0 md:border-l md:border-neutral-200 md:pl-10 md:pt-0"
-            >
-              <p class="font-sans text-xs font-medium uppercase tracking-widest text-neutral-400">
-                English Tutor
-              </p>
-              <ul class="mt-4 space-y-2 font-sans text-sm text-neutral-600">
-                <li>GEPT · TOEIC exam preparation</li>
-                <li>Writing &amp; composition coaching</li>
-                <li>TOEIC 935/990 · native Mandarin</li>
-                <li>7+ years, all ages and levels</li>
-              </ul>
-            </div>
+          <div class="mt-6">
+            <p class="font-sans text-xs font-medium uppercase tracking-widest text-neutral-400">
+              Frontend Engineer
+            </p>
+            <ul class="mt-4 space-y-2 font-sans text-sm text-neutral-600">
+              <li>Vue.js · TypeScript · Tailwind CSS</li>
+              <li>Quasar · Element Plus · Nuxt UI</li>
+              <li>C# · Java · SQL · Docker · CI/CD</li>
+              <li>Cross-functional team delivery</li>
+            </ul>
           </div>
 
           <div class="mt-10">

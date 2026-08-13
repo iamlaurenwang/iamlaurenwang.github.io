@@ -1,7 +1,9 @@
 <script lang="ts" setup>
 import HeroSection from '@/components/landing/HeroSection.vue'
 import AboutSection from '@/components/landing/AboutSection.vue'
-import ServicesSection from '@/components/landing/ServicesSection.vue'
+import ExperienceSection from '@/components/landing/ExperienceSection.vue'
+import ProjectsSection from '@/components/landing/ProjectsSection.vue'
+import SideProjectsSection from '@/components/landing/SideProjectsSection.vue'
 import ContactSection from '@/components/landing/ContactSection.vue'
 </script>
 
@@ -9,7 +11,9 @@ import ContactSection from '@/components/landing/ContactSection.vue'
   <div>
     <HeroSection />
     <AboutSection />
-    <ServicesSection />
+    <ExperienceSection />
+    <ProjectsSection />
+    <SideProjectsSection />
     <ContactSection />
   </div>
 </template>
