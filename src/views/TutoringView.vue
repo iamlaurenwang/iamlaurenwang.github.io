@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ref } from "vue";
-import { Quote, CheckCircle2, Mail } from "@lucide/vue";
+import { Quote, CheckCircle2, Mail, Sparkles, ArrowUpRight } from "@lucide/vue";
 import PillTag from "@/components/PillTag.vue";
 import MessageMarquee from "@/components/MessageMarquee.vue";
 import MessageForm from "@/components/MessageForm.vue";
@@ -70,15 +70,16 @@ const mockMessages: Message[] = [
   <!-- 1. Hero -->
   <div class="bg-neutral-100">
     <div class="mx-auto max-w-5xl px-6 py-16">
-      <p class="mb-3 font-sans text-xs font-medium uppercase tracking-widest text-neutral-400">
+      <!-- <p class="mb-3 font-sans text-xs font-medium uppercase tracking-widest text-neutral-400">
         English Tutoring
-      </p>
+      </p> -->
       <h1 class="font-serif text-4xl text-dark/60">英文家教</h1>
       <p class="mt-3 max-w-xl font-sans text-sm leading-relaxed text-dark/60">
         GEPT 考照 · 學測作文 · 主題式英語 · 升學諮詢 — 高師大英語系畢業，7 年+
         教學經驗，陪你找到適合自己的英文學習方式。
       </p>
 
+      
       <!-- Stats -->
       <div class="mt-10 flex flex-wrap gap-x-12 gap-y-6">
         <div v-for="s in stats" :key="s.label">
@@ -241,7 +242,37 @@ const mockMessages: Message[] = [
     </div>
   </div>
 
-  <!-- 7. CTA -->
+  <!-- 8. Gemini interactive material -->
+  <!-- TODO: rename this section heading / copy to match the actual Gemini content -->
+  <!-- <div class="bg-white">
+    <div class="mx-auto max-w-5xl px-6 py-16">
+      <p class="mb-8 font-sans text-xs font-medium uppercase tracking-widest text-neutral-400">
+        互動教材
+      </p>
+      <a
+        href="https://gemini.google.com/share/9c1285006053"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="group flex items-center gap-5 rounded-xl border border-neutral-200 bg-white p-6 shadow-card transition-shadow duration-200 hover:shadow-card-hover"
+      >
+        <div class="shrink-0 rounded-lg bg-accent-50 p-3 text-accent-600">
+          <Sparkles :size="22" />
+        </div>
+        <div class="min-w-0">
+          <h3 class="font-serif text-lg text-neutral-800">互動教材(Gemini)</h3>
+          <p class="mt-1 font-sans text-sm leading-relaxed text-neutral-500">
+            點擊開啟由 Gemini 製作的互動學習內容,在新分頁中瀏覽。
+          </p>
+        </div>
+        <ArrowUpRight
+          :size="18"
+          class="ml-auto shrink-0 text-neutral-300 transition-colors duration-150 group-hover:text-accent-600"
+        />
+      </a>
+    </div>
+  </div> -->
+
+  <!-- 9. CTA -->
   <!-- TODO: add available time slots when confirmed -->
   <!-- TODO: add pricing info when confirmed -->
   <div class="bg-neutral-800">
