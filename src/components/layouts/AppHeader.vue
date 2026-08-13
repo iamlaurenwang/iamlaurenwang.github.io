@@ -1,12 +1,19 @@
 <script lang="ts" setup>
+import { computed } from "vue";
 import { RouterLink } from "vue-router";
 import { RouteName } from "@/types/routes";
+import { useEmbedMode } from "@/composables/useEmbedMode";
 import ThemeToggle from "./ThemeToggle.vue";
 
 const navLinks = [
-  { label: "Tutoring", to: { name: RouteName.Tutoring } },
-  { label: "Visuals",  to: { name: RouteName.VisualsIndex } },
+  { label: "Tutoring", to: { name: RouteName.Tutoring }, hideInEmbed: true },
+  { label: "Visuals",  to: { name: RouteName.VisualsIndex }, hideInEmbed: false },
 ];
+
+const { isEmbed } = useEmbedMode();
+const visibleLinks = computed(() =>
+  navLinks.filter((link) => !(isEmbed.value && link.hideInEmbed)),
+);
 </script>
 
 <template>
@@ -25,7 +32,7 @@ const navLinks = [
       <!-- Nav -->
       <nav class="flex items-center gap-8">
         <RouterLink
-          v-for="link in navLinks"
+          v-for="link in visibleLinks"
           :key="link.label"
           :to="link.to"
           class="font-sans text-sm text-neutral-500 transition-colors duration-150 hover:text-neutral-900 dark:text-neutral-400 dark:hover:text-neutral-100"

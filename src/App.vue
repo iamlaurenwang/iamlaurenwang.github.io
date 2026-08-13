@@ -1,11 +1,15 @@
 <script setup lang="ts">
-import { computed } from 'vue'
+import { computed, watch } from 'vue'
 import { useRoute, RouterView } from 'vue-router'
 import AppHeader from '@/components/layouts/AppHeader.vue'
 import AppFooter from '@/components/layouts/AppFooter.vue'
+import { useEmbedMode } from '@/composables/useEmbedMode'
 
 const route = useRoute()
 const showLayout = computed(() => !route.meta.hideLayout)
+
+const { detectEmbed } = useEmbedMode()
+watch(() => route.query, detectEmbed, { immediate: true })
 </script>
 
 <template>
