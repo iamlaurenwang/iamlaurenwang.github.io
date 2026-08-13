@@ -8,6 +8,7 @@ import ThemeToggle from "./ThemeToggle.vue";
 const navLinks = [
   { label: "Tutoring", to: { name: RouteName.Tutoring }, hideInEmbed: true },
   { label: "Visuals",  to: { name: RouteName.VisualsIndex }, hideInEmbed: false },
+  { label: "AI",       to: { name: RouteName.Ai }, hideInEmbed: false },
 ];
 
 const { isEmbed } = useEmbedMode();

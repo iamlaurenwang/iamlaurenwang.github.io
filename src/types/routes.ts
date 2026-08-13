@@ -9,6 +9,7 @@ export enum RouteName {
   VisualsAnimation = 'visuals-animation',
   Notes = 'notes',
   Tutoring = 'tutoring',
+  Ai = 'ai',
   Demo = 'demo',
   NotFound = 'not-found',
 }

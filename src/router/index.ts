@@ -1,77 +1,82 @@
-import { RouteName } from '@/types/routes'
-import { createRouter, createWebHashHistory, type RouteRecordRaw } from 'vue-router'
+import { RouteName } from "@/types/routes";
+import { createRouter, createWebHashHistory, type RouteRecordRaw } from "vue-router";
 
 const routes: RouteRecordRaw[] = [
   {
-    path: '/',
+    path: "/",
     name: RouteName.Landing,
-    component: () => import('@/views/LandingView.vue'),
+    component: () => import("@/views/LandingView.vue"),
   },
   {
-    path: '/visuals',
+    path: "/visuals",
     name: RouteName.Visuals,
-    component: () => import('@/views/VisualsView.vue'),
+    component: () => import("@/views/VisualsView.vue"),
     children: [
       {
-        path: '',
+        path: "",
         name: RouteName.VisualsIndex,
-        component: () => import('@/views/visuals/VisualsIndexView.vue'),
+        component: () => import("@/views/visuals/VisualsIndexView.vue"),
       },
       {
-        path: 'flex-grid',
+        path: "flex-grid",
         name: RouteName.VisualsFlexGrid,
-        component: () => import('@/views/visuals/FlexAndGrid.vue'),
+        component: () => import("@/views/visuals/FlexAndGrid.vue"),
       },
       {
-        path: 'js-concepts',
+        path: "js-concepts",
         name: RouteName.VisualsJs,
-        component: () => import('@/views/visuals/JsConcepts.vue'),
+        component: () => import("@/views/visuals/JsConcepts.vue"),
       },
       {
-        path: 'animation',
+        path: "animation",
         name: RouteName.VisualsAnimation,
-        component: () => import('@/views/visuals/AnimationDisplay.vue'),
+        component: () => import("@/views/visuals/AnimationDisplay.vue"),
       },
     ],
   },
   {
-    path: '/notes',
+    path: "/notes",
     name: RouteName.Notes,
-    component: () => import('@/views/NotesView.vue'),
+    component: () => import("@/views/NotesView.vue"),
   },
   {
-    path: '/contact',
+    path: "/contact",
     name: RouteName.Contact,
-    component: () => import('@/views/ContactView.vue'),
+    component: () => import("@/views/ContactView.vue"),
   },
   {
-    path: '/tutoring',
+    path: "/tutoring",
     name: RouteName.Tutoring,
-    component: () => import('@/views/TutoringView.vue'),
+    component: () => import("@/views/TutoringView.vue"),
   },
   {
-    path: '/resume',
+    path: "/resume",
     name: RouteName.Resume,
-    component: () => import('@/views/ResumeView.vue'),
+    component: () => import("@/views/ResumeView.vue"),
   },
   {
-    path: '/demo',
+    path: "/demo",
     name: RouteName.Demo,
-    component: () => import('@/views/DemoView.vue'),
+    component: () => import("@/views/DemoView.vue"),
     meta: { hideLayout: true },
   },
   {
-    path: '/:pathMatch(.*)*',
+    path: "/ai",
+    name: RouteName.Ai,
+    component: () => import("@/views/AiView.vue"),
+  },
+  {
+    path: "/:pathMatch(.*)*",
     name: RouteName.NotFound,
-    component: () => import('@/views/NotFoundView.vue'),
+    component: () => import("@/views/NotFoundView.vue"),
     meta: { hideLayout: true },
   },
-]
+];
 
 const router = createRouter({
   history: createWebHashHistory(import.meta.env.BASE_URL),
   routes,
-  scrollBehavior: () => ({ top: 0, behavior: 'smooth' }),
-})
+  scrollBehavior: () => ({ top: 0, behavior: "smooth" }),
+});
 
-export default router
+export default router;
