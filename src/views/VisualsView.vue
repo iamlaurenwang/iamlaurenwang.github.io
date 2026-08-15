@@ -10,9 +10,22 @@ interface SubNavLink {
 
 const subNav: SubNavLink[] = [
   { label: 'Overview', to: { name: RouteName.VisualsIndex }, exact: true },
-  { label: 'Flex & Grid', to: { name: RouteName.VisualsFlexGrid }, exact: false },
+  {
+    label: 'Flex & Grid',
+    to: { name: RouteName.VisualsFlexGrid },
+    exact: false,
+  },
   { label: 'JS Concepts', to: { name: RouteName.VisualsJs }, exact: false },
-  { label: 'Animation', to: { name: RouteName.VisualsAnimation }, exact: false },
+  {
+    label: 'Base64 Converter',
+    to: { name: RouteName.VisualsBase64 },
+    exact: false,
+  },
+  {
+    label: 'Animation',
+    to: { name: RouteName.VisualsAnimation },
+    exact: false,
+  },
 ]
 </script>
 

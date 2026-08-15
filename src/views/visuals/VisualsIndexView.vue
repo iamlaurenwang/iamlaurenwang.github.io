@@ -1,6 +1,12 @@
 <script lang="ts" setup>
 import { RouterLink } from 'vue-router'
-import { LayoutGrid, Sparkles, ArrowRight, Braces } from '@lucide/vue'
+import {
+  LayoutGrid,
+  Sparkles,
+  ArrowRight,
+  Braces,
+  AudioLines,
+} from '@lucide/vue'
 import { RouteName } from '@/types/routes'
 import PillTag from '@/components/PillTag.vue'
 
@@ -25,6 +31,14 @@ const cards: VisualCard[] = [
     description: 'Interactive demos for language features, starting with closures.',
     to: { name: RouteName.VisualsJs },
     icon: Braces,
+    ready: true,
+  },
+  {
+    title: 'Base64 → MP3',
+    description:
+      'Decode base64 audio in the browser, preview it, and merge clips into one file.',
+    to: { name: RouteName.VisualsBase64 },
+    icon: AudioLines,
     ready: true,
   },
   {

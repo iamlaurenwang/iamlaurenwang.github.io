@@ -7,6 +7,7 @@ export enum RouteName {
   VisualsFlexGrid = 'visuals-flex-grid',
   VisualsJs = 'visuals-js',
   VisualsAnimation = 'visuals-animation',
+  VisualsBase64 = 'visuals-base64',
   Notes = 'notes',
   Tutoring = 'tutoring',
   Ai = 'ai',

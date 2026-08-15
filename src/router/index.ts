@@ -30,7 +30,12 @@ const routes: RouteRecordRaw[] = [
       {
         path: "animation",
         name: RouteName.VisualsAnimation,
-        component: () => import("@/views/visuals/AnimationDisplay.vue"),
+        component: () => import('@/views/visuals/AnimationDisplay.vue'),
+      },
+      {
+        path: 'base64',
+        name: RouteName.VisualsBase64,
+        component: () => import('@/views/visuals/Base64Converter.vue'),
       },
     ],
   },
