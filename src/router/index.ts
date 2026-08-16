@@ -40,6 +40,30 @@ const routes: RouteRecordRaw[] = [
     ],
   },
   {
+    path: "/teaching",
+    name: RouteName.Teaching,
+    component: () => import("@/views/TeachingView.vue"),
+    children: [
+      {
+        path: "",
+        name: RouteName.TeachingIndex,
+        component: () => import("@/views/teaching/TeachingIndexView.vue"),
+      },
+      // 具名路由要排在動態 :slug 之前，否則會被 slug 吃掉
+      {
+        path: "toeic-listening",
+        name: RouteName.TeachingToeic,
+        component: () => import("@/views/teaching/ToeicListeningView.vue"),
+      },
+      {
+        path: ":slug",
+        name: RouteName.TeachingDetail,
+        component: () => import("@/views/teaching/TeachingDetailView.vue"),
+        props: true,
+      },
+    ],
+  },
+  {
     path: "/notes",
     name: RouteName.Notes,
     component: () => import("@/views/NotesView.vue"),

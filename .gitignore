@@ -50,3 +50,8 @@ __screenshots__/
 .env
 .env.*
 !.env.example
+
+# 教學素材原檔（約 60MB，含 25MB 的課堂影片）。
+# 站上實際用的是壓縮後的衍生檔，放在 public/teaching/ 並且有進版控；
+# 原檔留在本機與 Google Drive 即可，別讓它進 git —— 一旦 commit 就永遠留在歷史裡。
+src/assets/todo/

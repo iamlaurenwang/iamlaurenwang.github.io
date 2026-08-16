@@ -1,9 +1,21 @@
 <script setup lang="ts">
 import { ref } from "vue";
-import { Quote, CheckCircle2, ChevronDown, Mail, Sparkles, ArrowUpRight } from "@lucide/vue";
+import { RouterLink } from "vue-router";
+import {
+  Quote,
+  CheckCircle2,
+  ChevronDown,
+  Mail,
+  Sparkles,
+  ArrowUpRight,
+  ArrowRight,
+} from "@lucide/vue";
+import { RouteName } from "@/types/routes";
 import PillTag from "@/components/PillTag.vue";
 import MessageMarquee from "@/components/MessageMarquee.vue";
 import MessageForm from "@/components/MessageForm.vue";
+import TeachingCard from "@/components/teaching/TeachingCard.vue";
+import { featuredTeachingItems } from "@/data/teaching";
 import {
   services,
   stats,
@@ -14,6 +26,7 @@ import {
   faqs,
 } from "@/data/tutoring";
 import type { Message } from "@/types/message";
+import mePhoto from "@/assets/images/me.jpg";
 
 const openFaq = ref<number | null>(null);
 const showFullStory = ref(false);
@@ -79,19 +92,41 @@ const mockMessages: Message[] = [
   <!-- 1. Hero -->
   <div class="bg-neutral-100 dark:bg-neutral-900">
     <div class="mx-auto max-w-5xl px-6 py-16">
-      <!-- <p class="mb-3 font-sans text-xs font-medium uppercase tracking-widest text-neutral-400 dark:text-neutral-500">
-        English Tutoring
-      </p> -->
-      <h1 class="font-serif text-4xl text-dark/60 dark:text-neutral-100">英文家教</h1>
-      <p class="mt-3 max-w-xl font-sans text-sm leading-relaxed text-dark/60 dark:text-neutral-400">
-        GEPT 考照 · 學測作文 · 主題式英語 · 升學諮詢 — 高師大英語系畢業，7 年+
-        教學經驗，陪你找到適合自己的英文學習方式。
-      </p>
+      <div class="flex flex-col gap-10 md:flex-row md:items-center md:gap-14">
+        <!-- Intro -->
+        <div class="min-w-0 flex-1">
+          <!-- <p class="mb-3 font-sans text-xs font-medium uppercase tracking-widest text-neutral-400 dark:text-neutral-500">
+            English Tutoring
+          </p> -->
+          <h1 class="font-serif text-4xl text-dark/60 dark:text-neutral-100">英文家教</h1>
+          <p class="mt-3 max-w-xl font-sans text-sm leading-relaxed text-dark/60 dark:text-neutral-400">
+            GEPT 考照 · 學測作文 · 主題式英語 · 升學諮詢 — 高師大英語系畢業，7 年+
+            教學經驗，陪你找到適合自己的英文學習方式。
+          </p>
+        </div>
 
+        <!-- Photo -->
+        <div class="order-first w-40 shrink-0 sm:w-44 md:order-none md:w-56">
+          <div
+            class="aspect-[4/5] overflow-hidden rounded-2xl shadow-card ring-1 ring-neutral-900/5 dark:ring-white/10"
+          >
+            <img
+              :src="mePhoto"
+              alt="英文家教老師 Lauren Wang"
+              class="h-full w-full object-cover object-top"
+            />
+          </div>
+          <p class="mt-3 font-sans text-xs text-neutral-400 dark:text-neutral-500">
+            Lauren Wang｜英文家教老師
+          </p>
+        </div>
+      </div>
 
       <!-- Stats -->
-      <div class="mt-10 flex flex-wrap gap-x-12 gap-y-6">
-        <div v-for="s in stats" :key="s.label">
+      <div
+        class="mt-12 grid grid-cols-1 divide-y divide-neutral-200 border-t border-neutral-300 sm:grid-cols-3 sm:divide-x sm:divide-y-0 dark:divide-neutral-800 dark:border-neutral-700"
+      >
+        <div v-for="s in stats" :key="s.label" class="py-4 sm:px-6 sm:py-5 sm:first:pl-0">
           <div class="font-serif text-3xl font-light text-dark/60 dark:text-neutral-200">{{ s.value }}</div>
           <div class="mt-0.5 font-sans text-xs text-neutral-400 dark:text-neutral-500">{{ s.label }}</div>
         </div>
@@ -315,7 +350,39 @@ const mockMessages: Message[] = [
     </div>
   </div> -->
 
-  <!-- 7. FAQ -->
+
+  <!-- 7. 教學作品集導流 -->
+  <div class="bg-neutral-100 dark:bg-neutral-900">
+    <div class="mx-auto max-w-5xl px-6 py-16">
+      <div class="flex flex-wrap items-end justify-between gap-4">
+        <div>
+          <p class="font-sans text-xs font-medium uppercase tracking-widest text-neutral-400 dark:text-neutral-500">
+            教學作品集
+          </p>
+          <p class="mt-3 max-w-xl font-sans text-sm leading-relaxed text-neutral-500 dark:text-neutral-400">
+            實際用在課堂上的教材與題目，其中的聽力題組可以直接在網頁上作答。
+          </p>
+        </div>
+        <RouterLink
+          :to="{ name: RouteName.TeachingIndex }"
+          class="group inline-flex items-center gap-1.5 font-sans text-sm font-medium text-accent-600 transition-colors hover:text-accent-700 dark:text-accent-400"
+        >
+          看全部
+          <ArrowRight :size="15" class="transition-transform group-hover:translate-x-1" />
+        </RouterLink>
+      </div>
+
+      <div class="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        <TeachingCard
+          v-for="item in featuredTeachingItems.slice(0, 3)"
+          :key="item.slug"
+          :item="item"
+        />
+      </div>
+    </div>
+  </div>
+
+  <!-- 8. FAQ -->
   <div class="bg-neutral-50 dark:bg-black">
     <div class="mx-auto max-w-5xl px-6 py-16">
       <p class="mb-8 font-sans text-xs font-medium uppercase tracking-widest text-neutral-400 dark:text-neutral-500">
@@ -374,6 +441,8 @@ const mockMessages: Message[] = [
     </div>
   </div> -->
 
+  
+
   <!-- 9. CTA -->
   <!-- TODO: add available time slots when confirmed -->
   <!-- TODO: add pricing info when confirmed -->
@@ -381,13 +450,13 @@ const mockMessages: Message[] = [
     <div class="mx-auto max-w-5xl px-6 py-16 text-center">
       <h2 class="font-serif text-3xl text-white">預約免費試聽</h2>
       <p class="mt-3 font-sans text-sm text-white/60">第一堂課免費，先試試看再決定。</p>
-      <a
-        href="mailto:placeholder@example.com"
+      <RouterLink
+        :to="{ name: RouteName.Contact }"
         class="mt-8 inline-flex items-center justify-center gap-2 rounded-md bg-neutral-50 px-8 py-3 font-sans text-sm font-medium text-neutral-900 transition hover:bg-neutral-100"
       >
         <Mail :size="16" />
         立即聯繫
-      </a>
+      </RouterLink>
     </div>
   </div>
 </template>
