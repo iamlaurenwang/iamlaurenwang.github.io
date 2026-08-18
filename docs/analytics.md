@@ -1,6 +1,6 @@
 # 網站訪客分析
 
-> 狀態：**階段一實作中**——`docs` 已就位，等待 Cloudflare beacon token 才能掛載 script。階段二（GA4）尚未動工，需先回覆下方待確認事項。
+> 狀態：**階段一已上線**（commit `2e2486b`）。hash 路由實測完成，結論：CF 只能提供總流量與 Referrer，各頁分析須靠階段二。階段二（GA4）尚未動工，需先回覆下方待確認事項。
 
 ## 背景
 
@@ -71,7 +71,35 @@ CF Web Analytics 支援非 CF 託管的站台，透過 JS beacon 掛載，**不�
 
 ### hash 路由實測結果
 
-⬜ **尚未實測**——上線後補寫。要記錄的是：CF 的 Top pages 有沒有區分 `#` 後的路徑。若沒有，則 CF 只能當總流量與 Referrer 的來源，各頁分析完全交給階段二的 GA4。
+✅ **已確認：CF 無法區分 hash 路由的各頁，Top pages 會全部併成 `/`。**
+
+驗證方式不是等 dashboard 出數據，而是直接讀 `beacon.min.js`（31,612 bytes）的原始碼，結論更確定：
+
+| 檢查項 | 結果 |
+|---|---|
+| `location.hash` 出現次數 | **0**（完全沒用到） |
+| `location.href` 出現次數 | **0**（完全沒用到） |
+| `location.pathname` 出現次數 | 3（回報頁面路徑的唯一來源） |
+| `pushState` / `popstate` | 有攔截，SPA 換頁**會**被計為新的 page view |
+
+關鍵那段（beacon 組出回報網址的邏輯）：
+
+```js
+try { const e = new URL(t); return `${e.protocol}://${e.host}${e.pathname}` } catch (t) {}
+// fallback:
+else { const t = window.location.pathname; ... }
+```
+
+即使 `pushState` 傳進來的網址是 `/#/teaching`，`new URL()` 之後只取 `protocol + host + pathname`——**hash 與 query 被明確捨棄**。
+
+**實際影響**：
+
+- ✅ 需求 3（Referrer）不受影響，正常運作
+- ✅ 需求 1（有沒有人來、總流量）不受影響。因為 beacon 有攔截 `pushState`，而 Vue Router 的 `createWebHashHistory` 底層正是用 `pushState`，所以每次換頁都**有**被計到，瀏覽量總數是對的
+- ❌ 需求 4（哪頁停留最久）在 CF 完全無解。不只是「沒有停留時間」，連「各頁瀏覽量」都是壞的——所有換頁都灌進 `/` 這一筆，Top pages 只會有一列
+- ❌ 需求 2（停留多久）本來就沒有此指標
+
+**結論**：CF 的定位確定收斂成「總流量計數器 ＋ Referrer 來源」。**所有各頁分析（需求 2 和 4）完全交給階段二的 GA4**，且 GA4 那邊務必用 `router.afterEach` 手動送 `to.fullPath`，不能依賴任何自動追蹤——上面這段原始碼就是自動追蹤在 hash 路由下必壞的實證。
 
 ## 階段二：GA4（尚未動工）
 
@@ -102,8 +130,8 @@ CF Web Analytics 支援非 CF 託管的站台，透過 JS beacon 掛載，**不�
 
 ## 未完成事項
 
-- 🟡 **階段一**：`docs` 已就位，**等待 Cloudflare beacon token** 才能改 `index.html` 並上線
-- ⬜ **階段一**：hash 路由實測，結果寫回上方「hash 路由實測結果」段落
+- ✅ **階段一**：CF beacon 已上線（commit `2e2486b`），hash 路由已實測並記錄
+- ⬜ **階段一收尾**：上線滿 1 天後回 CF dashboard 確認 Referrers 真的有記到資料（需求 3 的最終驗收）
 - ⬜ **階段二**：GA4 導入（先回覆上方兩個待確認事項）
 - ⬜ **Cookie 同意橫幅**：GA4 會寫 Cookie，若在意 GDPR 需做同意流程（同意後才載入 gtag）。CF 那份無 Cookie、不受影響，可維持永遠開啟。做到 GA4 時再一併處理
 - ⬜ **清掉死 import**：`src/firebase/index.ts` 的 `getAnalytics` import 目前完全沒用到。若階段二選 (A) gtag.js，這行應直接刪除；若選 (B) 則會被啟用。**階段一不要動這行**
