@@ -1,3 +1,4 @@
+import { trackPageView } from "@/composables/useAnalytics";
 import { RouteName } from "@/types/routes";
 import { createRouter, createWebHashHistory, type RouteRecordRaw } from "vue-router";
 
@@ -106,6 +107,12 @@ const router = createRouter({
   history: createWebHashHistory(import.meta.env.BASE_URL),
   routes,
   scrollBehavior: () => ({ top: 0, behavior: "smooth" }),
+});
+
+// gtag's automatic page view only ever sees "/" under hash history, so every
+// navigation is reported by hand. See docs/analytics.md.
+router.afterEach((to) => {
+  trackPageView(to.fullPath);
 });
 
 export default router;

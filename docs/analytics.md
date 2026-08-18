@@ -1,6 +1,6 @@
 # 網站訪客分析
 
-> 狀態：**階段一已上線**（commit `2e2486b`）。hash 路由實測完成，結論：CF 只能提供總流量與 Referrer，各頁分析須靠階段二。階段二（GA4）尚未動工，需先回覆下方待確認事項。
+> 狀態：**階段一、階段二程式碼皆已完成**。階段二採標準 gtag.js，本機端對端驗證通過，**但上線前必須先在 GitHub repo 設定 `VITE_GA_MEASUREMENT_ID` 這個 Variable**，否則追蹤會靜默停用。Cookie 同意橫幅本輪不做，見未完成事項。
 
 ## 背景
 
@@ -101,37 +101,92 @@ else { const t = window.location.pathname; ... }
 
 **結論**：CF 的定位確定收斂成「總流量計數器 ＋ Referrer 來源」。**所有各頁分析（需求 2 和 4）完全交給階段二的 GA4**，且 GA4 那邊務必用 `router.afterEach` 手動送 `to.fullPath`，不能依賴任何自動追蹤——上面這段原始碼就是自動追蹤在 hash 路由下必壞的實證。
 
-## 階段二：GA4（尚未動工）
+## 階段二：GA4（標準 gtag.js）
 
-完成需求 2（停留多久）與需求 4（哪頁停留最久），並補上需求 1 的真·即時面板。
+補上需求 2（停留多久）與需求 4（哪頁停留最久），並提供需求 1 的即時面板。
 
-### 待確認事項（動工前需回覆）
+### 已定案的決策
 
-1. **GA4 接法二選一**：
-   - **(A) 標準 gtag.js**（規劃時的推薦）：在 `index.html` 貼官方 snippet，由 Google CDN 非同步載入、不進 bundle；GA4 標準網站報表全部可用、文件最多、DebugView 最好除錯。代價：需新增 `VITE_GA_MEASUREMENT_ID`，要同步改 `env.d.ts`、`.env.example`、`deploy.yml` 三處。
-   - **(B) 沿用現有 `firebase/analytics`**：`src/firebase/index.ts` 已 import `getAnalytics` 卻沒呼叫，`VITE_FIREBASE_MEASUREMENT_ID` 也已在 `deploy.yml` 中，加一行 `getAnalytics(app)` 即通、不用碰環境變數。代價：約 30KB 打進 bundle，且事件模型偏手機 App 風格。
-2. **Measurement ID 放哪裡**（若選 A）：依 `deploy.yml` 既有註解「site key 為公開值，放在 repo Variables（非 Secrets）」的先例，GA Measurement ID 同為公開值 → 放 **repo Variables**，用 `vars.*` 而非 `secrets.*`。
+- **接法：標準 gtag.js**（非 `firebase/analytics`）。理由：GA4 標準網站報表全部可用、文件最多、DebugView 好除錯，且 gtag.js 由 Google CDN 非同步載入，不進 bundle。
+- **Measurement ID：`G-H9M6ND0C7W`**，走 `VITE_GA_MEASUREMENT_ID` 環境變數。依 `deploy.yml` 既有先例（「site key 為公開值，放在 repo Variables」），**放 repo Variables，不是 Secrets**。
+- **同意橫幅：本輪不做**，GA4 直接載入，先取得完整資料。見未完成事項。
 
-### 預計異動（選 A 的情況）
+### 為什麼是 runtime 注入而不是 index.html 貼 snippet
+
+gtag 的 script 由 `src/composables/useAnalytics.ts` 在 runtime 動態插入，而不是寫死在 `index.html`。這樣在**沒有 Measurement ID 時（本機開發、fork）會自動退化成完全不追蹤**，而不是發出一個 `id=%VITE_GA_MEASUREMENT_ID%` 的壞請求。已驗證：不帶環境變數 build 時，整段追蹤程式碼會被 tree-shake 掉，產物中不含任何 GA 痕跡。
+
+### 兩個關鍵實作細節
+
+**1. 關掉自動 page view，改由 router 手動送**
+
+```ts
+window.gtag('config', MEASUREMENT_ID, { send_page_view: false })
+```
+
+原因與階段一的 CF beacon 完全相同——自動追蹤只認 `location.pathname`，在 hash 路由下每頁都是 `/`。改由 `src/router/index.ts` 的 `afterEach` 逐次回報。
+
+**2. 把 hash 路由改寫成真實路徑**
+
+```ts
+const pageLocation = `${window.location.origin}${path}`  // path 來自 to.fullPath
+```
+
+GA4 的 Page path 維度是從 `page_location` 推導的，**而且會丟棄 fragment**。若照實送 `http://host/#/teaching`，GA4 一樣會算成 `/`。因此把 `/#/teaching` 改寫成 `/teaching` 回報。
+
+> **已知取捨**：GA4 報表裡顯示的網址（如 `https://iamlaurenwang.github.io/teaching`）**不是可直接點開的網址**——直接開會 404，因為 GitHub Pages 沒有 server-side routing，真實網址是 `/#/teaching`。換來的是各頁報表真正可用，這正是需求 4 的目的。看報表時心裡要有這個對應關係。
+
+另外 `page_referrer` 會串接：第一次瀏覽用真實的外部 `document.referrer`（需求 3），之後的 SPA 換頁則指向站內前一頁。
+
+### 檔案異動清單
 
 | 檔案 | 異動 |
 |---|---|
-| `index.html` | gtag snippet，`config` 帶 `{ send_page_view: false }` 關掉自動 pageview |
-| `src/router/index.ts` | 新增 `router.afterEach`，手動送 `page_view`，`page_path` 用 `to.fullPath` |
-| `env.d.ts` | `ImportMetaEnv` 加 `readonly VITE_GA_MEASUREMENT_ID: string` |
-| `.env.example` | 補上新 key。順帶：此檔目前**漏了** `VITE_RECAPTCHA_V3_SITE_KEY`，可一併補齊 |
-| `.github/workflows/deploy.yml` | build step 的 `env:` 加一行 `VITE_GA_MEASUREMENT_ID: ${{ vars.VITE_GA_MEASUREMENT_ID }}` |
+| `src/composables/useAnalytics.ts`（新增） | gtag 動態載入、`initAnalytics()`、`trackPageView()`；無 ID 時整組停用 |
+| `src/router/index.ts` | 加 `router.afterEach`，送 `to.fullPath` |
+| `src/main.ts` | 在 `app.use(router)` 之前呼叫 `initAnalytics()`（router 安裝時會觸發第一次導航） |
+| `src/firebase/index.ts` | **刪掉**沒用到的 `getAnalytics` import |
+| `env.d.ts` | 加 `VITE_GA_MEASUREMENT_ID` |
+| `.env.example` | 補上 `VITE_GA_MEASUREMENT_ID`，並補回先前遺漏的 `VITE_RECAPTCHA_V3_SITE_KEY` |
+| `.github/workflows/deploy.yml` | build step 加 `VITE_GA_MEASUREMENT_ID: ${{ vars.VITE_GA_MEASUREMENT_ID }}` |
 
-> 停留時間的精細度已確認：**用 GA4 內建的「平均參與時間」即可**，不自行實作 Page Visibility API + sendBeacon 的精準計時。
+順帶清掉的：`src/firebase/index.ts` 那行 `getAnalytics` import 從未被呼叫，卻讓整個 `@firebase/analytics` 套件被打包進去。刪除後確認產物中已無 `googletagmanager` 字串（該字串原本來自這個套件）。
 
-### 驗證步驟
+### 本機端對端驗證結果
 
-用 GA4 **DebugView**（加 `?debug_mode=1` 或 gtag 設 `debug_mode: true`）確認：切換路由時每次都收到一筆 `page_view`，且 `page_path` 是 `/#/teaching` 這種帶 hash 的完整路徑、不是全部 `/`。這是需求 4 的驗收條件。
+用 `npm run preview` 搭配瀏覽器實測，依序走過 `/#/` → `/#/teaching` → `/#/resume` → `/#/notes`，`window.dataLayer` 的實際內容：
+
+```
+0: js | 2026-08-18T16:27:59.726Z
+1: config | G-H9M6ND0C7W | {"send_page_view":false}
+2: event | page_view | {"page_location":"http://localhost:4173/",         "page_referrer":""}
+5: event | page_view | {"page_location":"http://localhost:4173/teaching", "page_referrer":".../"}
+6: event | page_view | {"page_location":"http://localhost:4173/resume",   "page_referrer":".../teaching"}
+7: event | page_view | {"page_location":"http://localhost:4173/notes",    "page_referrer":".../resume"}
+```
+
+確認事項：
+
+- ✅ 每次換頁都送出**恰好一筆** `page_view`
+- ✅ `page_location` 的 `#` 已被改寫掉，四頁是四個不同路徑（需求 4 成立，與 CF 的行為形成對比）
+- ✅ `page_referrer` 正確串接
+- ✅ `send_page_view: false` 生效，沒有重複計數
+- ✅ gtag.js 確實載入並執行（`window.google_tag_manager` 已定義），且 `_ga` cookie 已設定 → GA4 初始化成功
+
+**未能在本機驗證的部分**：實際送往 Google 伺服器的 collect 請求攔不到——gtag.js 在載入時就持有 `sendBeacon` 等傳輸函式的參照，事後 monkey-patch 攔截不到。但 `_ga` cookie 已設定即代表 tag 正常運作。最終確認請用 GA4 DebugView，見下方。
+
+### 上線後的驗收步驟
+
+1. **先在 GitHub 設定 Variable**（否則追蹤不會啟用）：repo → Settings → Secrets and variables → Actions → **Variables** 分頁 → New repository variable，名稱 `VITE_GA_MEASUREMENT_ID`，值 `G-H9M6ND0C7W`
+2. 推上 `main` 等部署完成
+3. 開 GA4 → **管理 → DebugView**，瀏覽器裝 Google Analytics Debugger 擴充功能（或在網址加 `?debug_mode=1`）後造訪線上站台
+4. 切換數個路由，確認 DebugView 每次都收到一筆 `page_view`，且 `page_location` 是 `/teaching` 這種改寫後的路徑、不是全部 `/`
+5. 隔 24–48 小時後看**參與度 → 網頁和畫面**報表，確認各頁的「平均參與時間」有數據（需求 2 與 4 的最終驗收）
 
 ## 未完成事項
 
-- ✅ **階段一**：CF beacon 已上線（commit `2e2486b`），hash 路由已實測並記錄
-- ⬜ **階段一收尾**：上線滿 1 天後回 CF dashboard 確認 Referrers 真的有記到資料（需求 3 的最終驗收）
-- ⬜ **階段二**：GA4 導入（先回覆上方兩個待確認事項）
-- ⬜ **Cookie 同意橫幅**：GA4 會寫 Cookie，若在意 GDPR 需做同意流程（同意後才載入 gtag）。CF 那份無 Cookie、不受影響，可維持永遠開啟。做到 GA4 時再一併處理
-- ⬜ **清掉死 import**：`src/firebase/index.ts` 的 `getAnalytics` import 目前完全沒用到。若階段二選 (A) gtag.js，這行應直接刪除；若選 (B) 則會被啟用。**階段一不要動這行**
+- ⚠️ **上線前必做**：在 GitHub repo 設定 Variable `VITE_GA_MEASUREMENT_ID` = `G-H9M6ND0C7W`。**沒設定的話 GA4 會靜默停用**（不報錯、不追蹤），這是刻意的退化設計，但也代表忘記設定不會有任何警告
+- ⬜ **GA4 上線驗收**：DebugView 確認 `page_view` 與改寫後的路徑；48 小時後確認各頁平均參與時間有數據
+- ⬜ **CF Referrers 驗收**：階段一上線滿 1 天後回 CF dashboard 確認 Referrers 有資料（需求 3）
+- ⬜ **排除本機測試流量**：本機驗證期間送了約 8 筆 `page_view` 到 GA4，hostname 為 `localhost`。建議在 GA4 設定內部流量規則或用 hostname 篩選排除，避免污染早期數據
+- ⬜ **Cookie 同意橫幅**：本輪明確決定不做，先取得完整資料。GA4 會寫 `_ga` cookie，若之後要面向歐盟訪客需補上同意流程（同意後才呼叫 `initAnalytics()`——目前的架構已經預留好這個切入點，因為 gtag 是 runtime 才注入的）。CF 那份無 Cookie，不受影響
+- ⬜ **各頁標題**：專案沒有 head 管理器，`document.title` 永遠是 "Lauren's Website"，所以 GA4 的 page_title 維度沒有鑑別度。報表改看 page path 即可；若想讓報表更好讀，可之後加上逐路由的標題

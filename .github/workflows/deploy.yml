@@ -45,6 +45,8 @@ jobs:
           VITE_FIREBASE_MEASUREMENT_ID: ${{ secrets.VITE_FIREBASE_MEASUREMENT_ID }}
           # site key 為公開值，放在 repo Variables（非 Secrets）
           VITE_RECAPTCHA_V3_SITE_KEY: ${{ vars.VITE_RECAPTCHA_V3_SITE_KEY }}
+          # Measurement ID 同為公開值，一樣放 repo Variables
+          VITE_GA_MEASUREMENT_ID: ${{ vars.VITE_GA_MEASUREMENT_ID }}
 
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v3
