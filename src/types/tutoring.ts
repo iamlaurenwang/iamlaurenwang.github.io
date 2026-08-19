@@ -16,6 +16,7 @@ export interface Testimonial {
 }
 
 export interface FeaturedStory {
+  id: string
   pullQuote: string
   leadParagraphs: string[]
   restParagraphs: string[]

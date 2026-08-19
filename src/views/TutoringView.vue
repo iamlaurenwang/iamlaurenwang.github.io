@@ -22,17 +22,21 @@ import {
   successCases,
   achievements,
   testimonials,
-  featuredStory,
+  featuredStories,
   faqs,
 } from "@/data/tutoring";
 import type { Message } from "@/types/message";
 import mePhoto from "@/assets/images/me.jpg";
 
 const openFaq = ref<number | null>(null);
-const showFullStory = ref(false);
+const openStories = ref<Record<string, boolean>>({});
 
 function toggleFaq(i: number) {
   openFaq.value = openFaq.value === i ? null : i;
+}
+
+function toggleStory(id: string) {
+  openStories.value[id] = !openStories.value[id];
 }
 
 // 假資料，串 Firebase 後替換
@@ -270,30 +274,32 @@ const mockMessages: Message[] = [
         </div>
       </div>
 
-      <!-- 5B. Featured story (Ryan's mother) -->
+      <!-- 5B. Featured stories (long-form testimonials) -->
       <div
+        v-for="story in featuredStories"
+        :key="story.id"
         class="mt-6 rounded-xl border border-neutral-200 bg-neutral-50 p-8 shadow-card sm:p-12 dark:border-neutral-800 dark:bg-neutral-900"
       >
         <!-- Pull-quote hook -->
         <div class="flex flex-col gap-4 sm:flex-row sm:gap-6">
           <Quote :size="32" class="shrink-0 text-accent-300 dark:text-accent-500" />
           <p class="font-serif text-2xl leading-snug text-neutral-800 sm:text-3xl dark:text-neutral-100">
-            {{ featuredStory.pullQuote }}
+            {{ story.pullQuote }}
           </p>
         </div>
 
         <!-- Body -->
         <div class="mt-8 space-y-4 sm:max-w-3xl">
           <p
-            v-for="(para, i) in featuredStory.leadParagraphs"
+            v-for="(para, i) in story.leadParagraphs"
             :key="`lead-${i}`"
             class="font-sans text-sm leading-relaxed text-neutral-600 dark:text-neutral-400"
           >
             {{ para }}
           </p>
           <p
-            v-for="(para, i) in featuredStory.restParagraphs"
-            v-show="showFullStory"
+            v-for="(para, i) in story.restParagraphs"
+            v-show="openStories[story.id]"
             :key="`rest-${i}`"
             class="font-sans text-sm leading-relaxed text-neutral-600 dark:text-neutral-400"
           >
@@ -303,15 +309,16 @@ const mockMessages: Message[] = [
 
         <!-- Read more toggle -->
         <button
+          v-if="story.restParagraphs.length"
           type="button"
           class="mt-6 inline-flex items-center gap-1.5 font-sans text-sm font-medium text-accent-700 transition-colors hover:text-accent-800 dark:text-accent-400 dark:hover:text-accent-300"
-          @click="showFullStory = !showFullStory"
+          @click="toggleStory(story.id)"
         >
-          {{ showFullStory ? "收合" : "閱讀完整見證" }}
+          {{ openStories[story.id] ? "收合" : "閱讀完整見證" }}
           <ChevronDown
             :size="16"
             class="transition-transform duration-200"
-            :class="showFullStory ? 'rotate-180' : ''"
+            :class="openStories[story.id] ? 'rotate-180' : ''"
           />
         </button>
 
@@ -320,11 +327,11 @@ const mockMessages: Message[] = [
           <div class="flex flex-wrap items-center gap-2">
             <CheckCircle2 :size="16" class="shrink-0 text-accent-500 dark:text-accent-400" />
             <span class="font-sans text-sm font-medium text-neutral-700 dark:text-neutral-200">
-              {{ featuredStory.result }}
+              {{ story.result }}
             </span>
           </div>
           <div class="mt-3 font-sans text-xs text-neutral-400 dark:text-neutral-500">
-            {{ featuredStory.author }}
+            {{ story.author }}
           </div>
         </div>
       </div>
