@@ -30,6 +30,7 @@ import type { Accent, AccentId, AccentTake, ListeningQuestion } from '@/types/te
 export const accents: Accent[] = [
   { id: 'default', label: '原始版本' },
   { id: 'uk', label: '英式', hint: 'British' },
+  { id: 'au', label: '澳洲', hint: 'Australian' },
 ]
 
 /**
@@ -67,7 +68,7 @@ export const toeicQuestions: ListeningQuestion[] = [
     },
     options: [{ label: 'A' }, { label: 'B' }, { label: 'C' }, { label: 'D' }],
     answer: 'A', // TODO: 聽過音檔後確認
-    takes: [take('default', 'q1'), take('uk', 'q1', false)],
+    takes: [take('default', 'q1'), take('uk', 'q1', false), take('au', 'q1')],
   },
   {
     id: 'q2',
@@ -79,7 +80,7 @@ export const toeicQuestions: ListeningQuestion[] = [
     },
     options: [{ label: 'A' }, { label: 'B' }, { label: 'C' }, { label: 'D' }],
     answer: 'A', // TODO: 聽過音檔後確認
-    takes: [take('default', 'q2'), take('uk', 'q2', false)],
+    takes: [take('default', 'q2'), take('uk', 'q2', false), take('au', 'q2')],
   },
   {
     id: 'q3',
@@ -91,7 +92,7 @@ export const toeicQuestions: ListeningQuestion[] = [
     },
     options: [{ label: 'A' }, { label: 'B' }, { label: 'C' }, { label: 'D' }],
     answer: 'A', // TODO: 聽過音檔後確認
-    takes: [take('default', 'q3'), take('uk', 'q3', false)],
+    takes: [take('default', 'q3'), take('uk', 'q3', false), take('au', 'q3')],
   },
   {
     id: 'q4',
@@ -103,7 +104,7 @@ export const toeicQuestions: ListeningQuestion[] = [
     },
     options: [{ label: 'A' }, { label: 'B' }, { label: 'C' }, { label: 'D' }],
     answer: 'A', // TODO: 聽過音檔後確認
-    takes: [take('default', 'q4'), take('uk', 'q4', false)],
+    takes: [take('default', 'q4'), take('uk', 'q4', false), take('au', 'q4')],
   },
 ]
 
