@@ -318,7 +318,7 @@ async function ask() {
   </div>
 
   <!-- Production note -->
-  <div class="bg-neutral-50 dark:bg-black">
+  <!-- <div class="bg-neutral-50 dark:bg-black">
     <div class="mx-auto max-w-5xl px-6 pb-16">
       <div
         class="flex gap-3 rounded-xl border border-warning/30 bg-warning/5 p-4 font-sans text-xs leading-relaxed text-neutral-500 dark:text-neutral-400"
@@ -331,5 +331,5 @@ async function ask() {
         </span>
       </div>
     </div>
-  </div>
+  </div> -->
 </template>
