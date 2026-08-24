@@ -182,6 +182,61 @@ GA4 的 Page path 維度是從 `page_location` 推導的，**而且會丟棄 fra
 4. 切換數個路由，確認 DebugView 每次都收到一筆 `page_view`，且 `page_location` 是 `/teaching` 這種改寫後的路徑、不是全部 `/`
 5. 隔 24–48 小時後看**參與度 → 網頁和畫面**報表，確認各頁的「平均參與時間」有數據（需求 2 與 4 的最終驗收）
 
+## 階段三：UTM／campaign 來源歸因
+
+散發連結（FB／IG／名片 QR 等）時要知道訪客從哪個管道來。做法沿用既有 GA4，把連結帶的 `utm_*` 參數轉成 GA4 的 campaign 歸因。
+
+### 為什麼不能靠 GA4 自動 UTM 歸因
+
+GA4 的自動 campaign 歸因是讀 `location.search`（`#` 之前的真實 query）。但本站是 hash 路由，散發連結長這樣：
+
+```
+https://iamlaurenwang.github.io/#/tutoring?utm_source=facebook&utm_medium=social&utm_campaign=launch
+```
+
+`utm_*` 位在 `#` 片段內，`location.search` 是空的 → 自動歸因抓不到。與階段一、二遇到的是同一類 hash 路由問題。
+
+### 做法
+
+- **擷取來源**：用 Vue Router 的 `route.query`（它會正確解析 hash 片段內的 query），而不是 `location.search`。
+- **保存**：`src/composables/useAttribution.ts` 在**第一次**偵測到任一 `utm_*` 時存進 `sessionStorage`，之後站內導頁不再覆蓋——維持「進站來源 = 整個 session 的來源」。
+- **送進 GA4**：`src/composables/useAnalytics.ts` 的 `trackPageView` 在每次 `page_view` 事件 spread 上 campaign 參數。用的是 GA4 手動 campaign 歸因的保留參數名：
+
+  | 連結 query | GA4 事件參數 |
+  |---|---|
+  | `utm_source` | `campaign_source` |
+  | `utm_medium` | `campaign_medium` |
+  | `utm_campaign` | `campaign_name` |
+  | `utm_term` | `campaign_term` |
+  | `utm_content` | `campaign_content` |
+
+- **page_location 維持乾淨**：刻意**不**把 utm 串回 `page_location`。原因與 134 行的改寫同理——`page_location` 會餵給 Page path 維度，串上 utm 會讓每頁報表都被 `?utm_source=...` 污染。改用 `campaign_*` 事件參數做歸因，各頁報表維持乾淨。
+
+擷取與鎖定判定都集中在 `src/router/index.ts` 的 `router.beforeEach`，它跑在 `afterEach`（trackPageView）之前，確保進站第一個 `page_view` 就帶上 campaign。
+
+### 檔案異動清單
+
+| 檔案 | 異動 |
+|---|---|
+| `src/composables/useAttribution.ts`（新增） | 擷取 utm_* → sessionStorage；`getCampaignParams()` 純函式回傳 campaign_* |
+| `src/composables/useAnalytics.ts` | `trackPageView` spread `getCampaignParams()` 進 page_view |
+| `src/router/index.ts` | `beforeEach` 呼叫 `detectAttribution(to.query)` |
+
+### 驗證
+
+開 `/#/tutoring?utm_source=facebook&utm_medium=social&utm_campaign=launch`，GA4 DebugView 的 `page_view` 應帶 `campaign_source=facebook`、`campaign_medium=social`、`campaign_name=launch`；站內再導頁到其他頁，參數仍在且不被覆蓋。不帶 utm 進站時 `page_view` 不含 campaign_*，與原行為一致。
+
+## Tutoring 鎖定（散發家教連結用）
+
+家教招生連結散出去後，希望訪客專注在 `/tutoring`（TutoringView）的家教體驗，不要逛進通用開發者作品集首頁 `/`（LandingView）。
+
+- **判定「從 tutoring 進來」**（滿足任一即鎖定，`src/composables/useTutoringLock.ts` 存 `sessionStorage`）：
+  1. session 進站的**第一個**路由就是 `/tutoring`；或
+  2. 連結帶 `?src=tutoring`（可貼在任何頁面精準標記，例如某篇貼文導流）。
+- **鎖定行為**：被標記後，任何導向 `RouteName.Landing`（`/`）的動作在 `router.beforeEach` 被導回 `/tutoring`（保留 query 讓 utm 不遺失）。**只擋 LandingView**，其餘頁面（visuals／notes／resume／ai／teaching／contact）不受影響。
+- **不會誤鎖**：若使用者**先進 `/`** 再從 header 點進 tutoring（非初始導航、也沒帶 `?src=tutoring`），不會被標記，仍可自由回到 `/`。
+- **範圍**：黏著整個瀏覽 session；關閉分頁重開（新 session）即清除。
+
 ## 未完成事項
 
 - ⚠️ **上線前必做**：在 GitHub repo 設定 Variable `VITE_GA_MEASUREMENT_ID` = `G-H9M6ND0C7W`。**沒設定的話 GA4 會靜默停用**（不報錯、不追蹤），這是刻意的退化設計，但也代表忘記設定不會有任何警告

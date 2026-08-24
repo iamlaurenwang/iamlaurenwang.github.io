@@ -4,6 +4,8 @@
 // missing measurement id (local dev, forks) quietly disables tracking instead of
 // requesting a broken tag. See docs/analytics.md.
 
+import { getCampaignParams } from './useAttribution'
+
 const MEASUREMENT_ID = import.meta.env.VITE_GA_MEASUREMENT_ID
 
 declare global {
@@ -48,10 +50,13 @@ export function trackPageView(path: string): void {
   // if it were a real path to keep the per-page reports usable.
   const pageLocation = `${window.location.origin}${path}`
 
+  // page_location stays clean (no utm) to keep GA4's Page path reports usable;
+  // the captured campaign is attributed via reserved campaign_* event params.
   window.gtag('event', 'page_view', {
     page_title: document.title,
     page_location: pageLocation,
     page_referrer: lastPageLocation ?? document.referrer,
+    ...getCampaignParams(),
   })
 
   lastPageLocation = pageLocation

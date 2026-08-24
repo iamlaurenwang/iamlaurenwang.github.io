@@ -1,4 +1,6 @@
 import { trackPageView } from "@/composables/useAnalytics";
+import { useAttribution } from "@/composables/useAttribution";
+import { useTutoringLock } from "@/composables/useTutoringLock";
 import { RouteName } from "@/types/routes";
 import { createRouter, createWebHashHistory, type RouteRecordRaw } from "vue-router";
 
@@ -107,6 +109,33 @@ const router = createRouter({
   history: createWebHashHistory(import.meta.env.BASE_URL),
   routes,
   scrollBehavior: () => ({ top: 0, behavior: "smooth" }),
+});
+
+// 「進站第一個路由」判定用；閉包保存，只在初始導航為 true。
+let isInitialNavigation = true;
+
+// 集中偵測 tutoring 來源與 UTM 歸因，並在被鎖定時把 Landing 導回 Tutoring。
+// 跑在 afterEach（trackPageView）之前，確保進站第一個 page_view 已帶 campaign。
+router.beforeEach((to) => {
+  const { isTutoringOrigin, markTutoringOrigin } = useTutoringLock();
+  const { detectAttribution } = useAttribution();
+
+  // 從 tutoring 進來：初始導航即為 /tutoring，或連結帶 ?src=tutoring。
+  if (
+    (isInitialNavigation && to.name === RouteName.Tutoring) ||
+    to.query.src === "tutoring"
+  ) {
+    markTutoringOrigin();
+  }
+  isInitialNavigation = false;
+
+  // 擷取散發連結帶的 utm_* 參數（只在第一次偵測時保存）。
+  detectAttribution(to.query);
+
+  // 被鎖定者不得訪問 LandingView，導回 /tutoring（保留 query 讓 utm 不遺失）。
+  if (isTutoringOrigin.value && to.name === RouteName.Landing) {
+    return { name: RouteName.Tutoring, query: to.query };
+  }
 });
 
 // gtag's automatic page view only ever sees "/" under hash history, so every
