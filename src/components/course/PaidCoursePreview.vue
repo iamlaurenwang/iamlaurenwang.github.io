@@ -1,13 +1,13 @@
 <script setup lang="ts">
-import { Check } from "@lucide/vue";
-import BaseButton from "@/components/BaseButton.vue";
-import { paidSlots, paidExtras, LINE_URL } from "@/data/courses";
+import { Check } from '@lucide/vue'
+import BaseButton from '@/components/BaseButton.vue'
+import { paidSlots, paidExtras, LINE_URL } from '@/data/courses'
 </script>
 
 <template>
   <div class="flex flex-col gap-8">
     <p class="max-w-2xl font-sans text-sm leading-relaxed text-neutral-500 dark:text-neutral-400">
-      付費課與免費課的主題、時段相同，但採 5 人滿班小班制，並提供額外的個人化服務與進階練習。
+      付費課與公開課的主題、時段相同，但採 5 人滿班小班制，並提供額外的個人化服務與進階練習。
     </p>
 
     <ul class="flex flex-col gap-3">

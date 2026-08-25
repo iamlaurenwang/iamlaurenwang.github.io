@@ -3,7 +3,7 @@ import { computed, ref, watch } from "vue";
 import BaseButton from "@/components/BaseButton.vue";
 import PillTag from "@/components/PillTag.vue";
 import { freeCourses as staticFreeCourses, FORM_URL, LINE_URL } from "@/data/courses";
-import type { FreeCourse } from "@/types/course";
+import { COURSE_LEVELS, type CourseLevelVariant, type FreeCourse } from "@/types/course";
 
 // 預設用打包在程式碼裡的靜態課表；demo 頁可傳入來自 Google Sheet 的動態資料。
 const props = withDefaults(defineProps<{ courses?: FreeCourse[] }>(), {
@@ -40,11 +40,11 @@ watch(
 const selectedCourse = computed(() => props.courses.find((c) => c.id === selectedId.value));
 
 function levelLabel(course: FreeCourse): string {
-  return course.level === "intermediate" ? "中級" : "初級";
+  return COURSE_LEVELS[course.level].label;
 }
 
-function levelVariant(course: FreeCourse): "accent" | "neutral" {
-  return course.level === "intermediate" ? "accent" : "neutral";
+function levelVariant(course: FreeCourse): CourseLevelVariant {
+  return COURSE_LEVELS[course.level].variant;
 }
 
 function pad(n: number): string {
@@ -60,15 +60,15 @@ function pad(n: number): string {
 
     <!-- 桌機：週課表 -->
     <div
-      class="hidden overflow-hidden rounded-xl border border-neutral-200 sm:grid dark:border-neutral-800"
+      class="hidden overflow-hidden rounded-xl border border-neutral-300 sm:grid dark:border-neutral-700"
       style="grid-template-columns: 4rem repeat(4, 1fr)"
     >
       <!-- 首列：星期標題 -->
-      <div class="border-b border-neutral-200 bg-neutral-50 dark:border-neutral-800 dark:bg-neutral-900" />
+      <div class="border-b border-neutral-300 bg-neutral-100 dark:border-neutral-700 dark:bg-neutral-800" />
       <div
         v-for="day in days"
         :key="`head-${day}`"
-        class="border-b border-l border-neutral-200 bg-neutral-50 px-3 py-2.5 text-center font-sans text-xs uppercase tracking-widest text-neutral-400 dark:border-neutral-800 dark:bg-neutral-900 dark:text-neutral-500"
+        class="text-base border-b border-l border-neutral-300 bg-neutral-100 px-3 py-2.5 text-center font-sans  font-semibold uppercase tracking-widest text-neutral-700 dark:border-neutral-700 dark:bg-neutral-800 dark:text-neutral-200"
       >
         {{ day }}
       </div>
@@ -76,7 +76,7 @@ function pad(n: number): string {
       <!-- 時段列 -->
       <template v-for="(start, rowIndex) in rows" :key="start">
         <div
-          class="flex items-center justify-center border-neutral-200 font-mono text-xs text-neutral-400 dark:border-neutral-800 dark:text-neutral-500"
+          class="text-sm flex items-center justify-center border-neutral-300 bg-neutral-100/60 font-mono  font-medium text-neutral-700 dark:border-neutral-700 dark:bg-neutral-800/50 dark:text-neutral-300"
           :class="rowIndex < rows.length - 1 ? 'border-b' : ''"
         >
           {{ start }}
@@ -85,23 +85,16 @@ function pad(n: number): string {
           <button
             v-if="courseAt(day, start)"
             type="button"
-            class="flex flex-col items-start gap-1.5 border-l border-neutral-200 px-3 py-4 text-left transition-colors dark:border-neutral-800"
+            class="flex flex-col items-start gap-1.5 border-l border-neutral-300 px-3 py-4 text-left transition-colors dark:border-neutral-700"
             :class="[
               rowIndex < rows.length - 1 ? 'border-b' : '',
               selectedId === courseAt(day, start)!.id
-                ? 'bg-accent-50 dark:bg-accent-500/10'
+                ? 'relative z-10 bg-white ring-2 ring-inset ring-accent-500 dark:bg-neutral-900 dark:ring-accent-400'
                 : 'hover:bg-neutral-50 dark:hover:bg-neutral-900',
             ]"
             @click="selectedId = courseAt(day, start)!.id"
           >
-            <span
-              class="font-serif text-sm leading-snug"
-              :class="
-                selectedId === courseAt(day, start)!.id
-                  ? 'text-accent-700 dark:text-accent-300'
-                  : 'text-neutral-800 dark:text-neutral-100'
-              "
-            >
+            <span class="font-serif text-sm leading-snug text-neutral-900 dark:text-neutral-100">
               {{ courseAt(day, start)!.title }}
             </span>
             <PillTag :variant="levelVariant(courseAt(day, start)!)" size="xs">
@@ -110,7 +103,7 @@ function pad(n: number): string {
           </button>
           <div
             v-else
-            class="border-l border-neutral-200 bg-neutral-50/50 dark:border-neutral-800 dark:bg-neutral-900/30"
+            class="border-l border-neutral-300 bg-neutral-50 dark:border-neutral-700 dark:bg-neutral-900/40"
             :class="rowIndex < rows.length - 1 ? 'border-b' : ''"
           />
         </template>
@@ -126,16 +119,16 @@ function pad(n: number): string {
         class="flex items-center justify-between gap-3 rounded-lg border px-4 py-3 text-left transition-colors"
         :class="
           selectedId === course.id
-            ? 'border-accent-300 bg-accent-50 dark:border-accent-500/40 dark:bg-accent-500/10'
-            : 'border-neutral-200 hover:bg-neutral-50 dark:border-neutral-800 dark:hover:bg-neutral-900'
+            ? 'border-accent-500 ring-1 ring-accent-500 dark:border-accent-400 dark:ring-accent-400'
+            : 'border-neutral-300 hover:bg-neutral-50 dark:border-neutral-700 dark:hover:bg-neutral-900'
         "
         @click="selectedId = course.id"
       >
         <span class="min-w-0">
-          <span class="block font-serif text-base text-neutral-800 dark:text-neutral-100">
+          <span class="block font-serif text-base text-neutral-900 dark:text-neutral-100">
             {{ course.title }}
           </span>
-          <span class="mt-0.5 block font-mono text-xs text-neutral-400 dark:text-neutral-500">
+          <span class="mt-0.5 block font-mono text-xs text-neutral-600 dark:text-neutral-400">
             {{ course.day }} {{ course.time }}
           </span>
         </span>

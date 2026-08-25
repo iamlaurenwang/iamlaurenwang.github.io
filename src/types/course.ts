@@ -1,4 +1,15 @@
-export type CourseLevel = "beginner" | "intermediate";
+export type CourseLevel = "beginner" | "intermediate" | "upper-intermediate" | "advanced";
+
+/** PillTag 的色彩變體（與 PillTag.vue 對應）。 */
+export type CourseLevelVariant = "accent" | "neutral" | "muted" | "success" | "warning";
+
+/** 級別的顯示中文與標籤顏色；新增級別只需在此加一項。 */
+export const COURSE_LEVELS: Record<CourseLevel, { label: string; variant: CourseLevelVariant }> = {
+  beginner: { label: "初級", variant: "neutral" },
+  intermediate: { label: "中級", variant: "accent" },
+  "upper-intermediate": { label: "中高級", variant: "success" },
+  advanced: { label: "進階", variant: "warning" },
+};
 
 export interface CourseSession {
   /** 第幾堂（class 1~4） */
@@ -9,6 +20,8 @@ export interface CourseSession {
 
 export interface FreeCourse {
   id: string;
+  /** 梯次月份，格式 "YYYY-MM"；未提供則視為單一梯次（不顯示月份選擇器） */
+  term?: string;
   title: string;
   level: CourseLevel;
   /** 星期，例如「週二」 */
