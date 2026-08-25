@@ -10,6 +10,7 @@ export enum RouteName {
   VisualsBase64 = 'visuals-base64',
   Notes = 'notes',
   Tutoring = 'tutoring',
+  Course = 'course',
   Teaching = 'teaching',
   TeachingIndex = 'teaching-index',
   TeachingToeic = 'teaching-toeic',
