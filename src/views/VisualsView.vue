@@ -32,7 +32,7 @@ const subNav: SubNavLink[] = [
 <template>
   <div class="min-h-screen bg-neutral-50 dark:bg-black">
     <nav class="border-b border-neutral-200 bg-neutral-50/90 backdrop-blur-sm dark:border-neutral-800 dark:bg-black/80">
-      <div class="mx-auto flex max-w-5xl gap-6 px-6">
+      <div class="mx-auto flex max-w-5xl gap-4 overflow-x-auto px-4 sm:gap-6 sm:px-6">
         <RouterLink
           v-for="link in subNav"
           :key="link.label"
@@ -42,7 +42,7 @@ const subNav: SubNavLink[] = [
         >
           <a
             :href="href"
-            class="border-b-2 py-3.5 font-sans text-sm transition-colors"
+            class="shrink-0 whitespace-nowrap border-b-2 py-3.5 font-sans text-sm transition-colors"
             :class="
               (link.exact ? isExactActive : isActive)
                 ? 'border-accent-400 text-neutral-800 dark:text-neutral-100'

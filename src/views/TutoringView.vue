@@ -15,6 +15,7 @@ import PillTag from "@/components/PillTag.vue";
 import MessageMarquee from "@/components/MessageMarquee.vue";
 import MessageForm from "@/components/MessageForm.vue";
 import TeachingCard from "@/components/teaching/TeachingCard.vue";
+import TutoringNav from "@/components/tutoring/TutoringNav.vue";
 import { featuredTeachingItems } from "@/data/teaching";
 import {
   services,
@@ -93,6 +94,8 @@ const mockMessages: Message[] = [
 </script>
 
 <template>
+  <TutoringNav />
+
   <!-- 1. Hero -->
   <div class="bg-neutral-100 dark:bg-neutral-900">
     <div class="mx-auto max-w-5xl px-6 py-16">
@@ -232,7 +235,7 @@ const mockMessages: Message[] = [
   </div>
 
   <!-- 5. Testimonials -->
-  <div class="bg-white dark:bg-black">
+  <div id="feedback" class="scroll-mt-28 bg-white dark:bg-black">
     <div class="mx-auto max-w-5xl px-6 py-16">
       <p class="mb-8 font-sans text-xs font-medium uppercase tracking-widest text-neutral-400 dark:text-neutral-500">
         學生 & 家長回饋
@@ -359,7 +362,7 @@ const mockMessages: Message[] = [
 
 
   <!-- 7. 教學作品集導流 -->
-  <div class="bg-neutral-100 dark:bg-neutral-900">
+  <div id="materials" class="scroll-mt-28 bg-neutral-100 dark:bg-neutral-900">
     <div class="mx-auto max-w-5xl px-6 py-16">
       <div class="flex flex-wrap items-end justify-between gap-4">
         <div>
