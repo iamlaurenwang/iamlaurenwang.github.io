@@ -4,7 +4,7 @@ import { RouterLink, useRoute, useRouter } from "vue-router";
 import { ArrowLeft } from "@lucide/vue";
 import PageHeader from "@/components/PageHeader.vue";
 import { RouteName } from "@/types/routes";
-import FreeCourseSection from "@/components/course/FreeCourseSection.vue";
+import FreeCourseTimetable from "@/components/course/FreeCourseTimetable.vue";
 import PaidCoursePreview from "@/components/course/PaidCoursePreview.vue";
 import { freeCourseCampaignActive } from "@/data/courses";
 
@@ -71,7 +71,7 @@ watch(activeTab, (tab) => {
     </div>
 
     <div class="mt-10">
-      <FreeCourseSection v-if="freeCourseCampaignActive && activeTab === 'free'" />
+      <FreeCourseTimetable v-if="freeCourseCampaignActive && activeTab === 'free'" />
       <PaidCoursePreview v-else />
     </div>
   </section>
