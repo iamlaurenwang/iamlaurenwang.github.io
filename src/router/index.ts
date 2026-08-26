@@ -108,7 +108,12 @@ const routes: RouteRecordRaw[] = [
 const router = createRouter({
   history: createWebHashHistory(import.meta.env.BASE_URL),
   routes,
-  scrollBehavior: () => ({ top: 0, behavior: "smooth" }),
+  scrollBehavior: (to) => {
+    if (to.hash) {
+      return { el: to.hash, behavior: "smooth" };
+    }
+    return { top: 0, behavior: "smooth" };
+  },
 });
 
 // 「進站第一個路由」判定用；閉包保存，只在初始導航為 true。
