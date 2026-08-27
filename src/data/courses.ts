@@ -71,14 +71,14 @@ export const freeCourses: FreeCourse[] = [
 ]
 
 export const paidSlots: PaidSlot[] = [
-  { day: '週二', time: '17:00-17:50', title: '全民英檢初級寫作' },
-  { day: '週二', time: '18:00-18:50', title: '全民英檢初級寫作' },
-  { day: '週三', time: '19:00-19:50', title: '全民英檢中級寫作' },
-  { day: '週三', time: '20:00-20:50', title: '全民英檢中級寫作' },
-  { day: '週四', time: '19:00-19:50', title: '主題式課程（初級）' },
-  { day: '週四', time: '20:00-20:50', title: '主題式課程（初級）' },
-  { day: '週五', time: '19:00-19:50', title: '主題式課程（中級）' },
-  { day: '週五', time: '20:00-20:50', title: '主題式課程（中級）' },
+  // { day: '週二', time: '17:00-17:50', title: '全民英檢初級寫作' },
+  // { day: '週二', time: '18:00-18:50', title: '全民英檢初級寫作' },
+  // { day: '週三', time: '19:00-19:50', title: '全民英檢中級寫作' },
+  // { day: '週三', time: '20:00-20:50', title: '全民英檢中級寫作' },
+  // { day: '週四', time: '19:00-19:50', title: '主題式課程（初級）' },
+  // { day: '週四', time: '20:00-20:50', title: '主題式課程（初級）' },
+  // { day: '週五', time: '19:00-19:50', title: '主題式課程（中級）' },
+  // { day: '週五', time: '20:00-20:50', title: '主題式課程（中級）' },
 ]
 
 export const paidExtras: string[] = [

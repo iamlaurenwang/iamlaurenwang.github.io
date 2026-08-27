@@ -25,6 +25,7 @@ import { paidSlots, paidExtras, LINE_URL } from '@/data/courses'
       <h3 class="font-serif text-xl text-neutral-800 dark:text-neutral-100">開課時段</h3>
       <div class="mt-4 grid gap-3 sm:grid-cols-2">
         <div
+          v-if="paidSlots.length > 0"
           v-for="slot in paidSlots"
           :key="`${slot.day}-${slot.time}`"
           class="flex items-baseline justify-between gap-4 rounded-lg border border-neutral-200 bg-white px-4 py-3 dark:border-neutral-800 dark:bg-neutral-900"
@@ -35,6 +36,9 @@ import { paidSlots, paidExtras, LINE_URL } from '@/data/courses'
           <span class="shrink-0 font-sans text-xs text-neutral-400 dark:text-neutral-500">
             {{ slot.day }} {{ slot.time }}
           </span>
+        </div>
+        <div v-else>
+          Coming Soon!
         </div>
       </div>
     </div>
