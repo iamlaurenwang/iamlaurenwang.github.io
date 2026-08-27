@@ -10,6 +10,11 @@ export interface SocialLink {
 }
 
 // TODO: replace placeholder values with real contact info before publishing
+// TODO: replace with real LINE add-friend URL before publishing
+export const LINE_ID = "@801foijn";
+export const LINE_URL = "https://lin.ee/t6m8zt9";
+
+// TODO: replace placeholder values with real contact info before publishing
 export const socialLinks: SocialLink[] = [
   {
     icon: Mail,
@@ -25,11 +30,11 @@ export const socialLinks: SocialLink[] = [
     value: "linkedin.com/in/lauren-wang",
     href: "https://www.linkedin.com/in/lauren-wang",
   },
-  // {
-  //   icon: MessageCircle,
-  //   iconClass: 'bg-accent-50 text-accent-600',
-  //   label: 'LINE',
-  //   value: '@lauren_wang',
-  //   href: '#', // TODO: replace with LINE add-friend URL
-  // },
+  {
+    icon: MessageCircle,
+    iconClass: "bg-accent-50 text-accent-600",
+    label: "LINE",
+    value: LINE_ID,
+    href: LINE_URL,
+  },
 ];
