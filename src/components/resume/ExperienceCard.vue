@@ -1,28 +1,30 @@
 <script setup lang="ts">
-import type { WorkExperience } from "@/types/resume";
-import { usePeriod } from "@/composables/usePeriod";
-import PillTag from "@/components/PillTag.vue";
+import type { WorkExperience } from '@/types/resume'
+import { usePeriod } from '@/composables/usePeriod'
+import PillTag from '@/components/PillTag.vue'
 
 defineProps<{
-  experience: WorkExperience;
-  isLast: boolean;
-}>();
+  experience: WorkExperience
+  isLast: boolean
+}>()
 
-const TYPE_LABEL: Record<WorkExperience["type"], string> = {
-  "full-time": "Full-time",
-  "part-time": "Part-time",
-  contract: "Contract",
-  internship: "Internship",
-};
+const TYPE_LABEL: Record<WorkExperience['type'], string> = {
+  'full-time': 'Full-time',
+  'part-time': 'Part-time',
+  contract: 'Contract',
+  internship: 'Internship',
+}
 
-const { formatPeriod } = usePeriod();
+const { formatPeriod } = usePeriod()
 </script>
 
 <template>
   <div class="flex gap-5">
     <!-- Timeline column -->
     <div class="flex shrink-0 flex-col items-center pt-1.5">
-      <div class="h-2.5 w-2.5 shrink-0 rounded-full bg-accent-400 ring-2 ring-accent-100 dark:ring-accent-500/20" />
+      <div
+        class="h-2.5 w-2.5 shrink-0 rounded-full bg-accent-400 ring-2 ring-accent-100 dark:ring-accent-500/20"
+      />
       <div v-if="!isLast" class="mt-2 w-px flex-1 bg-neutral-200 dark:bg-neutral-800" />
     </div>
 
@@ -30,7 +32,9 @@ const { formatPeriod } = usePeriod();
     <div class="min-w-0 flex-1 pb-10">
       <div class="flex flex-wrap items-start justify-between gap-3">
         <div class="min-w-0">
-          <h3 class="font-serif text-xl text-neutral-800 dark:text-neutral-100">{{ experience.role }}</h3>
+          <h3 class="font-serif text-xl text-neutral-800 dark:text-neutral-100">
+            {{ experience.role }}
+          </h3>
           <p class="mt-0.5 font-sans text-sm text-neutral-500 dark:text-neutral-400">
             <span v-if="experience.companyZh">{{ experience.companyZh }} | </span
             >{{ experience.company }}
@@ -42,7 +46,6 @@ const { formatPeriod } = usePeriod();
             formatPeriod(experience.period)
           }}</span>
           <PillTag variant="accent" size="xs">{{ TYPE_LABEL[experience.type] }}</PillTag>
-          
         </div>
       </div>
 
@@ -59,7 +62,9 @@ const { formatPeriod } = usePeriod();
           :key="h"
           class="flex gap-2.5 font-sans text-sm leading-relaxed text-neutral-600 dark:text-neutral-400"
         >
-          <span class="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-neutral-300 dark:bg-neutral-600" />
+          <span
+            class="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-neutral-300 dark:bg-neutral-600"
+          />
           {{ h }}
         </li>
       </ul>

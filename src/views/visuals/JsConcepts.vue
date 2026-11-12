@@ -19,11 +19,14 @@ import FontSizeDemo from '@/components/visuals/js/FontSizeDemo.vue'
         <PageHeader level="h2" size="section" title="Private state" />
         <PillTag variant="accent" size="sm">closure</PillTag>
       </div>
-      <p class="mb-6 max-w-3xl font-sans text-sm leading-relaxed text-neutral-500 dark:text-neutral-400">
-        <code class="font-mono text-neutral-700 dark:text-neutral-300">balance</code> lives inside the factory and is
-        unreachable from outside — only the returned <code class="font-mono">deposit</code> /
-        <code class="font-mono">withdraw</code> can touch it. Every call builds an independent
-        scope, so accounts A, B and C never leak into each other.
+      <p
+        class="mb-6 max-w-3xl font-sans text-sm leading-relaxed text-neutral-500 dark:text-neutral-400"
+      >
+        <code class="font-mono text-neutral-700 dark:text-neutral-300">balance</code> lives inside
+        the factory and is unreachable from outside — only the returned
+        <code class="font-mono">deposit</code> / <code class="font-mono">withdraw</code> can touch
+        it. Every call builds an independent scope, so accounts A, B and C never leak into each
+        other.
       </p>
       <BankAccountDemo />
     </section>
@@ -36,7 +39,9 @@ import FontSizeDemo from '@/components/visuals/js/FontSizeDemo.vue'
         <PageHeader level="h2" size="section" title="State across async" />
         <PillTag variant="accent" size="sm">closure + setInterval</PillTag>
       </div>
-      <p class="mb-6 max-w-3xl font-sans text-sm leading-relaxed text-neutral-500 dark:text-neutral-400">
+      <p
+        class="mb-6 max-w-3xl font-sans text-sm leading-relaxed text-neutral-500 dark:text-neutral-400"
+      >
         <code class="font-mono text-neutral-700 dark:text-neutral-300">sendCode()</code> returns a
         <code class="font-mono">counter</code> that still remembers
         <code class="font-mono">count</code>, and the interval callback remembers
@@ -54,10 +59,12 @@ import FontSizeDemo from '@/components/visuals/js/FontSizeDemo.vue'
         <PageHeader level="h2" size="section" title="Shared state" />
         <PillTag variant="accent" size="sm">module pattern</PillTag>
       </div>
-      <p class="mb-6 max-w-3xl font-sans text-sm leading-relaxed text-neutral-500 dark:text-neutral-400">
-        One private <code class="font-mono text-neutral-700 dark:text-neutral-300">size</code>, two methods closing over
-        the <em>same</em> variable. The returned object is the only interface to a protected piece
-        of state — the revealing module pattern in miniature.
+      <p
+        class="mb-6 max-w-3xl font-sans text-sm leading-relaxed text-neutral-500 dark:text-neutral-400"
+      >
+        One private <code class="font-mono text-neutral-700 dark:text-neutral-300">size</code>, two
+        methods closing over the <em>same</em> variable. The returned object is the only interface
+        to a protected piece of state — the revealing module pattern in miniature.
       </p>
       <FontSizeDemo />
     </section>

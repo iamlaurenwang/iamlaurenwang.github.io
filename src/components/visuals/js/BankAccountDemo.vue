@@ -69,8 +69,11 @@ const accountB = createBankAccount(350)   // separate balance
     <!-- Live -->
     <div class="space-y-4">
       <div class="flex flex-wrap gap-2">
-        <div class="flex flex-1 items-stretch overflow-hidden rounded-md border border-neutral-200 dark:border-neutral-700">
-          <span class="flex items-center bg-neutral-100 px-3 font-mono text-sm text-neutral-500 dark:bg-neutral-800 dark:text-neutral-400"
+        <div
+          class="flex flex-1 items-stretch overflow-hidden rounded-md border border-neutral-200 dark:border-neutral-700"
+        >
+          <span
+            class="flex items-center bg-neutral-100 px-3 font-mono text-sm text-neutral-500 dark:bg-neutral-800 dark:text-neutral-400"
             >$</span
           >
           <input
@@ -116,8 +119,12 @@ const accountB = createBankAccount(350)   // separate balance
               : 'border-neutral-200 bg-neutral-50 dark:border-neutral-800 dark:bg-neutral-900'
           "
         >
-          <span class="font-sans text-sm text-neutral-500 dark:text-neutral-400">Account {{ id }}</span>
-          <span class="font-mono text-sm font-medium text-neutral-800 dark:text-neutral-100">${{ balances[id] }}</span>
+          <span class="font-sans text-sm text-neutral-500 dark:text-neutral-400"
+            >Account {{ id }}</span
+          >
+          <span class="font-mono text-sm font-medium text-neutral-800 dark:text-neutral-100"
+            >${{ balances[id] }}</span
+          >
         </li>
       </ul>
     </div>

@@ -14,7 +14,9 @@ defineEmits<{
 
 <template>
   <div>
-    <p class="mb-2 font-mono text-xs tracking-wide text-neutral-500 dark:text-neutral-400">{{ label }}</p>
+    <p class="mb-2 font-mono text-xs tracking-wide text-neutral-500 dark:text-neutral-400">
+      {{ label }}
+    </p>
     <div class="flex flex-wrap gap-1.5">
       <button
         v-for="option in options"

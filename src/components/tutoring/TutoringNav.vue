@@ -1,17 +1,19 @@
 <script lang="ts" setup>
-import { useScrollSpy } from "@/composables/useScrollSpy";
+import { RouterLink } from 'vue-router'
+import { useScrollSpy } from '@/composables/useScrollSpy'
+import { RouteName } from '@/types/routes'
 
 interface AnchorLink {
-  label: string;
-  id: string;
+  label: string
+  id: string
 }
 
 const anchorLinks: AnchorLink[] = [
-  { label: "家長&學生回饋", id: "feedback" },
-  { label: "教材&講義", id: "materials" },
-];
+  { label: '家長&學生回饋', id: 'feedback' },
+  { label: '教材&講義', id: 'materials' },
+]
 
-const { activeId, scrollTo } = useScrollSpy(anchorLinks.map((l) => l.id));
+const { activeId, scrollTo } = useScrollSpy(anchorLinks.map((l) => l.id))
 </script>
 
 <template>
@@ -38,17 +40,13 @@ const { activeId, scrollTo } = useScrollSpy(anchorLinks.map((l) => l.id));
       <!-- Divider between anchors and page navigation -->
       <span class="mx-1 h-4 w-px shrink-0 self-center bg-neutral-200 dark:bg-neutral-800" />
 
-      <!-- Page navigation — Course placeholder (coming soon, phase 2) -->
-      <span
-        class="inline-flex shrink-0 cursor-not-allowed items-center gap-1.5 whitespace-nowrap border-b-2 border-transparent py-3.5 font-sans text-sm text-neutral-300 dark:text-neutral-600"
+      <!-- Page navigation — Course page -->
+      <RouterLink
+        :to="{ name: RouteName.Course }"
+        class="shrink-0 whitespace-nowrap border-b-2 border-transparent py-3.5 font-sans text-sm text-neutral-500 transition-colors hover:text-neutral-800 dark:text-neutral-400 dark:hover:text-neutral-100"
       >
-        Course
-        <span
-          class="rounded-full bg-neutral-100 px-1.5 py-0.5 text-[10px] font-medium text-neutral-400 dark:bg-neutral-800 dark:text-neutral-500"
-        >
-          即將推出
-        </span>
-      </span>
+        課程
+      </RouterLink>
     </div>
   </nav>
 </template>

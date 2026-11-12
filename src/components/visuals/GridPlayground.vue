@@ -186,8 +186,12 @@ const childTw = computed<string>(() => {
 
         <div>
           <div class="mb-2 flex items-center justify-between">
-            <p class="font-mono text-xs tracking-wide text-neutral-500 dark:text-neutral-400">columns</p>
-            <span class="font-mono text-xs text-neutral-700 dark:text-neutral-300">{{ state.columns }}</span>
+            <p class="font-mono text-xs tracking-wide text-neutral-500 dark:text-neutral-400">
+              columns
+            </p>
+            <span class="font-mono text-xs text-neutral-700 dark:text-neutral-300">{{
+              state.columns
+            }}</span>
           </div>
           <input
             v-model.number="state.columns"
@@ -201,8 +205,12 @@ const childTw = computed<string>(() => {
 
         <div>
           <div class="mb-2 flex items-center justify-between">
-            <p class="font-mono text-xs tracking-wide text-neutral-500 dark:text-neutral-400">rows</p>
-            <span class="font-mono text-xs text-neutral-700 dark:text-neutral-300">{{ state.rows }}</span>
+            <p class="font-mono text-xs tracking-wide text-neutral-500 dark:text-neutral-400">
+              rows
+            </p>
+            <span class="font-mono text-xs text-neutral-700 dark:text-neutral-300">{{
+              state.rows
+            }}</span>
           </div>
           <input
             v-model.number="state.rows"
@@ -216,8 +224,12 @@ const childTw = computed<string>(() => {
 
         <div>
           <div class="mb-2 flex items-center justify-between">
-            <p class="font-mono text-xs tracking-wide text-neutral-500 dark:text-neutral-400">gap</p>
-            <span class="font-mono text-xs text-neutral-700 dark:text-neutral-300">{{ state.gap }}px</span>
+            <p class="font-mono text-xs tracking-wide text-neutral-500 dark:text-neutral-400">
+              gap
+            </p>
+            <span class="font-mono text-xs text-neutral-700 dark:text-neutral-300"
+              >{{ state.gap }}px</span
+            >
           </div>
           <input
             v-model.number="state.gap"
@@ -231,8 +243,12 @@ const childTw = computed<string>(() => {
 
         <div>
           <div class="mb-2 flex items-center justify-between">
-            <p class="font-mono text-xs tracking-wide text-neutral-500 dark:text-neutral-400">items</p>
-            <span class="font-mono text-xs text-neutral-700 dark:text-neutral-300">{{ children.length }}</span>
+            <p class="font-mono text-xs tracking-wide text-neutral-500 dark:text-neutral-400">
+              items
+            </p>
+            <span class="font-mono text-xs text-neutral-700 dark:text-neutral-300">{{
+              children.length
+            }}</span>
           </div>
           <div class="flex gap-2">
             <button
@@ -274,8 +290,12 @@ const childTw = computed<string>(() => {
 
           <div>
             <div class="mb-2 flex items-center justify-between">
-              <p class="font-mono text-xs tracking-wide text-neutral-500 dark:text-neutral-400">grid-column (span)</p>
-              <span class="font-mono text-xs text-neutral-700 dark:text-neutral-300">{{ selected.colSpan }}</span>
+              <p class="font-mono text-xs tracking-wide text-neutral-500 dark:text-neutral-400">
+                grid-column (span)
+              </p>
+              <span class="font-mono text-xs text-neutral-700 dark:text-neutral-300">{{
+                selected.colSpan
+              }}</span>
             </div>
             <input
               v-model.number="selected.colSpan"
@@ -289,8 +309,12 @@ const childTw = computed<string>(() => {
 
           <div>
             <div class="mb-2 flex items-center justify-between">
-              <p class="font-mono text-xs tracking-wide text-neutral-500 dark:text-neutral-400">grid-row (span)</p>
-              <span class="font-mono text-xs text-neutral-700 dark:text-neutral-300">{{ selected.rowSpan }}</span>
+              <p class="font-mono text-xs tracking-wide text-neutral-500 dark:text-neutral-400">
+                grid-row (span)
+              </p>
+              <span class="font-mono text-xs text-neutral-700 dark:text-neutral-300">{{
+                selected.rowSpan
+              }}</span>
             </div>
             <input
               v-model.number="selected.rowSpan"
@@ -315,7 +339,10 @@ const childTw = computed<string>(() => {
 
       <!-- Preview + code -->
       <div class="space-y-4">
-        <div class="rounded-lg border border-neutral-200 bg-neutral-100 p-4 dark:border-neutral-800 dark:bg-neutral-900" :style="stageStyle">
+        <div
+          class="rounded-lg border border-neutral-200 bg-neutral-100 p-4 dark:border-neutral-800 dark:bg-neutral-900"
+          :style="stageStyle"
+        >
           <button
             v-for="(c, i) in children"
             :key="i"

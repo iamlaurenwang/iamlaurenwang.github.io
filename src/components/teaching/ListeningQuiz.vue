@@ -1,23 +1,8 @@
 <script setup lang="ts">
 import { computed, onBeforeUnmount, reactive, ref, watch } from 'vue'
-import {
-  Play,
-  Pause,
-  Check,
-  X,
-  RotateCcw,
-  ChevronLeft,
-  ChevronRight,
-  Languages,
-} from '@lucide/vue'
+import { Play, Pause, Check, X, RotateCcw, ChevronLeft, ChevronRight, Languages } from '@lucide/vue'
 import BaseButton from '@/components/BaseButton.vue'
-import type {
-  Accent,
-  AccentId,
-  AccentTake,
-  ListeningQuestion,
-  OptionLabel,
-} from '@/types/teaching'
+import type { Accent, AccentId, AccentTake, ListeningQuestion, OptionLabel } from '@/types/teaching'
 
 const props = defineProps<{
   questions: ListeningQuestion[]
@@ -29,9 +14,7 @@ const currentIndex = ref(0)
 const selected = reactive<Record<string, OptionLabel | undefined>>({})
 const revealed = reactive<Record<string, boolean>>({})
 
-const current = computed<ListeningQuestion | undefined>(
-  () => props.questions[currentIndex.value],
-)
+const current = computed<ListeningQuestion | undefined>(() => props.questions[currentIndex.value])
 
 /* --- 口音 --- */
 const accentOptions = computed<Accent[]>(() => props.accents ?? [])
@@ -42,9 +25,7 @@ const activeAccent = ref<AccentId | null>(props.accents?.[0]?.id ?? null)
 const currentTake = computed<AccentTake | undefined>(() => {
   const question = current.value
   if (!question) return undefined
-  return (
-    question.takes.find((t) => t.accent === activeAccent.value) ?? question.takes[0]
-  )
+  return question.takes.find((t) => t.accent === activeAccent.value) ?? question.takes[0]
 })
 
 function selectAccent(id: AccentId): void {
@@ -54,9 +35,7 @@ function selectAccent(id: AccentId): void {
 }
 const isLast = computed(() => currentIndex.value === props.questions.length - 1)
 const allRevealed = computed(() => props.questions.every((q) => revealed[q.id]))
-const score = computed(
-  () => props.questions.filter((q) => selected[q.id] === q.answer).length,
-)
+const score = computed(() => props.questions.filter((q) => selected[q.id] === q.answer).length)
 
 /* --- 音檔播放：共用一個 Audio 實例，同時間只會有一段在播 --- */
 const audio = new Audio()
@@ -115,9 +94,7 @@ function toggleAll(): void {
     play(take.mergedAudioSrc)
     return
   }
-  const [first, ...rest] = (current.value?.options ?? []).map(
-    (option) => take.audio[option.label],
-  )
+  const [first, ...rest] = (current.value?.options ?? []).map((option) => take.audio[option.label])
   if (!first) {
     playingAll.value = false
     return
@@ -165,8 +142,7 @@ function optionClass(question: ListeningQuestion, label: OptionLabel): string {
       ? 'border-accent-500 bg-accent-50 dark:bg-accent-500/10'
       : 'border-neutral-200 bg-neutral-50 hover:border-neutral-300 dark:border-neutral-800 dark:bg-neutral-900 dark:hover:border-neutral-700'
   }
-  if (label === question.answer)
-    return 'border-success bg-green-50 dark:bg-success/10'
+  if (label === question.answer) return 'border-success bg-green-50 dark:bg-success/10'
   if (isSelected) return 'border-error bg-red-50 dark:bg-error/10'
   return 'border-neutral-200 bg-neutral-50 opacity-60 dark:border-neutral-800 dark:bg-neutral-900'
 }
@@ -176,9 +152,7 @@ function optionClass(question: ListeningQuestion, label: OptionLabel): string {
   <div v-if="current" class="flex flex-col gap-6">
     <!-- 進度 -->
     <div class="flex items-center justify-between">
-      <p
-        class="font-sans text-xs tracking-wide text-neutral-500 uppercase dark:text-neutral-400"
-      >
+      <p class="font-sans text-xs tracking-wide text-neutral-500 uppercase dark:text-neutral-400">
         第 {{ currentIndex + 1 }} 題 / 共 {{ questions.length }} 題
       </p>
       <div class="flex gap-1.5">
@@ -259,9 +233,7 @@ function optionClass(question: ListeningQuestion, label: OptionLabel): string {
         <component :is="playingAll ? Pause : Play" :size="16" />
         {{ playingAll ? '暫停' : '播放全部選項' }}
       </button>
-      <p class="font-sans text-xs text-neutral-400 dark:text-neutral-500">
-        或逐項聽下方 A–D
-      </p>
+      <p class="font-sans text-xs text-neutral-400 dark:text-neutral-500">或逐項聽下方 A–D</p>
     </div>
 
     <!-- 選項 -->
@@ -311,9 +283,7 @@ function optionClass(question: ListeningQuestion, label: OptionLabel): string {
             class="text-success"
           />
           <X
-            v-else-if="
-              revealed[current.id] && selected[current.id] === option.label
-            "
+            v-else-if="revealed[current.id] && selected[current.id] === option.label"
             :size="18"
             class="text-error"
           />
@@ -333,9 +303,7 @@ function optionClass(question: ListeningQuestion, label: OptionLabel): string {
       v-if="revealed[current.id] && current.explanation"
       class="rounded-lg bg-neutral-100 p-4 dark:bg-neutral-900"
     >
-      <p
-        class="font-sans text-sm leading-relaxed text-neutral-600 dark:text-neutral-300"
-      >
+      <p class="font-sans text-sm leading-relaxed text-neutral-600 dark:text-neutral-300">
         {{ current.explanation }}
       </p>
     </div>
@@ -373,9 +341,7 @@ function optionClass(question: ListeningQuestion, label: OptionLabel): string {
         <ChevronRight :size="16" />
       </button>
 
-      <span v-else class="font-sans text-sm text-neutral-400"
-        >已是最後一題</span
-      >
+      <span v-else class="font-sans text-sm text-neutral-400">已是最後一題</span>
 
       <button
         type="button"

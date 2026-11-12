@@ -51,11 +51,7 @@ const to = computed(() =>
       </p>
 
       <div class="mt-4 flex flex-wrap gap-1.5">
-        <PillTag
-          v-for="tag in item.tags.slice(0, 3)"
-          :key="tag"
-          variant="neutral"
-        >
+        <PillTag v-for="tag in item.tags.slice(0, 3)" :key="tag" variant="neutral">
           {{ tag }}
         </PillTag>
       </div>
@@ -64,10 +60,7 @@ const to = computed(() =>
         class="mt-4 flex items-center gap-1.5 font-sans text-xs tracking-wide text-accent-600 uppercase dark:text-accent-400"
       >
         {{ item.interactiveRoute ? '開始練習' : '看內容' }}
-        <ArrowRight
-          :size="14"
-          class="transition-transform group-hover:translate-x-1"
-        />
+        <ArrowRight :size="14" class="transition-transform group-hover:translate-x-1" />
       </span>
     </div>
   </RouterLink>

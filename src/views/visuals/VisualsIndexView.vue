@@ -1,12 +1,6 @@
 <script lang="ts" setup>
 import { RouterLink } from 'vue-router'
-import {
-  LayoutGrid,
-  Sparkles,
-  ArrowRight,
-  Braces,
-  AudioLines,
-} from '@lucide/vue'
+import { LayoutGrid, Sparkles, ArrowRight, Braces, AudioLines } from '@lucide/vue'
 import { RouteName } from '@/types/routes'
 import PillTag from '@/components/PillTag.vue'
 
@@ -35,8 +29,7 @@ const cards: VisualCard[] = [
   },
   {
     title: 'Base64 → MP3',
-    description:
-      'Decode base64 audio in the browser, preview it, and merge clips into one file.',
+    description: 'Decode base64 audio in the browser, preview it, and merge clips into one file.',
     to: { name: RouteName.VisualsBase64 },
     icon: AudioLines,
     ready: true,
@@ -54,7 +47,9 @@ const cards: VisualCard[] = [
 <template>
   <div class="mx-auto max-w-5xl px-6 py-12">
     <h1 class="font-serif text-4xl text-neutral-800 dark:text-neutral-100">Visuals</h1>
-    <p class="mt-3 max-w-2xl font-sans text-sm leading-relaxed text-neutral-500 dark:text-neutral-400">
+    <p
+      class="mt-3 max-w-2xl font-sans text-sm leading-relaxed text-neutral-500 dark:text-neutral-400"
+    >
       A small collection of interactive demos I build to explore and explain front-end concepts.
     </p>
 
@@ -69,8 +64,12 @@ const cards: VisualCard[] = [
           <component :is="card.icon" :size="24" class="text-accent-500 dark:text-accent-400" />
           <PillTag v-if="!card.ready" variant="muted" size="xs">Soon</PillTag>
         </div>
-        <h2 class="mt-4 font-serif text-xl text-neutral-800 dark:text-neutral-100">{{ card.title }}</h2>
-        <p class="mt-2 flex-1 font-sans text-sm leading-relaxed text-neutral-500 dark:text-neutral-400">
+        <h2 class="mt-4 font-serif text-xl text-neutral-800 dark:text-neutral-100">
+          {{ card.title }}
+        </h2>
+        <p
+          class="mt-2 flex-1 font-sans text-sm leading-relaxed text-neutral-500 dark:text-neutral-400"
+        >
           {{ card.description }}
         </p>
         <span

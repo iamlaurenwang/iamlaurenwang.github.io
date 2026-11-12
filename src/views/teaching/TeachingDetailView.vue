@@ -44,16 +44,10 @@ const coverIndex = ref<number | null>(null)
 
     <div class="mt-5 flex flex-wrap items-center gap-1.5">
       <PillTag variant="accent">{{ item.date }}</PillTag>
-      <PillTag
-        v-for="audience in item.audience"
-        :key="audience"
-        variant="muted"
-      >
+      <PillTag v-for="audience in item.audience" :key="audience" variant="muted">
         {{ audience }}
       </PillTag>
-      <PillTag v-for="tag in item.tags" :key="tag" variant="neutral">{{
-        tag
-      }}</PillTag>
+      <PillTag v-for="tag in item.tags" :key="tag" variant="neutral">{{ tag }}</PillTag>
     </div>
 
     <!-- 主體：學習歷程與圖庫可以並存；兩者都沒有時退回單張封面 -->
@@ -105,14 +99,8 @@ const coverIndex = ref<number | null>(null)
     <!-- 課堂流程 -->
     <section v-if="item.outline?.length" class="mt-12">
       <PageHeader title="課堂流程" level="h2" size="section" />
-      <div
-        class="mt-4 flex flex-col divide-y divide-neutral-200 dark:divide-neutral-800"
-      >
-        <div
-          v-for="step in item.outline"
-          :key="step.activity"
-          class="flex gap-5 py-3"
-        >
+      <div class="mt-4 flex flex-col divide-y divide-neutral-200 dark:divide-neutral-800">
+        <div v-for="step in item.outline" :key="step.activity" class="flex gap-5 py-3">
           <span
             class="w-24 shrink-0 font-sans text-xs tracking-wide text-neutral-400 uppercase dark:text-neutral-500"
           >
@@ -122,10 +110,7 @@ const coverIndex = ref<number | null>(null)
             <p class="font-sans text-sm text-neutral-700 dark:text-neutral-200">
               {{ step.activity }}
             </p>
-            <p
-              v-if="step.note"
-              class="font-sans text-xs text-neutral-500 dark:text-neutral-400"
-            >
+            <p v-if="step.note" class="font-sans text-xs text-neutral-500 dark:text-neutral-400">
               {{ step.note }}
             </p>
           </div>
@@ -156,9 +141,7 @@ const coverIndex = ref<number | null>(null)
           class="group flex items-center gap-3 rounded-lg border border-neutral-200 p-4 transition-colors hover:border-neutral-300 dark:border-neutral-800 dark:hover:border-neutral-700"
         >
           <FileText :size="18" class="shrink-0 text-accent-500" />
-          <span
-            class="flex-1 font-sans text-sm text-neutral-700 dark:text-neutral-200"
-          >
+          <span class="flex-1 font-sans text-sm text-neutral-700 dark:text-neutral-200">
             {{ resource.label }}
           </span>
           <ArrowUpRight
@@ -181,9 +164,7 @@ const coverIndex = ref<number | null>(null)
         }"
         class="group flex max-w-[45%] flex-col gap-1"
       >
-        <span class="font-sans text-xs tracking-wide text-neutral-400 uppercase"
-          >上一篇</span
-        >
+        <span class="font-sans text-xs tracking-wide text-neutral-400 uppercase">上一篇</span>
         <span
           class="flex items-center gap-1.5 font-sans text-sm text-neutral-600 transition-colors group-hover:text-accent-600 dark:text-neutral-300"
         >
@@ -201,9 +182,7 @@ const coverIndex = ref<number | null>(null)
         }"
         class="group flex max-w-[45%] flex-col items-end gap-1 text-right"
       >
-        <span class="font-sans text-xs tracking-wide text-neutral-400 uppercase"
-          >下一篇</span
-        >
+        <span class="font-sans text-xs tracking-wide text-neutral-400 uppercase">下一篇</span>
         <span
           class="flex items-center gap-1.5 font-sans text-sm text-neutral-600 transition-colors group-hover:text-accent-600 dark:text-neutral-300"
         >

@@ -1,19 +1,19 @@
 <script setup lang="ts">
-import { ref } from "vue";
-import { GraduationCap } from "@lucide/vue";
-import EmptyState from "@/components/EmptyState.vue";
-import ExperienceCard from "@/components/resume/ExperienceCard.vue";
-import ProjectCard from "@/components/resume/ProjectCard.vue";
-import { experiences, education } from "@/data/experience";
-import { projects } from "@/data/projects";
+import { ref } from 'vue'
+import { GraduationCap } from '@lucide/vue'
+import EmptyState from '@/components/EmptyState.vue'
+import ExperienceCard from '@/components/resume/ExperienceCard.vue'
+import ProjectCard from '@/components/resume/ProjectCard.vue'
+import { experiences, education } from '@/data/experience'
+import { projects } from '@/data/projects'
 
-type Tab = "experience" | "projects";
-const activeTab = ref<Tab>("experience");
+type Tab = 'experience' | 'projects'
+const activeTab = ref<Tab>('experience')
 
 const tabs: { key: Tab; label: string }[] = [
-  { key: "experience", label: "Experience" },
-  { key: "projects", label: "Projects" },
-];
+  { key: 'experience', label: 'Experience' },
+  { key: 'projects', label: 'Projects' },
+]
 </script>
 
 <template>
@@ -21,7 +21,9 @@ const tabs: { key: Tab; label: string }[] = [
   <div class="bg-neutral-100 dark:bg-neutral-900">
     <div class="mx-auto max-w-5xl px-6 py-16">
       <h1 class="font-serif text-4xl text-dark/60 dark:text-neutral-100">Resume</h1>
-      <p class="mt-3 min-h-[2.85rem] max-w-2xl font-sans text-sm leading-relaxed text-dark/60 dark:text-neutral-400">
+      <p
+        class="mt-3 min-h-[2.85rem] max-w-2xl font-sans text-sm leading-relaxed text-dark/60 dark:text-neutral-400"
+      >
         Frontend engineer with a background in Vue.js, TypeScript, and cross-functional team
         delivery — and a TOEIC 935 score to boot.
       </p>
@@ -58,14 +60,21 @@ const tabs: { key: Tab; label: string }[] = [
 
       <!-- Education -->
       <div class="mt-4 border-t border-neutral-200 pt-10 dark:border-neutral-800">
-        <p class="mb-5 font-sans text-xs font-medium uppercase tracking-widest text-neutral-400 dark:text-neutral-500">
+        <p
+          class="mb-5 font-sans text-xs font-medium uppercase tracking-widest text-neutral-400 dark:text-neutral-500"
+        >
           Education
         </p>
         <div class="rounded-xl bg-neutral-100 p-5 dark:bg-neutral-900">
           <div class="flex items-start gap-4">
-            <GraduationCap :size="20" class="mt-0.5 shrink-0 text-neutral-400 dark:text-neutral-500" />
+            <GraduationCap
+              :size="20"
+              class="mt-0.5 shrink-0 text-neutral-400 dark:text-neutral-500"
+            />
             <div>
-              <h3 class="font-serif text-xl text-neutral-800 dark:text-neutral-100">{{ education.degree }}</h3>
+              <h3 class="font-serif text-xl text-neutral-800 dark:text-neutral-100">
+                {{ education.degree }}
+              </h3>
               <p class="mt-0.5 font-sans text-sm text-neutral-500 dark:text-neutral-400">
                 {{ education.school }} {{ education.schoolEn }} · {{ education.location }}
               </p>

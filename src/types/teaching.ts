@@ -1,8 +1,7 @@
 import type { RouteName } from './routes'
 
 /** 作品分類，同時作為 index 頁的篩選軸。 */
-export type TeachingCategory =
-  'worksheet' | 'interactive' | 'project' | 'student-work'
+export type TeachingCategory = 'worksheet' | 'interactive' | 'project' | 'student-work'
 
 /** 一張圖片素材。`width` / `height` 為壓縮後的實際尺寸，用來鎖 aspect-ratio 避免 CLS。 */
 export interface TeachingAsset {

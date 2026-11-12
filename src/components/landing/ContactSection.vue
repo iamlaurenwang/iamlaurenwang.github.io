@@ -7,7 +7,9 @@ import { RouteName } from '@/types/routes'
   <section class="bg-neutral-100 dark:bg-neutral-900">
     <div class="mx-auto max-w-5xl border-t border-neutral-200 px-6 py-20 dark:border-neutral-800">
       <div class="flex flex-col gap-8 md:flex-row md:items-end md:justify-between">
-        <h2 class="max-w-sm font-serif text-3xl font-light leading-tight text-neutral-800 md:text-5xl dark:text-neutral-100">
+        <h2
+          class="max-w-sm font-serif text-3xl font-light leading-tight text-neutral-800 md:text-5xl dark:text-neutral-100"
+        >
           Let's build<br />something together.
         </h2>
         <RouterLink

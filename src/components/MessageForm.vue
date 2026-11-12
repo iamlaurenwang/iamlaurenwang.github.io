@@ -71,7 +71,9 @@ function togglePreview() {
           {{ mockUser.displayName[0] }}
         </span>
       </div>
-      <span class="font-sans text-sm font-medium text-neutral-700 dark:text-neutral-200">{{ mockUser.displayName }}</span>
+      <span class="font-sans text-sm font-medium text-neutral-700 dark:text-neutral-200">{{
+        mockUser.displayName
+      }}</span>
       <button
         type="button"
         class="ml-auto flex items-center gap-1.5 font-sans text-xs text-neutral-400 transition-colors hover:text-neutral-600 dark:text-neutral-500 dark:hover:text-neutral-300"
@@ -91,7 +93,9 @@ function togglePreview() {
     />
 
     <div class="flex items-center justify-between">
-      <span class="font-sans text-xs text-neutral-300 dark:text-neutral-600">{{ text.length }} / {{ MAX }}</span>
+      <span class="font-sans text-xs text-neutral-300 dark:text-neutral-600"
+        >{{ text.length }} / {{ MAX }}</span
+      >
       <BaseButton type="button" :disabled="!text.trim()">
         <Send :size="13" />
         送出留言

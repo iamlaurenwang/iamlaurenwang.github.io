@@ -24,11 +24,7 @@ const testimonials: Testimonial[] = [
 <template>
   <section class="bg-neutral-100">
     <div class="mx-auto grid max-w-6xl gap-4 px-6 py-16 sm:grid-cols-2">
-      <figure
-        v-for="t in testimonials"
-        :key="t.name"
-        class="relative aspect-[4/3] overflow-hidden"
-      >
+      <figure v-for="t in testimonials" :key="t.name" class="relative aspect-[4/3] overflow-hidden">
         <ImagePlaceholder :tone="t.tone" />
         <div class="absolute inset-0 bg-neutral-800/45" />
         <figcaption

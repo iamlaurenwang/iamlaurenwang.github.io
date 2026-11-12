@@ -10,11 +10,15 @@ const { formatPeriod } = usePeriod()
 </script>
 
 <template>
-  <div class="flex flex-col rounded-lg border border-neutral-200 bg-neutral-50 p-6 shadow-card transition-shadow duration-200 hover:shadow-card-hover dark:border-neutral-800 dark:bg-neutral-900">
+  <div
+    class="flex flex-col rounded-lg border border-neutral-200 bg-neutral-50 p-6 shadow-card transition-shadow duration-200 hover:shadow-card-hover dark:border-neutral-800 dark:bg-neutral-900"
+  >
     <!-- Header -->
     <div class="flex items-start justify-between gap-3">
       <div class="min-w-0">
-        <h3 class="font-serif text-xl text-neutral-800 dark:text-neutral-100">{{ project.name }}</h3>
+        <h3 class="font-serif text-xl text-neutral-800 dark:text-neutral-100">
+          {{ project.name }}
+        </h3>
         <p class="mt-0.5 font-sans text-xs text-neutral-400 dark:text-neutral-500">
           {{ project.company }} · {{ formatPeriod(project.period) }}
         </p>

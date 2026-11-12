@@ -1,104 +1,104 @@
 <script setup lang="ts">
-import { ref } from "vue";
-import { Schema } from "firebase/ai";
-import { Sparkles, Send, PenLine, MessageCircle, CheckCircle2, AlertCircle } from "@lucide/vue";
-import { useAI } from "@/composables/useAI";
-import BaseButton from "@/components/BaseButton.vue";
+import { ref } from 'vue'
+import { Schema } from 'firebase/ai'
+import { Sparkles, Send, PenLine, MessageCircle, CheckCircle2, AlertCircle } from '@lucide/vue'
+import { useAI } from '@/composables/useAI'
+import BaseButton from '@/components/BaseButton.vue'
 
 /* ── Feature 1: English writing feedback (structured JSON output) ── */
 
 interface Correction {
-  original: string;
-  suggestion: string;
-  reason: string;
+  original: string
+  suggestion: string
+  reason: string
 }
 
 interface WritingFeedback {
-  level: string;
-  score: number;
-  summary: string;
-  strengths: string[];
-  corrections: Correction[];
-  revised: string;
+  level: string
+  score: number
+  summary: string
+  strengths: string[]
+  corrections: Correction[]
+  revised: string
 }
 
 const feedbackSchema = Schema.object({
   properties: {
-    level: Schema.string({ description: "CEFR level, e.g. A2, B1, B2" }),
-    score: Schema.number({ description: "Overall score from 0 to 100" }),
-    summary: Schema.string({ description: "One-sentence overview in Traditional Chinese" }),
+    level: Schema.string({ description: 'CEFR level, e.g. A2, B1, B2' }),
+    score: Schema.number({ description: 'Overall score from 0 to 100' }),
+    summary: Schema.string({ description: 'One-sentence overview in Traditional Chinese' }),
     strengths: Schema.array({ items: Schema.string() }),
     corrections: Schema.array({
       items: Schema.object({
         properties: {
           original: Schema.string(),
           suggestion: Schema.string(),
-          reason: Schema.string({ description: "Why, in Traditional Chinese" }),
+          reason: Schema.string({ description: 'Why, in Traditional Chinese' }),
         },
       }),
     }),
-    revised: Schema.string({ description: "A polished version of the whole text" }),
+    revised: Schema.string({ description: 'A polished version of the whole text' }),
   },
-});
+})
 
 const writer = useAI({
-  model: "gemini-3.6-flash",
+  model: 'gemini-3.6-flash',
   systemInstruction:
-    "You are Lauren, an experienced English tutor for Taiwanese students (GEPT / 學測 / TOEIC). " +
+    'You are Lauren, an experienced English tutor for Taiwanese students (GEPT / 學測 / TOEIC). ' +
     "Grade the student's English writing fairly and encouragingly. " +
-    "Write `summary` and each correction `reason` in Traditional Chinese; keep English examples in English. " +
-    "Respond ONLY with JSON that matches the provided schema.",
+    'Write `summary` and each correction `reason` in Traditional Chinese; keep English examples in English. ' +
+    'Respond ONLY with JSON that matches the provided schema.',
   generationConfig: {
-    responseMimeType: "application/json",
+    responseMimeType: 'application/json',
     responseSchema: feedbackSchema,
   },
-});
+})
 
-const essay = ref("");
-const feedback = ref<WritingFeedback | null>(null);
+const essay = ref('')
+const feedback = ref<WritingFeedback | null>(null)
 
 const sampleEssay =
-  "Last weekend I go to the mountain with my family. The weather are very nice and " +
-  "we saw many beautiful flower. I think it is a good experience and I want to go there " +
-  "again in the future because it make me feel relax.";
+  'Last weekend I go to the mountain with my family. The weather are very nice and ' +
+  'we saw many beautiful flower. I think it is a good experience and I want to go there ' +
+  'again in the future because it make me feel relax.'
 
 async function runFeedback() {
-  if (!essay.value.trim() || writer.isLoading.value) return;
-  feedback.value = null;
+  if (!essay.value.trim() || writer.isLoading.value) return
+  feedback.value = null
   try {
-    const raw = await writer.generate(essay.value.trim());
-    feedback.value = JSON.parse(raw) as WritingFeedback;
+    const raw = await writer.generate(essay.value.trim())
+    feedback.value = JSON.parse(raw) as WritingFeedback
   } catch {
     /* error surfaced via writer.error */
   }
 }
 
 function scoreColor(score: number): string {
-  if (score >= 80) return "text-success";
-  if (score >= 60) return "text-warning";
-  return "text-error";
+  if (score >= 80) return 'text-success'
+  if (score >= 60) return 'text-warning'
+  return 'text-error'
 }
 
 /* ── Feature 2: Free-form ask (streaming) ── */
 
 const chat = useAI({
-  model: "gemini-3.6-flash",
+  model: 'gemini-3.6-flash',
   systemInstruction:
     "You are a friendly assistant on Lauren Wang's personal website. " +
-    "Lauren is a frontend engineer (Vue / TypeScript / Tailwind) and an English tutor. " +
-    "Answer concisely in Traditional Chinese unless the user writes in another language.",
-});
+    'Lauren is a frontend engineer (Vue / TypeScript / Tailwind) and an English tutor. ' +
+    'Answer concisely in Traditional Chinese unless the user writes in another language.',
+})
 
-const question = ref("");
-const answer = ref("");
+const question = ref('')
+const answer = ref('')
 
 async function ask() {
-  if (!question.value.trim() || chat.isLoading.value) return;
-  answer.value = "";
+  if (!question.value.trim() || chat.isLoading.value) return
+  answer.value = ''
   try {
     await chat.stream(question.value.trim(), (chunk) => {
-      answer.value += chunk;
-    });
+      answer.value += chunk
+    })
   } catch {
     /* error surfaced via chat.error */
   }
@@ -152,7 +152,7 @@ async function ask() {
           <div class="flex items-center gap-3">
             <BaseButton variant="primary" @click="runFeedback">
               <Sparkles :size="14" />
-              {{ writer.isLoading.value ? "批改中…" : "開始批改" }}
+              {{ writer.isLoading.value ? '批改中…' : '開始批改' }}
             </BaseButton>
             <button
               type="button"
@@ -295,7 +295,7 @@ async function ask() {
           />
           <BaseButton variant="primary" @click="ask">
             <Send :size="14" />
-            {{ chat.isLoading.value ? "…" : "送出" }}
+            {{ chat.isLoading.value ? '…' : '送出' }}
           </BaseButton>
         </div>
 

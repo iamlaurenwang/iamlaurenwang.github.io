@@ -50,10 +50,7 @@ export function downloadBlob(blob: Blob, filename: string): void {
 
 /** Builds a safe `.mp3` filename for an item, falling back to its position. */
 export function itemFilename(item: Base64AudioItem, index: number): string {
-  const base = (item.id ?? item.filename ?? `audio_${index + 1}`).replace(
-    /\.mp3$/i,
-    '',
-  )
+  const base = (item.id ?? item.filename ?? `audio_${index + 1}`).replace(/\.mp3$/i, '')
   return `${base.replace(/[^\w.-]+/g, '_')}.mp3`
 }
 
@@ -76,11 +73,7 @@ function toMono(buffer: AudioBuffer): Float32Array {
 }
 
 /** Encodes mono float samples into an MP3 Blob. */
-function encodeMp3(
-  samples: Float32Array,
-  sampleRate: number,
-  kbps: number,
-): Blob {
+function encodeMp3(samples: Float32Array, sampleRate: number, kbps: number): Blob {
   const pcm = new Int16Array(samples.length)
   for (let i = 0; i < samples.length; i++) {
     const sample = Math.max(-1, Math.min(1, samples[i] ?? 0))
@@ -92,9 +85,7 @@ function encodeMp3(
   // backed by a plain ArrayBuffer — which is what Blob requires.
   const chunks: BlobPart[] = []
   for (let offset = 0; offset < pcm.length; offset += BLOCK_SIZE) {
-    const encoded = encoder.encodeBuffer(
-      pcm.subarray(offset, offset + BLOCK_SIZE),
-    )
+    const encoded = encoder.encodeBuffer(pcm.subarray(offset, offset + BLOCK_SIZE))
     if (encoded.length > 0) chunks.push(encoded as BlobPart)
   }
   const tail = encoder.flush()
@@ -136,18 +127,12 @@ export function useAudioMerge() {
         const item = items[i]
         if (!item) continue
         try {
-          const decoded = await context.decodeAudioData(
-            base64ToArrayBuffer(item.audio),
-          )
+          const decoded = await context.decodeAudioData(base64ToArrayBuffer(item.audio))
           parts.push(toMono(decoded))
         } catch {
-          throw new Error(
-            `Clip ${i + 1}${item.id ? ` (${item.id})` : ''} is not valid audio.`,
-          )
+          throw new Error(`Clip ${i + 1}${item.id ? ` (${item.id})` : ''} is not valid audio.`)
         }
-        progress.value = Math.round(
-          ((i + 1) / items.length) * DECODE_SHARE * 100,
-        )
+        progress.value = Math.round(((i + 1) / items.length) * DECODE_SHARE * 100)
       }
 
       // 2. Join the PCM end to end, in array order.

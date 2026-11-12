@@ -1,8 +1,8 @@
 <script setup lang="ts">
-import { Sun, Moon } from "@lucide/vue";
-import { useTheme } from "@/composables/useTheme";
+import { Sun, Moon } from '@lucide/vue'
+import { useTheme } from '@/composables/useTheme'
 
-const { isDark, toggle } = useTheme();
+const { isDark, toggle } = useTheme()
 </script>
 
 <template>

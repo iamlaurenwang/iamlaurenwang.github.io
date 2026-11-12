@@ -1,20 +1,18 @@
 <script lang="ts" setup>
-import { computed } from "vue";
-import { RouterLink } from "vue-router";
-import { RouteName } from "@/types/routes";
-import { useEmbedMode } from "@/composables/useEmbedMode";
-import ThemeToggle from "./ThemeToggle.vue";
+import { computed } from 'vue'
+import { RouterLink } from 'vue-router'
+import { RouteName } from '@/types/routes'
+import { useEmbedMode } from '@/composables/useEmbedMode'
+import ThemeToggle from './ThemeToggle.vue'
 
 const navLinks = [
-  { label: "Tutoring", to: { name: RouteName.Tutoring }, hideInEmbed: true },
-  { label: "Visuals",  to: { name: RouteName.VisualsIndex }, hideInEmbed: false },
-  { label: "AI",       to: { name: RouteName.Ai }, hideInEmbed: false },
-];
+  { label: 'AI Playground', to: { name: RouteName.Ai }, hideInEmbed: false, highlight: true },
+  { label: 'Tutoring', to: { name: RouteName.Tutoring }, hideInEmbed: true, highlight: false },
+  { label: 'Visuals & Tools', to: { name: RouteName.VisualsIndex }, hideInEmbed: false, highlight: false },
+]
 
-const { isEmbed } = useEmbedMode();
-const visibleLinks = computed(() =>
-  navLinks.filter((link) => !(isEmbed.value && link.hideInEmbed)),
-);
+const { isEmbed } = useEmbedMode()
+const visibleLinks = computed(() => navLinks.filter((link) => !(isEmbed.value && link.hideInEmbed)))
 </script>
 
 <template>
@@ -36,9 +34,18 @@ const visibleLinks = computed(() =>
           v-for="link in visibleLinks"
           :key="link.label"
           :to="link.to"
-          class="font-sans text-sm text-neutral-500 transition-colors duration-150 hover:text-neutral-900 dark:text-neutral-400 dark:hover:text-neutral-100"
+          :class="[
+            'relative font-sans text-sm transition-colors duration-150',
+            link.highlight
+              ? 'text-accent-600 hover:text-accent-700 dark:text-accent-400 dark:hover:text-accent-300'
+              : 'text-neutral-500 hover:text-neutral-900 dark:text-neutral-400 dark:hover:text-neutral-100',
+          ]"
           active-class="text-neutral-900 font-medium dark:!text-neutral-100"
         >
+          <span
+            v-if="link.highlight"
+            class="absolute -right-2 -top-1 size-1.5 rounded-full bg-accent-400 animate-pulse"
+          />
           {{ link.label }}
         </RouterLink>
 

@@ -7,13 +7,9 @@ import FilterPill from '@/components/FilterPill.vue'
 import EmptyState from '@/components/EmptyState.vue'
 import TeachingCard from '@/components/teaching/TeachingCard.vue'
 import { sortedTeachingItems } from '@/data/teaching'
-import {
-  teachingCategories,
-  useTeachingFilter,
-} from '@/composables/useTeachingFilter'
+import { teachingCategories, useTeachingFilter } from '@/composables/useTeachingFilter'
 
-const { activeCategory, filteredItems, setCategory } =
-  useTeachingFilter(sortedTeachingItems)
+const { activeCategory, filteredItems, setCategory } = useTeachingFilter(sortedTeachingItems)
 </script>
 
 <template>
@@ -41,15 +37,8 @@ const { activeCategory, filteredItems, setCategory } =
       />
     </div>
 
-    <div
-      v-if="filteredItems.length"
-      class="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3"
-    >
-      <TeachingCard
-        v-for="item in filteredItems"
-        :key="item.slug"
-        :item="item"
-      />
+    <div v-if="filteredItems.length" class="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+      <TeachingCard v-for="item in filteredItems" :key="item.slug" :item="item" />
     </div>
 
     <EmptyState

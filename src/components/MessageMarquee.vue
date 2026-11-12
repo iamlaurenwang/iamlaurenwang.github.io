@@ -11,17 +11,13 @@ const shouldScroll = computed(() => props.messages.length >= 4)
 </script>
 
 <template>
-  <div
-    class="overflow-hidden"
-    @mouseenter="isPaused = true"
-    @mouseleave="isPaused = false"
-  >
+  <div class="overflow-hidden" @mouseenter="isPaused = true" @mouseleave="isPaused = false">
     <div
       class="flex w-max gap-5"
       :class="shouldScroll ? 'animate-marquee' : 'flex-wrap justify-center px-6'"
       :style="shouldScroll ? { animationPlayState: isPaused ? 'paused' : 'running' } : {}"
     >
-      <template v-for="pass in (shouldScroll ? 2 : 1)" :key="pass">
+      <template v-for="pass in shouldScroll ? 2 : 1" :key="pass">
         <div
           v-for="msg in messages"
           :key="`${pass}-${msg.id}`"
@@ -42,9 +38,13 @@ const shouldScroll = computed(() => props.messages.length >= 4)
                 {{ msg.author[0] }}
               </span>
             </div>
-            <span class="font-sans text-sm font-medium text-neutral-700 dark:text-neutral-200">{{ msg.author }}</span>
+            <span class="font-sans text-sm font-medium text-neutral-700 dark:text-neutral-200">{{
+              msg.author
+            }}</span>
           </div>
-          <p class="font-sans text-sm leading-relaxed text-neutral-600 dark:text-neutral-400">{{ msg.text }}</p>
+          <p class="font-sans text-sm leading-relaxed text-neutral-600 dark:text-neutral-400">
+            {{ msg.text }}
+          </p>
         </div>
       </template>
     </div>

@@ -184,8 +184,10 @@ const childTw = computed<string>(() => {
   const c = selected.value
   if (!c) return ''
   const grow = c.grow === '0' ? 'grow-0' : c.grow === '1' ? 'grow' : `grow-[${c.grow}]`
-  const shrink = c.shrink === '1' ? 'shrink' : c.shrink === '0' ? 'shrink-0' : `shrink-[${c.shrink}]`
-  const basis = c.basis === 'auto' ? 'basis-auto' : c.basis === '0' ? 'basis-0' : `basis-[${c.basis}]`
+  const shrink =
+    c.shrink === '1' ? 'shrink' : c.shrink === '0' ? 'shrink-0' : `shrink-[${c.shrink}]`
+  const basis =
+    c.basis === 'auto' ? 'basis-auto' : c.basis === '0' ? 'basis-0' : `basis-[${c.basis}]`
   return [grow, shrink, basis, SELF_TW[c.self]].join(' ')
 })
 </script>
@@ -212,8 +214,12 @@ const childTw = computed<string>(() => {
 
         <div>
           <div class="mb-2 flex items-center justify-between">
-            <p class="font-mono text-xs tracking-wide text-neutral-500 dark:text-neutral-400">gap</p>
-            <span class="font-mono text-xs text-neutral-700 dark:text-neutral-300">{{ state.gap }}px</span>
+            <p class="font-mono text-xs tracking-wide text-neutral-500 dark:text-neutral-400">
+              gap
+            </p>
+            <span class="font-mono text-xs text-neutral-700 dark:text-neutral-300"
+              >{{ state.gap }}px</span
+            >
           </div>
           <input
             v-model.number="state.gap"
@@ -227,8 +233,12 @@ const childTw = computed<string>(() => {
 
         <div>
           <div class="mb-2 flex items-center justify-between">
-            <p class="font-mono text-xs tracking-wide text-neutral-500 dark:text-neutral-400">items</p>
-            <span class="font-mono text-xs text-neutral-700 dark:text-neutral-300">{{ children.length }}</span>
+            <p class="font-mono text-xs tracking-wide text-neutral-500 dark:text-neutral-400">
+              items
+            </p>
+            <span class="font-mono text-xs text-neutral-700 dark:text-neutral-300">{{
+              children.length
+            }}</span>
           </div>
           <div class="flex gap-2">
             <button
