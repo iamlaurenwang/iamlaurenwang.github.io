@@ -17,15 +17,15 @@ import SectionHeading from '@/components/SectionHeading.vue'
 
       <div class="mt-12 grid gap-6 md:grid-cols-2 md:gap-16">
         <p class="font-sans text-sm leading-relaxed text-neutral-600 dark:text-neutral-400">
-          I build full-stack features with Vue.js, TypeScript, and Tailwind CSS as my frontend
-          foundation — backed by experience in C#, Java, SQL, and Docker. I care about user
-          experience and performance, and I actively integrate AI tools and process automation into
-          both my workflow and the products I build.
+          I got into software because I care about user experience and efficiency. When making
+          technical decisions, I start by asking who will use it and whose time it saves — and I
+          apply the same thinking to AI and automation: reaching for them when they genuinely remove
+          friction, not for their own sake.
         </p>
         <p class="font-sans text-sm leading-relaxed text-neutral-600 dark:text-neutral-400">
-          A native Mandarin speaker fluent in English (TOEIC 935/990), I care about clarity in both
-          language and code — writing interfaces and documentation that are precise, accessible, and
-          easy to reason about.
+          A native Mandarin speaker fluent in English (TOEIC 935/990), I bring the same care for
+          clarity to both language and code — which makes me effective in cross-functional and
+          international environments.
         </p>
       </div>
 
