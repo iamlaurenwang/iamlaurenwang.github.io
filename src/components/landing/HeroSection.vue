@@ -26,24 +26,10 @@ import mePhoto from '@/assets/images/me.jpg'
           <p
             class="mt-6 max-w-xl font-sans text-sm leading-relaxed text-neutral-500 dark:text-neutral-400"
           >
-            Frontend engineer building thoughtful, accessible interfaces for the web.
+            Software engineer who cares about user experience, performance, and AI-assisted workflows — with a habit of automating the inefficient parts.
           </p>
 
           <div class="mt-6 border-t border-neutral-200 dark:border-neutral-800" />
-
-          <div class="mt-6">
-            <p
-              class="font-sans text-xs font-medium uppercase tracking-widest text-neutral-400 dark:text-neutral-500"
-            >
-              Frontend Engineer
-            </p>
-            <ul class="mt-4 space-y-2 font-sans text-sm text-neutral-600 dark:text-neutral-400">
-              <li>Vue.js · TypeScript · Tailwind CSS</li>
-              <li>Quasar · Element Plus · Nuxt UI</li>
-              <li>C# · Java · SQL · Docker · CI/CD</li>
-              <li>Cross-functional team delivery</li>
-            </ul>
-          </div>
 
           <div class="mt-10">
             <RouterLink

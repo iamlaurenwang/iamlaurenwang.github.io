@@ -17,9 +17,10 @@ import SectionHeading from '@/components/SectionHeading.vue'
 
       <div class="mt-12 grid gap-6 md:grid-cols-2 md:gap-16">
         <p class="font-sans text-sm leading-relaxed text-neutral-600 dark:text-neutral-400">
-          I focus on the frontend, building interfaces with Vue.js, TypeScript, and Tailwind CSS —
-          with hands-on experience across Quasar, Element Plus, Nuxt UI, and Bootstrap, and a
-          full-stack foundation in C#, SQL, and Docker.
+          I build full-stack features with Vue.js, TypeScript, and Tailwind CSS as my frontend
+          foundation — backed by experience in C#, Java, SQL, and Docker. I care about user
+          experience and performance, and I actively integrate AI tools and process automation into
+          both my workflow and the products I build.
         </p>
         <p class="font-sans text-sm leading-relaxed text-neutral-600 dark:text-neutral-400">
           A native Mandarin speaker fluent in English (TOEIC 935/990), I care about clarity in both
@@ -31,7 +32,7 @@ import SectionHeading from '@/components/SectionHeading.vue'
       <div class="mt-10 flex flex-wrap gap-2.5">
         <span
           v-for="fact in [
-            'Frontend Engineer',
+            'Software Engineer',
             'Full-stack capable',
             'TOEIC 935/990',
             'Native Mandarin · Fluent English',

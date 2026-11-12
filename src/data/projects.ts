@@ -19,7 +19,7 @@ export const projects: Project[] = [
     name: 'Logistics Operations Dashboard',
     company: 'TitanSoft',
     period: { start: '2024-08', end: '2025-01' },
-    role: 'Frontend Engineer',
+    role: 'Software Engineer',
     description:
       'A real-time dashboard for monitoring fleet status, delivery routes, and exception alerts for logistics operations teams.',
     highlights: [
