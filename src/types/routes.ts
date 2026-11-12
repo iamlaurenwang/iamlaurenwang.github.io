@@ -12,6 +12,7 @@ export enum RouteName {
   Tutoring = 'tutoring',
   Course = 'course',
   DemoCourse = 'demo-course',
+  DemoProjects = 'demo-projects',
   Teaching = 'teaching',
   TeachingIndex = 'teaching-index',
   TeachingToeic = 'teaching-toeic',
