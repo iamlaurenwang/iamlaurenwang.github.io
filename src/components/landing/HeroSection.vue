@@ -2,6 +2,12 @@
 import { RouterLink } from 'vue-router'
 import { RouteName } from '@/types/routes'
 import mePhoto from '@/assets/images/me.jpg'
+
+const sectionLinks = [
+  { label: 'About', hash: '#about' },
+  { label: 'Experience', hash: '#experience' },
+  { label: 'Projects', hash: '#projects' },
+]
 </script>
 
 <template>
@@ -30,6 +36,18 @@ import mePhoto from '@/assets/images/me.jpg'
           </p>
 
           <div class="mt-6 border-t border-neutral-200 dark:border-neutral-800" />
+
+          <!-- Jump to section -->
+          <nav class="mt-6 flex flex-wrap gap-x-6 gap-y-2" aria-label="Jump to section">
+            <RouterLink
+              v-for="link in sectionLinks"
+              :key="link.hash"
+              :to="{ name: RouteName.Landing, hash: link.hash }"
+              class="font-sans text-xs uppercase tracking-[0.18em] text-neutral-500 transition-colors duration-200 hover:text-neutral-900 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-neutral-900 dark:text-neutral-400 dark:hover:text-neutral-100 dark:focus-visible:outline-neutral-100"
+            >
+              {{ link.label }}
+            </RouterLink>
+          </nav>
 
           <div class="mt-10">
             <RouterLink
