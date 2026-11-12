@@ -11,11 +11,7 @@ const activeIndex = ref<number | null>(null)
 <template>
   <div>
     <div class="grid gap-4 sm:grid-cols-2">
-      <figure
-        v-for="(asset, i) in assets"
-        :key="asset.src"
-        class="flex flex-col gap-2"
-      >
+      <figure v-for="(asset, i) in assets" :key="asset.src" class="flex flex-col gap-2">
         <button
           type="button"
           class="group overflow-hidden rounded-lg border border-neutral-200 bg-neutral-100 dark:border-neutral-800 dark:bg-neutral-800"

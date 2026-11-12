@@ -31,7 +31,9 @@ const subNav: SubNavLink[] = [
 
 <template>
   <div class="min-h-screen bg-neutral-50 dark:bg-black">
-    <nav class="border-b border-neutral-200 bg-neutral-50/90 backdrop-blur-sm dark:border-neutral-800 dark:bg-black/80">
+    <nav
+      class="border-b border-neutral-200 bg-neutral-50/90 backdrop-blur-sm dark:border-neutral-800 dark:bg-black/80"
+    >
       <div class="mx-auto flex max-w-5xl gap-4 overflow-x-auto px-4 sm:gap-6 sm:px-6">
         <RouterLink
           v-for="link in subNav"

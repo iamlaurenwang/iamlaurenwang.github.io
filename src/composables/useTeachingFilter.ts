@@ -32,8 +32,7 @@ export function useTeachingFilter(items: TeachingItem[]): {
   const activeCategory = computed<TeachingCategory | 'all'>(() => {
     const raw = route.query.category
     const value = Array.isArray(raw) ? raw[0] : raw
-    return typeof value === 'string' &&
-      validValues.has(value as TeachingCategory)
+    return typeof value === 'string' && validValues.has(value as TeachingCategory)
       ? (value as TeachingCategory)
       : 'all'
   })

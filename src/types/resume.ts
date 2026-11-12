@@ -1,6 +1,6 @@
 export interface Period {
-  start: string  // 'YYYY-MM', e.g. '2023-06'
-  end?: string   // absent = present / current
+  start: string // 'YYYY-MM', e.g. '2023-06'
+  end?: string // absent = present / current
 }
 
 export interface WorkExperience {

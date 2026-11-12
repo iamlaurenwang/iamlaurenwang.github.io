@@ -8,15 +8,10 @@ import mePhoto from '@/assets/images/me.jpg'
   <section class="bg-white dark:bg-black">
     <div class="mx-auto max-w-5xl px-6 py-16 md:py-24">
       <div class="flex flex-col gap-10 md:flex-row md:items-start md:gap-14">
-
         <!-- Photo -->
         <div class="w-36 shrink-0 md:w-52">
           <div class="aspect-[3/4] overflow-hidden rounded-xl">
-            <img
-              :src="mePhoto"
-              alt="Lauren Wang"
-              class="h-full w-full object-cover object-top"
-            />
+            <img :src="mePhoto" alt="Lauren Wang" class="h-full w-full object-cover object-top" />
           </div>
         </div>
 
@@ -28,14 +23,18 @@ import mePhoto from '@/assets/images/me.jpg'
             Lauren<br />Wang
           </h1>
 
-          <p class="mt-6 max-w-xl font-sans text-sm leading-relaxed text-neutral-500 dark:text-neutral-400">
+          <p
+            class="mt-6 max-w-xl font-sans text-sm leading-relaxed text-neutral-500 dark:text-neutral-400"
+          >
             Frontend engineer building thoughtful, accessible interfaces for the web.
           </p>
 
           <div class="mt-6 border-t border-neutral-200 dark:border-neutral-800" />
 
           <div class="mt-6">
-            <p class="font-sans text-xs font-medium uppercase tracking-widest text-neutral-400 dark:text-neutral-500">
+            <p
+              class="font-sans text-xs font-medium uppercase tracking-widest text-neutral-400 dark:text-neutral-500"
+            >
               Frontend Engineer
             </p>
             <ul class="mt-4 space-y-2 font-sans text-sm text-neutral-600 dark:text-neutral-400">
@@ -55,7 +54,6 @@ import mePhoto from '@/assets/images/me.jpg'
             </RouterLink>
           </div>
         </div>
-
       </div>
     </div>
   </section>

@@ -28,11 +28,7 @@ const services = [
         What I do
       </p>
       <div class="divide-y divide-neutral-200">
-        <div
-          v-for="svc in services"
-          :key="svc.title"
-          class="group py-8 first:pt-0 last:pb-0"
-        >
+        <div v-for="svc in services" :key="svc.title" class="group py-8 first:pt-0 last:pb-0">
           <div class="flex flex-col gap-4 md:flex-row md:gap-16">
             <h3
               class="font-serif text-2xl font-light text-neutral-800 transition-colors duration-150 group-hover:text-accent-600 md:w-64 md:shrink-0"

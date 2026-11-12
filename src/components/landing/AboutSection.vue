@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import SectionHeading from "@/components/SectionHeading.vue";
+import SectionHeading from '@/components/SectionHeading.vue'
 </script>
 
 <template>

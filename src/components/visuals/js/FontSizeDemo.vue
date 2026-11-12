@@ -46,7 +46,9 @@ function decrease(): void {
 }
 
 // scale step (1..6) -> font-size; the value itself is the teaching subject.
-const textStyle = computed<CSSProperties>(() => ({ fontSize: `${0.75 + (size.value - 1) * 0.35}rem` }))
+const textStyle = computed<CSSProperties>(() => ({
+  fontSize: `${0.75 + (size.value - 1) * 0.35}rem`,
+}))
 
 const code = `function createFontSizeController(min, max, init) {
   let size = init                    // ONE private variable
@@ -67,7 +69,9 @@ ctrl.increase()   // mutates the shared private state`
     <!-- Live -->
     <div class="space-y-4">
       <div class="flex items-center gap-3">
-        <div class="inline-flex overflow-hidden rounded-md border border-neutral-200 dark:border-neutral-700">
+        <div
+          class="inline-flex overflow-hidden rounded-md border border-neutral-200 dark:border-neutral-700"
+        >
           <button
             type="button"
             class="flex h-9 w-9 items-center justify-center text-neutral-600 transition-colors hover:bg-neutral-100 disabled:opacity-40 dark:text-neutral-300 dark:hover:bg-neutral-800"
@@ -85,7 +89,9 @@ ctrl.increase()   // mutates the shared private state`
             <Plus :size="14" />
           </button>
         </div>
-        <span class="font-mono text-xs text-neutral-500 dark:text-neutral-400">size = {{ size }}</span>
+        <span class="font-mono text-xs text-neutral-500 dark:text-neutral-400"
+          >size = {{ size }}</span
+        >
       </div>
 
       <p

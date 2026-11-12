@@ -11,7 +11,9 @@ const { fields, errors, isSubmitted, isLoading, submitError, submit } = useConta
   <div class="bg-neutral-100 dark:bg-neutral-900">
     <div class="mx-auto max-w-5xl px-6 py-16">
       <h1 class="font-serif text-4xl text-dark/60 dark:text-neutral-100">Contact</h1>
-      <p class="mt-3 min-h-[2.85rem] max-w-xl font-sans text-sm leading-relaxed text-dark/60 dark:text-neutral-400">
+      <p
+        class="mt-3 min-h-[2.85rem] max-w-xl font-sans text-sm leading-relaxed text-dark/60 dark:text-neutral-400"
+      >
         歡迎來聊聊任何事 — 合作提案、家教諮詢、或只是想打聲招呼，都很歡迎。
       </p>
     </div>
@@ -21,10 +23,11 @@ const { fields, errors, isSubmitted, isLoading, submitError, submit } = useConta
   <div class="bg-neutral-50 dark:bg-black">
     <div class="mx-auto max-w-5xl px-6 py-16">
       <div class="grid gap-12 md:grid-cols-[1fr_1.5fr] md:gap-16 md:items-start">
-
         <!-- Left: social links -->
         <div>
-          <p class="mb-6 font-sans text-xs font-medium uppercase tracking-widest text-neutral-400 dark:text-neutral-500">
+          <p
+            class="mb-6 font-sans text-xs font-medium uppercase tracking-widest text-neutral-400 dark:text-neutral-500"
+          >
             Find me at
           </p>
           <div class="flex flex-col gap-3">
@@ -40,8 +43,12 @@ const { fields, errors, isSubmitted, isLoading, submitError, submit } = useConta
                 <component :is="s.icon" :size="18" />
               </div>
               <div class="min-w-0">
-                <div class="font-sans text-xs text-neutral-400 dark:text-neutral-500">{{ s.label }}</div>
-                <div class="truncate font-sans text-sm text-neutral-700 dark:text-neutral-200">{{ s.value }}</div>
+                <div class="font-sans text-xs text-neutral-400 dark:text-neutral-500">
+                  {{ s.label }}
+                </div>
+                <div class="truncate font-sans text-sm text-neutral-700 dark:text-neutral-200">
+                  {{ s.value }}
+                </div>
               </div>
               <ExternalLink
                 :size="14"
@@ -53,13 +60,18 @@ const { fields, errors, isSubmitted, isLoading, submitError, submit } = useConta
 
         <!-- Right: form -->
         <div>
-          <p class="mb-6 font-sans text-xs font-medium uppercase tracking-widest text-neutral-400 dark:text-neutral-500">
+          <p
+            class="mb-6 font-sans text-xs font-medium uppercase tracking-widest text-neutral-400 dark:text-neutral-500"
+          >
             Send a message
           </p>
 
           <form v-if="!isSubmitted" class="space-y-5" novalidate @submit.prevent="submit">
             <div>
-              <label for="cv-name" class="mb-1.5 block font-sans text-xs text-neutral-600 dark:text-neutral-300">
+              <label
+                for="cv-name"
+                class="mb-1.5 block font-sans text-xs text-neutral-600 dark:text-neutral-300"
+              >
                 Name
               </label>
               <input
@@ -74,7 +86,10 @@ const { fields, errors, isSubmitted, isLoading, submitError, submit } = useConta
             </div>
 
             <div>
-              <label for="cv-email" class="mb-1.5 block font-sans text-xs text-neutral-600 dark:text-neutral-300">
+              <label
+                for="cv-email"
+                class="mb-1.5 block font-sans text-xs text-neutral-600 dark:text-neutral-300"
+              >
                 Email
               </label>
               <input
@@ -89,7 +104,10 @@ const { fields, errors, isSubmitted, isLoading, submitError, submit } = useConta
             </div>
 
             <div>
-              <label for="cv-message" class="mb-1.5 block font-sans text-xs text-neutral-600 dark:text-neutral-300">
+              <label
+                for="cv-message"
+                class="mb-1.5 block font-sans text-xs text-neutral-600 dark:text-neutral-300"
+              >
                 Message
               </label>
               <textarea
@@ -113,7 +131,10 @@ const { fields, errors, isSubmitted, isLoading, submitError, submit } = useConta
             <p v-if="submitError" class="text-center font-sans text-xs text-error">
               {{ submitError }}
             </p>
-            <p v-else class="text-center font-sans text-[0.65rem] text-neutral-400 dark:text-neutral-500">
+            <p
+              v-else
+              class="text-center font-sans text-[0.65rem] text-neutral-400 dark:text-neutral-500"
+            >
               Your information will never be shared. Never submit passwords.
             </p>
           </form>
@@ -121,7 +142,9 @@ const { fields, errors, isSubmitted, isLoading, submitError, submit } = useConta
           <!-- Submitted state -->
           <div v-else class="flex flex-col items-center gap-4 py-10 text-center">
             <Flower2 :size="32" class="text-accent-400" />
-            <p class="font-serif text-2xl font-light text-neutral-700 dark:text-neutral-100">Thank you.</p>
+            <p class="font-serif text-2xl font-light text-neutral-700 dark:text-neutral-100">
+              Thank you.
+            </p>
             <p class="max-w-xs font-sans text-sm text-neutral-500 dark:text-neutral-400">
               Your message has been received. I'll be in touch soon.
             </p>

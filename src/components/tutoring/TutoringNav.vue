@@ -1,19 +1,19 @@
 <script lang="ts" setup>
-import { RouterLink } from "vue-router";
-import { useScrollSpy } from "@/composables/useScrollSpy";
-import { RouteName } from "@/types/routes";
+import { RouterLink } from 'vue-router'
+import { useScrollSpy } from '@/composables/useScrollSpy'
+import { RouteName } from '@/types/routes'
 
 interface AnchorLink {
-  label: string;
-  id: string;
+  label: string
+  id: string
 }
 
 const anchorLinks: AnchorLink[] = [
-  { label: "家長&學生回饋", id: "feedback" },
-  { label: "教材&講義", id: "materials" },
-];
+  { label: '家長&學生回饋', id: 'feedback' },
+  { label: '教材&講義', id: 'materials' },
+]
 
-const { activeId, scrollTo } = useScrollSpy(anchorLinks.map((l) => l.id));
+const { activeId, scrollTo } = useScrollSpy(anchorLinks.map((l) => l.id))
 </script>
 
 <template>

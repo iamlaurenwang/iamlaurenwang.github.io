@@ -203,10 +203,7 @@ export const teachingItems: TeachingItem[] = [
       width: 847,
       height: 1200,
     },
-    objectives: [
-      '使用比較／對比的圖表組織整理資訊',
-      '辨識 similarities 與 differences 的表達句型',
-    ],
+    objectives: ['使用比較／對比的圖表組織整理資訊', '辨識 similarities 與 differences 的表達句型'],
   },
   {
     slug: 'clil-colors',
@@ -294,8 +291,8 @@ export const teachingItems: TeachingItem[] = [
 ]
 
 /** 依日期新到舊排序。 */
-export const sortedTeachingItems: TeachingItem[] = [...teachingItems].sort(
-  (a, b) => b.date.localeCompare(a.date),
+export const sortedTeachingItems: TeachingItem[] = [...teachingItems].sort((a, b) =>
+  b.date.localeCompare(a.date),
 )
 
 export const featuredTeachingItems: TeachingItem[] = sortedTeachingItems.filter(

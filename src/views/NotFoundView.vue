@@ -42,7 +42,9 @@ const links: SuggestedRoute[] = [
         <span class="h-1.5 w-1.5 rounded-full bg-accent-400/70" />
       </div>
 
-      <div class="mt-10 h-px w-40 bg-gradient-to-r from-transparent via-accent-400 to-transparent" />
+      <div
+        class="mt-10 h-px w-40 bg-gradient-to-r from-transparent via-accent-400 to-transparent"
+      />
 
       <h1 class="mt-10 font-serif text-3xl text-neutral-100 sm:text-4xl">
         You’ve wandered off the path.

@@ -1,8 +1,8 @@
 <script setup lang="ts">
-import { GraduationCap } from "@lucide/vue";
-import { experiences, education } from "@/data/experience";
-import ExperienceCard from "@/components/resume/ExperienceCard.vue";
-import SectionHeading from "@/components/SectionHeading.vue";
+import { GraduationCap } from '@lucide/vue'
+import { experiences, education } from '@/data/experience'
+import ExperienceCard from '@/components/resume/ExperienceCard.vue'
+import SectionHeading from '@/components/SectionHeading.vue'
 </script>
 
 <template>
@@ -20,14 +20,21 @@ import SectionHeading from "@/components/SectionHeading.vue";
 
         <!-- Education -->
         <div class="mt-4 border-t border-neutral-200 pt-10 dark:border-neutral-800">
-          <p class="mb-5 font-sans text-xs font-medium uppercase tracking-widest text-neutral-400 dark:text-neutral-500">
+          <p
+            class="mb-5 font-sans text-xs font-medium uppercase tracking-widest text-neutral-400 dark:text-neutral-500"
+          >
             Education
           </p>
           <div class="rounded-xl bg-neutral-100 p-5 dark:bg-neutral-900">
             <div class="flex items-start gap-4">
-              <GraduationCap :size="20" class="mt-0.5 shrink-0 text-neutral-400 dark:text-neutral-500" />
+              <GraduationCap
+                :size="20"
+                class="mt-0.5 shrink-0 text-neutral-400 dark:text-neutral-500"
+              />
               <div>
-                <h3 class="font-serif text-xl text-neutral-800 dark:text-neutral-100">{{ education.degree }}</h3>
+                <h3 class="font-serif text-xl text-neutral-800 dark:text-neutral-100">
+                  {{ education.degree }}
+                </h3>
                 <p class="mt-0.5 font-sans text-sm text-neutral-500 dark:text-neutral-400">
                   {{ education.school }} {{ education.schoolEn }} · {{ education.location }}
                 </p>

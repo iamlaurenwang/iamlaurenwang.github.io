@@ -26,12 +26,7 @@ const items: GalleryItem[] = [
 
       <!-- Collage -->
       <div class="grid auto-rows-[7rem] grid-cols-3 gap-3 md:auto-rows-[8rem]">
-        <div
-          v-for="(item, i) in items"
-          :key="i"
-          class="overflow-hidden"
-          :class="item.spanClass"
-        >
+        <div v-for="(item, i) in items" :key="i" class="overflow-hidden" :class="item.spanClass">
           <ImagePlaceholder :tone="item.tone" :label="item.label" />
         </div>
       </div>

@@ -54,10 +54,7 @@ function onKeydown(event: KeyboardEvent): void {
     @keydown="onKeydown"
     @click.self="emit('close')"
   >
-    <div
-      v-if="current"
-      class="flex max-h-[90vh] w-[92vw] max-w-5xl flex-col gap-3"
-    >
+    <div v-if="current" class="flex max-h-[90vh] w-[92vw] max-w-5xl flex-col gap-3">
       <div class="flex items-center justify-between gap-4">
         <p class="font-sans text-sm text-neutral-200">
           {{ current.caption || current.alt }}
@@ -103,10 +100,7 @@ function onKeydown(event: KeyboardEvent): void {
         </button>
       </div>
 
-      <p
-        v-if="assets.length > 1"
-        class="text-center font-sans text-xs text-neutral-400"
-      >
+      <p v-if="assets.length > 1" class="text-center font-sans text-xs text-neutral-400">
         {{ (index ?? 0) + 1 }} / {{ assets.length }}
       </p>
     </div>

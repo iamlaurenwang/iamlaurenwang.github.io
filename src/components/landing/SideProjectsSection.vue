@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import { FolderGit2 } from "@lucide/vue";
-import SectionHeading from "@/components/SectionHeading.vue";
-import EmptyState from "@/components/EmptyState.vue";
+import { FolderGit2 } from '@lucide/vue'
+import SectionHeading from '@/components/SectionHeading.vue'
+import EmptyState from '@/components/EmptyState.vue'
 </script>
 
 <template>

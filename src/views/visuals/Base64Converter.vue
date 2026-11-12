@@ -64,9 +64,7 @@ const jsonItems = computed<Base64AudioItem[]>(() => {
         entry !== null &&
         typeof (entry as Base64AudioItem).audio === 'string',
     )
-    jsonError.value = items.length
-      ? null
-      : '找不到任何含有 audio 欄位（字串）的項目。'
+    jsonError.value = items.length ? null : '找不到任何含有 audio 欄位（字串）的項目。'
     return items
   } catch {
     jsonError.value = 'JSON 格式有誤，無法解析。'
@@ -79,11 +77,7 @@ const items = computed<Base64AudioItem[]>(() => {
   if (mode.value === 'json') return jsonItems.value
   return rows.value
     .filter((row) => row.audio.trim())
-    .map((row) =>
-      row.id.trim()
-        ? { id: row.id.trim(), audio: row.audio }
-        : { audio: row.audio },
-    )
+    .map((row) => (row.id.trim() ? { id: row.id.trim(), audio: row.audio } : { audio: row.audio }))
 })
 
 const hasItems = computed(() => items.value.length > 0)
@@ -200,9 +194,7 @@ const inputClass =
               :placeholder="`audio_${index + 1}`"
               :class="[inputClass, 'w-48 py-2']"
             />
-            <span
-              class="font-sans text-xs text-neutral-400 dark:text-neutral-500"
-            >
+            <span class="font-sans text-xs text-neutral-400 dark:text-neutral-500">
               id（選填，作為檔名）
             </span>
             <button
@@ -236,19 +228,12 @@ const inputClass =
           :placeholder="JSON_PLACEHOLDER"
           :class="[inputClass, 'resize-y']"
         />
-        <p
-          v-if="jsonError"
-          class="flex items-center gap-1.5 font-sans text-xs text-error"
-        >
+        <p v-if="jsonError" class="flex items-center gap-1.5 font-sans text-xs text-error">
           <AlertCircle :size="13" />
           {{ jsonError }}
         </p>
-        <p
-          v-else
-          class="font-sans text-xs text-neutral-400 dark:text-neutral-500"
-        >
-          一個物件陣列，每個物件用 <code class="font-mono">audio</code> 欄位存放
-          base64 字串。
+        <p v-else class="font-sans text-xs text-neutral-400 dark:text-neutral-500">
+          一個物件陣列，每個物件用 <code class="font-mono">audio</code> 欄位存放 base64 字串。
         </p>
       </div>
     </section>
@@ -278,10 +263,7 @@ const inputClass =
             controls
             class="h-8 flex-1"
           />
-          <span
-            v-else
-            class="flex flex-1 items-center gap-1.5 font-sans text-xs text-error"
-          >
+          <span v-else class="flex flex-1 items-center gap-1.5 font-sans text-xs text-error">
             <AlertCircle :size="13" />
             {{ previews[index]?.error ?? '無法讀取這一筆音訊。' }}
           </span>
@@ -302,30 +284,20 @@ const inputClass =
           分別下載
         </BaseButton>
 
-        <BaseButton
-          variant="primary"
-          :disabled="isMerging"
-          @click="mergeAndDownload"
-        >
+        <BaseButton variant="primary" :disabled="isMerging" @click="mergeAndDownload">
           <Merge :size="14" />
           {{ isMerging ? `合併中… ${progress}%` : '合併並下載' }}
         </BaseButton>
       </div>
 
-      <p
-        v-if="error"
-        class="flex items-center gap-1.5 font-sans text-xs text-error"
-      >
+      <p v-if="error" class="flex items-center gap-1.5 font-sans text-xs text-error">
         <AlertCircle :size="13" />
         {{ error }}
       </p>
 
-      <p
-        class="font-sans text-xs leading-relaxed text-neutral-400 dark:text-neutral-500"
-      >
+      <p class="font-sans text-xs leading-relaxed text-neutral-400 dark:text-neutral-500">
         「分別下載」會原封不動地逐檔存下每段音訊，瀏覽器可能會詢問是否允許一次下載多個檔案。
-        「合併並下載」則會解碼每段音訊、串接後重新編碼成單一的 128&nbsp;kbps
-        MP3。
+        「合併並下載」則會解碼每段音訊、串接後重新編碼成單一的 128&nbsp;kbps MP3。
       </p>
     </section>
   </div>
