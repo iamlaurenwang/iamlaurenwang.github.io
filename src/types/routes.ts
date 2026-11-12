@@ -18,6 +18,5 @@ export enum RouteName {
   TeachingDetail = 'teaching-detail',
   Ai = 'ai',
   Demo = 'demo',
-  DemoBg = 'demo-bg',
   NotFound = 'not-found',
 }

@@ -103,12 +103,6 @@ const routes: RouteRecordRaw[] = [
     meta: { hideLayout: true },
   },
   {
-    path: '/demo-bg',
-    name: RouteName.DemoBg,
-    component: () => import('@/views/DemoBgView.vue'),
-    meta: { hideLayout: true },
-  },
-  {
     path: '/ai',
     name: RouteName.Ai,
     component: () => import('@/views/AiView.vue'),
