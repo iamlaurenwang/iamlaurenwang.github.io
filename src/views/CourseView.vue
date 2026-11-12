@@ -6,18 +6,20 @@ import PageHeader from '@/components/PageHeader.vue'
 import { RouteName } from '@/types/routes'
 import FreeCourseTerms from '@/components/course/FreeCourseTerms.vue'
 import PaidCoursePreview from '@/components/course/PaidCoursePreview.vue'
+import TutorComingSoon from '@/components/course/TutorComingSoon.vue'
 import { freeCourseCampaignActive, freeCourses as staticFreeCourses } from '@/data/courses'
-import { COURSE_SHEET_CSV_URL } from '@/data/courseSheet'
+import { COURSE_SHEET_CSV_URL, COURSE_GROUP_SHEET_CSV_URL } from '@/data/courseSheet'
 import { useCourseSheet } from '@/composables/useCourseSheet'
 
-type Tab = 'free' | 'paid'
+type Tab = 'free' | 'paid' | 'tutor'
 
 const route = useRoute()
 const router = useRouter()
 
 const tabs: { id: Tab; label: string }[] = [
-  { id: 'free', label: '公開課' },
-  { id: 'paid', label: '付費課' },
+  { id: 'free', label: '公開體驗課' },
+  { id: 'paid', label: '5人小班課' },
+  { id: 'tutor', label: '一對一' },
 ]
 
 // campaign 進行中預設顯示公開課；關閉後只剩付費課。
@@ -25,7 +27,8 @@ const defaultTab: Tab = freeCourseCampaignActive ? 'free' : 'paid'
 
 function normalizeTab(value: unknown): Tab {
   if (!freeCourseCampaignActive) return 'paid'
-  return value === 'paid' ? 'paid' : 'free'
+  if (value === 'paid' || value === 'tutor') return value
+  return 'free'
 }
 
 const activeTab = ref<Tab>(normalizeTab(route.query.tab))
@@ -47,6 +50,25 @@ onMounted(() => {
 const freeCoursesToShow = computed(() => (courses.value.length ? courses.value : staticFreeCourses))
 // 只有「首次載入、尚無任何資料」時才顯示骨架；失敗後 courses 仍為空 → 直接退回靜態課表。
 const showFreeSkeleton = computed(() => loading.value && courses.value.length === 0)
+
+// 5 人小班課（團課）課表也來自 Google Sheet（另一個工作表），無靜態 fallback。
+// 延遲載入：首次切到「5人小班課」tab 才抓，避免只看公開課的使用者多打一次網路。
+const {
+  courses: groupCourses,
+  loading: groupLoading,
+  load: loadGroup,
+} = useCourseSheet(COURSE_GROUP_SHEET_CSV_URL)
+let groupLoaded = false
+watch(
+  activeTab,
+  (tab) => {
+    if (tab === 'paid' && !groupLoaded) {
+      groupLoaded = true
+      loadGroup()
+    }
+  },
+  { immediate: true },
+)
 </script>
 
 <template>
@@ -95,7 +117,8 @@ const showFreeSkeleton = computed(() => loading.value && courses.value.length ==
         </div>
         <FreeCourseTerms v-else :courses="freeCoursesToShow" />
       </template>
-      <PaidCoursePreview v-else />
+      <TutorComingSoon v-else-if="activeTab === 'tutor'" />
+      <PaidCoursePreview v-else :courses="groupCourses" :loading="groupLoading" />
     </div>
   </section>
 </template>

@@ -1,17 +1,17 @@
 <script setup lang="ts">
-import { onMounted } from "vue";
-import { RouterLink } from "vue-router";
-import { ArrowLeft, RotateCcw } from "@lucide/vue";
-import PageHeader from "@/components/PageHeader.vue";
-import BaseButton from "@/components/BaseButton.vue";
-import FreeCourseTerms from "@/components/course/FreeCourseTerms.vue";
-import { RouteName } from "@/types/routes";
-import { COURSE_SHEET_CSV_URL } from "@/data/courseSheet";
-import { useCourseSheet } from "@/composables/useCourseSheet";
+import { onMounted } from 'vue'
+import { RouterLink } from 'vue-router'
+import { ArrowLeft, RotateCcw } from '@lucide/vue'
+import PageHeader from '@/components/PageHeader.vue'
+import BaseButton from '@/components/BaseButton.vue'
+import FreeCourseTerms from '@/components/course/FreeCourseTerms.vue'
+import { RouteName } from '@/types/routes'
+import { COURSE_SHEET_CSV_URL } from '@/data/courseSheet'
+import { useCourseSheet } from '@/composables/useCourseSheet'
 
-const { courses, loading, error, load } = useCourseSheet(COURSE_SHEET_CSV_URL);
+const { courses, loading, error, load } = useCourseSheet(COURSE_SHEET_CSV_URL)
 
-onMounted(load);
+onMounted(load)
 </script>
 
 <template>

@@ -1,4 +1,4 @@
-import type { FreeCourse, PaidSlot } from '@/types/course'
+import type { FreeCourse } from '@/types/course'
 
 /**
  * 公開課是 9 月開課的 campaign。campaign 結束後把此旗標設為 false，
@@ -70,19 +70,9 @@ export const freeCourses: FreeCourse[] = [
   },
 ]
 
-export const paidSlots: PaidSlot[] = [
-  { day: '週二', time: '17:00-17:50', title: '全民英檢初級寫作' },
-  { day: '週二', time: '18:00-18:50', title: '全民英檢初級寫作' },
-  { day: '週三', time: '19:00-19:50', title: '全民英檢中級寫作' },
-  { day: '週三', time: '20:00-20:50', title: '全民英檢中級寫作' },
-  { day: '週四', time: '19:00-19:50', title: '主題式課程（初級）' },
-  { day: '週四', time: '20:00-20:50', title: '主題式課程（初級）' },
-  { day: '週五', time: '19:00-19:50', title: '主題式課程（中級）' },
-  { day: '週五', time: '20:00-20:50', title: '主題式課程（中級）' },
-]
-
 export const paidExtras: string[] = [
   '作業／作文批改：每位學生擁有專屬 Google 文件，逐篇回饋',
+  '模擬題／課後小考：每堂課結束後都有課後小考，追蹤學習進度和弱點',
   '進階課堂活動：speaking、in-class debate 等 output 練習',
   '5 人滿班小班制，與老師互動更緊密',
 ]

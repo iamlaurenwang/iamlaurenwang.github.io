@@ -1,86 +1,92 @@
 <script setup lang="ts">
-import { computed, nextTick, ref, watch } from "vue";
-import FreeCourseTimetable from "@/components/course/FreeCourseTimetable.vue";
-import { freeCourses as staticFreeCourses } from "@/data/courses";
-import type { FreeCourse } from "@/types/course";
+import { computed, nextTick, ref, watch } from 'vue'
+import FreeCourseTimetable from '@/components/course/FreeCourseTimetable.vue'
+import { freeCourses as staticFreeCourses } from '@/data/courses'
+import type { FreeCourse } from '@/types/course'
 
-const props = withDefaults(defineProps<{ courses?: FreeCourse[] }>(), {
-  courses: () => staticFreeCourses,
-});
+// intro / showCta 透傳給內層 FreeCourseTimetable，供付費課共用（預設不傳＝公開課原行為）。
+const props = withDefaults(
+  defineProps<{ courses?: FreeCourse[]; intro?: string; showCta?: boolean }>(),
+  {
+    courses: () => staticFreeCourses,
+    intro: undefined,
+    showCta: undefined,
+  },
+)
 
 // distinct term（由小到大），空字串（無 term）也算一組。
 const terms = computed(() => {
-  const set = new Set(props.courses.map((c) => c.term ?? ""));
-  return [...set].sort();
-});
+  const set = new Set(props.courses.map((c) => c.term ?? ''))
+  return [...set].sort()
+})
 
 // 只有單一組（含全部無 term）時，不顯示月份選擇器。
-const hasMultipleTerms = computed(() => terms.value.length > 1);
+const hasMultipleTerms = computed(() => terms.value.length > 1)
 
 const multiYear = computed(() => {
-  const years = new Set(terms.value.map((t) => t.split("-")[0]));
-  return years.size > 1;
-});
+  const years = new Set(terms.value.map((t) => t.split('-')[0]))
+  return years.size > 1
+})
 
 function yearOf(term: string): string {
-  return term.split("-")[0] ?? "";
+  return term.split('-')[0] ?? ''
 }
 
 function monthLabel(term: string): string {
-  const month = term.split("-")[1];
-  return month ? `${Number(month)} 月` : term || "課程";
+  const month = term.split('-')[1]
+  return month ? `${Number(month)} 月` : term || '課程'
 }
 
 function fullLabel(term: string): string {
-  const [year, month] = term.split("-");
-  return year && month ? `${year} 年 ${Number(month)} 月` : term;
+  const [year, month] = term.split('-')
+  return year && month ? `${year} 年 ${Number(month)} 月` : term
 }
 
 // 跨年時，在每年的第一個月份 tab 前插入年份分隔標。
 function showYearMarker(index: number): boolean {
-  if (!multiYear.value) return false;
-  const list = terms.value;
-  return index === 0 || yearOf(list[index]!) !== yearOf(list[index - 1]!);
+  if (!multiYear.value) return false
+  const list = terms.value
+  return index === 0 || yearOf(list[index]!) !== yearOf(list[index - 1]!)
 }
 
 function currentYearMonth(): string {
-  const now = new Date();
-  return `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, "0")}`;
+  const now = new Date()
+  return `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, '0')}`
 }
 
 // 預設落在「當月或最近即將到來的月」，皆為過去則取最後一個。
 function pickDefaultTerm(list: string[]): string {
-  const ym = currentYearMonth();
-  return list.find((t) => t >= ym) ?? list[list.length - 1] ?? "";
+  const ym = currentYearMonth()
+  return list.find((t) => t >= ym) ?? list[list.length - 1] ?? ''
 }
 
-const selectedTerm = ref("");
+const selectedTerm = ref('')
 watch(
   terms,
   (list) => {
     if (!list.includes(selectedTerm.value)) {
-      selectedTerm.value = pickDefaultTerm(list);
+      selectedTerm.value = pickDefaultTerm(list)
     }
   },
   { immediate: true },
-);
+)
 
 const selectedCourses = computed(() =>
-  props.courses.filter((c) => (c.term ?? "") === selectedTerm.value),
-);
+  props.courses.filter((c) => (c.term ?? '') === selectedTerm.value),
+)
 
 // 月份多時，讓選中的 tab 自動捲進視野（水平置中、不動垂直捲軸）。
-const stripRef = ref<HTMLElement | null>(null);
+const stripRef = ref<HTMLElement | null>(null)
 watch(
   selectedTerm,
   async () => {
-    await nextTick();
+    await nextTick()
     stripRef.value
       ?.querySelector<HTMLElement>('[data-active="true"]')
-      ?.scrollIntoView({ inline: "center", block: "nearest" });
+      ?.scrollIntoView({ inline: 'center', block: 'nearest' })
   },
   { immediate: true },
-);
+)
 </script>
 
 <template>
@@ -117,6 +123,11 @@ watch(
       </template>
     </div>
 
-    <FreeCourseTimetable :key="selectedTerm" :courses="selectedCourses" />
+    <FreeCourseTimetable
+      :key="selectedTerm"
+      :courses="selectedCourses"
+      :intro="intro"
+      :show-cta="showCta"
+    />
   </div>
 </template>
