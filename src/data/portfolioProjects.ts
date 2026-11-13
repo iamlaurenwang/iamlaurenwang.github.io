@@ -1,7 +1,19 @@
 import type { PortfolioProject } from '@/types/portfolio'
 
-// 作品集精選。目前先放兩個 imedtac 旗艦專案，個人作品之後再加。
+// 作品集精選：imedtac 旗艦專案 + 個人 side project。
 export const portfolioProjects: PortfolioProject[] = [
+  {
+    id: 'piano-learning-helper',
+    title: 'Piano Learning Helper',
+    tag: 'Side Project · 2026',
+    summary:
+      '幫助鋼琴學習者即時辨識彈奏的音與和弦的純前端 Web App：麥克風收音後即時在 SVG 鍵盤高亮，顯示音名／音準，並辨識四種三和弦附概念解說。所有運算在瀏覽器端完成，可安裝為 PWA。',
+    tech: ['Vue 3', 'TypeScript', 'Web Audio API', 'Pitchy', 'PWA', 'Tailwind v4'],
+    image: '/projects/piano-learning-helper.jpg',
+    links: {
+      live: 'https://piano-learning-helper.iamlaurenwang.workers.dev/',
+    },
+  },
   {
     id: 'ai-clinical-assistant',
     title: '遠距醫療AI助理',
