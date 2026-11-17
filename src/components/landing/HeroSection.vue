@@ -30,9 +30,15 @@ const sectionLinks = [
           </h1>
 
           <p
+            class="mt-3 font-sans text-xs uppercase tracking-[0.18em] text-neutral-500 dark:text-neutral-400"
+          >
+            Full-Stack Engineer · Vue / TypeScript / C#
+          </p>
+
+          <p
             class="mt-6 max-w-xl font-sans text-sm leading-relaxed text-neutral-500 dark:text-neutral-400"
           >
-            Software engineer who cares about user experience, performance, and AI-assisted workflows — with a habit of automating the inefficient parts.
+            I take new products from zero to shipped for small teams — and leave them in a state the team can run without me. Working language: English or Mandarin.
           </p>
 
           <div class="mt-6 border-t border-neutral-200 dark:border-neutral-800" />

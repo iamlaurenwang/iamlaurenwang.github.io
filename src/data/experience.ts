@@ -16,10 +16,12 @@ export const experiences: WorkExperience[] = [
     period: { start: '2025-02' },
     location: 'Taipei, Taiwan',
     description:
-      'Delivered full-stack features for a telemedicine SaaS platform and led end-to-end deployment for the Japan market.',
+      'Own new products end to end on a telemedicine SaaS — backend to UI to deployment — including the full lifecycle of a vital-signs measurement product and the Japan market launch.',
     highlights: [
+      'Took a vital-signs measurement product through its full lifecycle: built v1 from zero to launch, then led the v2 overhaul — a redesigned UI, 40+ instructional videos orchestrated on the kiosk to match each measurement flow, and third-party AI integrations.',
       'Built an LLM agent (Ollama, tool-calling) that lets clinicians and patients manage appointments in natural language within the video call, reducing booking time from 5–10 min to under 1 min.',
       'Spearheaded a 0-to-1 surgical instrument recognition POC by fine-tuning a pretrained YOLO model on a custom dataset, delivering a working MVP with 84.4% accuracy within 1 week.',
+      'Introduced protected-branch GitLab CI/CD across three product variants, cutting each deployment from 5–10 minutes of manual remote work to under 1 minute.',
       'Integrated the Tolgee localization platform to resolve i18n-induced RWD overflow issues and enabled PMs to manage copy independently, cutting the translation update cycle from 2–4 days to same-day.',
       'Deployed a Wiki.js knowledge base and authored system architecture docs, FAE troubleshooting guides, and a self-serve onboarding flow, saving half a day of managerial time per new hire.',
     ],
@@ -44,10 +46,10 @@ export const experiences: WorkExperience[] = [
     period: { start: '2024-07', end: '2025-01' },
     location: 'Taipei, Taiwan',
     description:
-      'Developed enterprise web applications for logistics and operations management clients.',
+      'Developed enterprise web applications in a cross-border Agile team (Taiwan–Singapore), on a multilingual platform serving 350K+ monthly active users.',
     highlights: [
       'Built an automated voucher distribution system (Vue 3, TypeScript, C#), reducing the weekly manual process from 1–2 hours to under 3 minutes.',
-      'Practiced TDD in an Agile team serving 20k+ users; created test suites as living documentation for complex business logic.',
+      'Engineered and scaled features for a multilingual web and mobile platform serving 20+ countries and 350K+ monthly active users, localized into 10+ languages, collaborating in English across Taiwan and Singapore teams.',
       'Led resolution of Google "dangerous site" issues; implemented Elastic monitoring, automated alerts, and incident SOP for proactive issue detection.',
       'Participated in Agile sprints with weekly releases and regular code reviews.',
     ],
@@ -60,10 +62,12 @@ export const experiences: WorkExperience[] = [
     role: 'Software Engineer',
     period: { start: '2023-06', end: '2024-06' },
     location: 'Taipei, Taiwan',
-    description: "Maintained and extended frontend systems for one of Taiwan's largest insurers.",
+    description:
+      "Maintained and extended frontend systems at scale for one of Taiwan's largest insurers — building tools other engineers depend on.",
     highlights: [
       'Designed and maintained a Storybook UI component library adopted by 600+ engineers, standardizing frontend practices company-wide.',
       'Led frontend modernization of a legacy system serving 5,000–8,000 sales agents, focusing on performance and operational efficiency.',
+      'Decommissioned legacy portal applications end to end within one month — dependency audits, permission / database / scheduled-job cleanup across environments — and left a structured handover others could execute from.',
     ],
     skills: ['Vue 3', 'TypeScript', 'Storybook', 'Java', 'SQL'],
     type: 'full-time',
@@ -74,7 +78,8 @@ export const experiences: WorkExperience[] = [
     role: 'English Teacher',
     period: { start: '2019-03', end: '2022-06' },
     location: 'Kaohsiung, Taiwan',
-    description: 'Taught exam-prep English to students from high school to adult learners.',
+    description:
+      'Taught exam-prep English from high school to adult learners — where I learned to break complex material into something anyone can follow.',
     highlights: [
       'Maintained an ~80% pass rate among students sitting standardized English exams.',
       'Built strong communication and presentation skills through years of classroom instruction.',
